@@ -17,6 +17,7 @@
   --font: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
 }
 
+
 [data-theme="light"]{
   --bg: #f5f7fb;
   --bg2:#eef2f9;
