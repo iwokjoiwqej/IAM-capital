@@ -1,41 +1,44 @@
-// IAM Capital MVP site script
-// - Injects editable KPIs + Track Record cards
-// - Theme toggle (saved in localStorage)
+// IAM Capital — professional MVP script
+// - Inject high-level KPIs (no proprietary strategy details)
+// - Mobile menu toggle
+// - Theme toggle (saved)
 
 const $ = (sel) => document.querySelector(sel);
 
 const state = {
-  // 🔧 Edit these numbers anytime
+  // 🔧 Edit anytime (keep high-level, investor-safe)
   kpis: [
     {
-      label: "Target AUM (initial)",
-      value: "$100k",
-      sub: "Proof-size for initial external capital",
+      label: "Positioning",
+      value: "Systematic",
+      sub: "Process-driven approach with defined controls",
     },
     {
-      label: "Portfolio DD Cap",
-      value: "2–5%",
-      sub: "Illustrative firm-level drawdown guardrail",
+      label: "Reporting",
+      value: "Monthly",
+      sub: "Net-of-fees + risk metrics (when published)",
     },
     {
-      label: "Capital Allocation",
-      value: "70/30",
-      sub: "Stable yield vs quant trading (initial)",
+      label: "Execution",
+      value: "Fee-aware",
+      sub: "Designed to reduce friction & operational risk",
     },
     {
-      label: "Execution Bias",
-      value: "Maker-first",
-      sub: "Fee-aware rules to protect edge",
+      label: "Focus",
+      value: "Risk-first",
+      sub: "Risk governance overrides return optimization",
     },
-  ],
-
-  // 🔧 Illustrative monthly cards (edit later with real net-of-fees results)
-  months: [
-    { name: "2026 • Q1", tag: "Illustrative", net: "-", dd: "−", notes: "Stable yield anchor + light quant exposure" },
-    { name: "2026 • Q2", tag: "Illustrative", net: "-", dd: "−", notes: "Regime filter reduced churn; fees optimized" },
-    { name: "2026 • Q3", tag: "Illustrative", net: "-", dd: "-", notes: "Momentum basket performed; risk caps respected" },
   ],
 };
+
+function escapeHtml(s) {
+  return String(s)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
 
 function renderKpis() {
   const grid = $("#kpiGrid");
@@ -50,34 +53,6 @@ function renderKpis() {
   `).join("");
 }
 
-function renderMonths() {
-  const grid = $("#trackGrid");
-  if (!grid) return;
-
-  grid.innerHTML = state.months.map(m => `
-    <div class="monthCard">
-      <div class="monthTop">
-        <div class="monthName">${escapeHtml(m.name)}</div>
-        <div class="monthTag">${escapeHtml(m.tag)}</div>
-      </div>
-      <div class="monthMeta">
-        <div class="metaRow"><div class="metaKey">Net return</div><div class="metaVal">${escapeHtml(m.net)}</div></div>
-        <div class="metaRow"><div class="metaKey">Max drawdown</div><div class="metaVal">${escapeHtml(m.dd)}</div></div>
-        <div class="metaRow"><div class="metaKey">Notes</div><div class="metaVal">${escapeHtml(m.notes)}</div></div>
-      </div>
-    </div>
-  `).join("");
-}
-
-function escapeHtml(s) {
-  return String(s)
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#039;");
-}
-
 function setTheme(theme) {
   if (theme === "light") {
     document.documentElement.setAttribute("data-theme", "light");
@@ -90,13 +65,12 @@ function setTheme(theme) {
 function initTheme() {
   const saved = localStorage.getItem("iam_theme");
   if (saved) return setTheme(saved);
-
-  // Default: dark (finance vibe)
   setTheme("dark");
 }
 
 function initEvents() {
-  $("#year").textContent = new Date().getFullYear();
+  const year = $("#year");
+  if (year) year.textContent = new Date().getFullYear();
 
   const themeBtn = $("#themeBtn");
   if (themeBtn) {
@@ -106,15 +80,32 @@ function initEvents() {
     });
   }
 
+  // Mobile menu
+  const menuBtn = $("#menuBtn");
+  const mobileNav = $("#mobileNav");
+  if (menuBtn && mobileNav) {
+    menuBtn.addEventListener("click", () => {
+      const isOpen = mobileNav.classList.toggle("open");
+      mobileNav.setAttribute("aria-hidden", String(!isOpen));
+    });
+
+    mobileNav.querySelectorAll("a").forEach(a => {
+      a.addEventListener("click", () => {
+        mobileNav.classList.remove("open");
+        mobileNav.setAttribute("aria-hidden", "true");
+      });
+    });
+  }
+
+  // Disable "coming soon" button
   const dl = $("#downloadBtn");
   if (dl) {
-    dl.addEventListener("click", () => {
-      alert("Sample PDF placeholder. Later you can upload a real investor letter PDF and link it here.");
+    dl.addEventListener("click", (e) => {
+      e.preventDefault();
     });
   }
 }
 
 initTheme();
 renderKpis();
-renderMonths();
 initEvents();
