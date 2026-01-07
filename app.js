@@ -31,9 +31,9 @@ const state = {
 
   // 🔧 Illustrative monthly cards (edit later with real net-of-fees results)
   months: [
-    { name: "2026 • Q1", tag: "Illustrative", net: "+2.4%", dd: "−1.1%", notes: "Stable yield anchor + light quant exposure" },
-    { name: "2026 • Q2", tag: "Illustrative", net: "+1.7%", dd: "−0.8%", notes: "Regime filter reduced churn; fees optimized" },
-    { name: "2026 • Q3", tag: "Illustrative", net: "+3.1%", dd: "−1.6%", notes: "Momentum basket performed; risk caps respected" },
+    { name: "2026 • Q1", tag: "Illustrative", net: "-", dd: "−", notes: "Stable yield anchor + light quant exposure" },
+    { name: "2026 • Q2", tag: "Illustrative", net: "-", dd: "−", notes: "Regime filter reduced churn; fees optimized" },
+    { name: "2026 • Q3", tag: "Illustrative", net: "-", dd: "-", notes: "Momentum basket performed; risk caps respected" },
   ],
 };
 
