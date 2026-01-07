@@ -9,23 +9,23 @@ const state = {
   // 🔧 Edit anytime (keep high-level, investor-safe)
   kpis: [
     {
-      label: "Positioning",
-      value: "Systematic",
-      sub: "Process-driven approach with defined controls",
+      label: "AUM (Asset Under Management)",
+      value: "94.2K USD",
+      sub: "Internally managed capital (indicative)",
     },
     {
-      label: "Reporting",
-      value: "Monthly",
-      sub: "Net-of-fees + risk metrics (when published)",
+      label: "Team",
+      value: "4",
+      sub: "Research, engineering & operations",
     },
     {
-      label: "Execution",
-      value: "Fee-aware",
-      sub: "Designed to reduce friction & operational risk",
+      label: "Operating History",
+      value: "18+ months",
+      sub: "Live trading experience"
     },
     {
-      label: "Focus",
-      value: "Risk-first",
+      label: "Avg Return rate",
+      value: "12.43% IRR",
       sub: "Risk governance overrides return optimization",
     },
   ],
