@@ -101,32 +101,57 @@
         <aside class="snapshot" aria-label="Firm Snapshot">
           <div class="snapTop">
             <div class="snapTitle">Firm Snapshot</div>
-            <div class="snapTag">High-level</div>
           </div>
 
           <div class="kpis" id="kpiGrid"></div>
           
           <div class="snapLine"></div>
 
-<div class="charts2">
-  <div class="chartCard">
-    <div class="chartHead">
-      <div class="chartTitle">Historical AUM</div>
+<div class="snapLine"></div>
+
+<!-- AUM chart (large) -->
+<div class="chartBlock">
+  <div class="chartTop">
+    <div>
+      <div class="chartKicker">Historical AUM</div>
       <div class="chartMeta muted">USD (illustrative)</div>
     </div>
-    <canvas id="aumChart" width="520" height="180"></canvas>
+
+    <div class="rangePills" data-target="aum">
+      <button class="pillBtn active" type="button" data-range="30d">30D</button>
+      <button class="pillBtn" type="button" data-range="1y">1Y</button>
+      <button class="pillBtn" type="button" data-range="all">ALL</button>
+    </div>
   </div>
 
-  <div class="chartCard">
-    <div class="chartHead">
-      <div class="chartTitle">Historical IRR</div>
-      <div class="chartMeta muted">Annualized % (illustrative)</div>
-    </div>
-    <canvas id="irrChart" width="520" height="180"></canvas>
+  <div class="chartWrap">
+    <canvas id="aumChart"></canvas>
+    <div class="tooltip" id="aumTip" aria-hidden="true"></div>
   </div>
 </div>
 
 <div class="snapLine"></div>
+
+<!-- IRR chart (large) -->
+<div class="chartBlock">
+  <div class="chartTop">
+    <div>
+      <div class="chartKicker">Historical IRR</div>
+      <div class="chartMeta muted">Annualized % (illustrative)</div>
+    </div>
+
+    <div class="rangePills" data-target="irr">
+      <button class="pillBtn active" type="button" data-range="30d">30D</button>
+      <button class="pillBtn" type="button" data-range="1y">1Y</button>
+      <button class="pillBtn" type="button" data-range="all">ALL</button>
+    </div>
+  </div>
+
+  <div class="chartWrap">
+    <canvas id="irrChart"></canvas>
+    <div class="tooltip" id="irrTip" aria-hidden="true"></div>
+  </div>
+</div>
 
           
           <div class="snapLine"></div>
