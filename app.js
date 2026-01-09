@@ -1,49 +1,28 @@
-// IAM Capital — professional MVP script
-// - Inject high-level KPIs (no proprietary strategy details)
-// - Mobile menu toggle
-// - Theme toggle (saved)
-
 const $ = (sel) => document.querySelector(sel);
+const $$ = (sel) => Array.from(document.querySelectorAll(sel));
 
 const state = {
-  // 🔧 Edit anytime (keep high-level, investor-safe)
+  // KPI는 “성과”보다 “운영 가능성/신뢰” 중심이 더 프로임
   kpis: [
-    {
-      label: "AUM",
-      value: "94.2K USD",
-      sub: "Internally managed capital (indicative)",
-    },
-    {
-      label: "Team",
-      value: "4 people",
-      sub: "Research, engineering & operations",
-    },
-    {
-      label: "Operating History",
-      value: "18+ months",
-      sub: "Live trading experience"
-    },
-    {
-      label: "Avg Return rate",
-      value: "12.43% IRR",
-      sub: "Historical & Back-tested IRR",
-    },
+    { label: "Capital Base", value: "Proprietary", sub: "Internally managed (indicative)" },
+    { label: "Operating History", value: "12+ months", sub: "Live trading experience" },
+    { label: "Strategy Scope", value: "Multi-strategy", sub: "Systematic deployment" },
+    { label: "Reporting", value: "Monthly", sub: "Net-of-fees format" },
   ],
 };
 
-function escapeHtml(s) {
+function escapeHtml(s){
   return String(s)
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#039;");
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
 }
 
-function renderKpis() {
+function renderKpis(){
   const grid = $("#kpiGrid");
   if (!grid) return;
-
   grid.innerHTML = state.kpis.map(k => `
     <div class="kpi">
       <div class="kpiLabel">${escapeHtml(k.label)}</div>
@@ -53,81 +32,132 @@ function renderKpis() {
   `).join("");
 }
 
-function setTheme(theme) {
-  if (theme === "light") {
-    document.documentElement.setAttribute("data-theme", "light");
-  } else {
-    document.documentElement.removeAttribute("data-theme");
-  }
+function setTheme(theme){
+  if (theme === "light") document.documentElement.setAttribute("data-theme","light");
+  else document.documentElement.removeAttribute("data-theme");
   localStorage.setItem("iam_theme", theme);
 }
-
-function initTheme() {
+function initTheme(){
   const saved = localStorage.getItem("iam_theme");
-  if (saved) return setTheme(saved);
-  setTheme("dark");
+  setTheme(saved || "dark");
 }
 
-function initEvents() {
-  const year = $("#year");
-  if (year) year.textContent = new Date().getFullYear();
+function closeAllMega(){
+  $$(".hasMega").forEach(item => {
+    item.classList.remove("open");
+    const btn = item.querySelector(".navBtn");
+    if (btn) btn.setAttribute("aria-expanded", "false");
+  });
+}
 
-  const themeBtn = $("#themeBtn");
-  if (themeBtn) {
-    themeBtn.addEventListener("click", () => {
-      const isLight = document.documentElement.getAttribute("data-theme") === "light";
-      setTheme(isLight ? "dark" : "light");
+// Desktop mega-menu behavior:
+// - Open on hover
+// - Also open/close on click (for trackpads)
+// - Close when clicking outside or pressing ESC
+function initMegaMenu(){
+  const items = $$(".hasMega");
+
+  items.forEach(item => {
+    const btn = item.querySelector(".navBtn");
+    const mega = item.querySelector(".mega");
+    if (!btn || !mega) return;
+
+    const open = () => {
+      closeAllMega();
+      item.classList.add("open");
+      btn.setAttribute("aria-expanded", "true");
+    };
+
+    const close = () => {
+      item.classList.remove("open");
+      btn.setAttribute("aria-expanded", "false");
+    };
+
+    item.addEventListener("mouseenter", open);
+    item.addEventListener("mouseleave", close);
+
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
+      const isOpen = item.classList.contains("open");
+      if (isOpen) close();
+      else open();
     });
 
-      // Performance toggle
+    // If user clicks a link inside mega menu, close it
+    mega.querySelectorAll("a").forEach(a => {
+      a.addEventListener("click", () => closeAllMega());
+    });
+  });
+
+  document.addEventListener("click", (e) => {
+    const inside = e.target.closest(".hasMega");
+    if (!inside) closeAllMega();
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeAllMega();
+  });
+}
+
+function initPerformanceToggle(){
   const perfBtn = $("#perfBtn");
   const perfPanel = $("#perfPanel");
   const perfClose = $("#perfClose");
 
-  function openPerf(){
+  const open = () => {
     if (!perfPanel) return;
     perfPanel.classList.add("open");
     perfPanel.setAttribute("aria-hidden", "false");
-    // 스크롤 이동(자연스럽게)
-    document.querySelector("#performance")?.scrollIntoView({behavior:"smooth", block:"start"});
-  }
-  function closePerf(){
+    $("#performance")?.scrollIntoView({behavior:"smooth", block:"start"});
+  };
+  const close = () => {
     if (!perfPanel) return;
     perfPanel.classList.remove("open");
     perfPanel.setAttribute("aria-hidden", "true");
-  }
+  };
 
-  perfBtn?.addEventListener("click", openPerf);
-  perfClose?.addEventListener("click", closePerf);
-
-  }
-
-  // Mobile menu
-  const menuBtn = $("#menuBtn");
-  const mobileNav = $("#mobileNav");
-  if (menuBtn && mobileNav) {
-    menuBtn.addEventListener("click", () => {
-      const isOpen = mobileNav.classList.toggle("open");
-      mobileNav.setAttribute("aria-hidden", String(!isOpen));
-    });
-
-    mobileNav.querySelectorAll("a").forEach(a => {
-      a.addEventListener("click", () => {
-        mobileNav.classList.remove("open");
-        mobileNav.setAttribute("aria-hidden", "true");
-      });
-    });
-  }
-
-  // Disable "coming soon" button
-  const dl = $("#downloadBtn");
-  if (dl) {
-    dl.addEventListener("click", (e) => {
-      e.preventDefault();
-    });
-  }
+  perfBtn?.addEventListener("click", open);
+  perfClose?.addEventListener("click", close);
 }
 
-initTheme();
-renderKpis();
-initEvents();
+function initMobileDrawer(){
+  const btn = $("#mobileMenuBtn");
+  const drawer = $("#mobileDrawer");
+  const closeBtn = $("#mobileCloseBtn");
+  if (!btn || !drawer || !closeBtn) return;
+
+  const open = () => {
+    drawer.classList.add("open");
+    drawer.setAttribute("aria-hidden", "false");
+  };
+  const close = () => {
+    drawer.classList.remove("open");
+    drawer.setAttribute("aria-hidden", "true");
+  };
+
+  btn.addEventListener("click", open);
+  closeBtn.addEventListener("click", close);
+
+  drawer.querySelectorAll("a").forEach(a => {
+    a.addEventListener("click", close);
+  });
+}
+
+function init(){
+  initTheme();
+  renderKpis();
+  initMegaMenu();
+  initPerformanceToggle();
+  initMobileDrawer();
+
+  const themeBtn = $("#themeBtn");
+  themeBtn?.addEventListener("click", () => {
+    const isLight = document.documentElement.getAttribute("data-theme") === "light";
+    setTheme(isLight ? "dark" : "light");
+  });
+
+  const year = $("#year");
+  if (year) year.textContent = new Date().getFullYear();
+}
+
+init();
