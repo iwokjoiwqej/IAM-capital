@@ -534,3 +534,52 @@ textarea.input{resize:vertical}
 [data-theme="light"] .note{
   color: rgba(11,18,32,.65);
 }
+
+/* Performance panel toggle */
+.perfPanel{
+  display:none;
+  overflow:hidden;
+}
+.perfPanel.open{
+  display:block;
+  animation: perfIn .22s ease-out;
+}
+@keyframes perfIn{
+  from{ transform: translateY(-8px); opacity:.0; }
+  to{ transform: translateY(0); opacity:1; }
+}
+.perfTop{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:14px;
+}
+
+/* Simple bars */
+.bars{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+.barHead{
+  display:flex;
+  justify-content:space-between;
+  align-items:baseline;
+  font-weight:800;
+  margin-bottom:8px;
+}
+.barTrack{
+  height:12px;
+  border-radius:999px;
+  border:1px solid var(--line2);
+  background: rgba(255,255,255,.03);
+  overflow:hidden;
+}
+.barFill{
+  height:100%;
+  border-radius:999px;
+  background: linear-gradient(135deg, rgba(77,163,255,.98), rgba(124,92,255,.92));
+  box-shadow: 0 8px 20px rgba(77,163,255,.14);
+}
+
