@@ -133,14 +133,25 @@ a{color:inherit; text-decoration:none}
 .heroBg{
   position:absolute;
   inset:0;
-  background:
-    linear-gradient(90deg, rgba(7,11,20,.92) 0%, rgba(7,11,20,.70) 48%, rgba(7,11,20,.92) 100%),
-    url("./assets/hero.jpg");
+  background-image: url("./assets/hero.jpg");
   background-size: cover;
   background-position: center;
+  background-repeat: no-repeat;
   filter: saturate(1.05) contrast(1.05);
-  opacity: .95;
+  opacity: 1;
 }
+
+/* 오버레이를 분리해서 얹기 */
+.heroBg::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(700px 420px at 20% 10%, rgba(77,163,255,.18), transparent 60%),
+    radial-gradient(700px 420px at 85% 20%, rgba(124,92,255,.16), transparent 60%),
+    linear-gradient(90deg, rgba(7,11,20,.65) 0%, rgba(7,11,20,.30) 50%, rgba(7,11,20,.65) 100%);
+}
+
 [data-theme="light"] .heroBg{
   opacity: .60;
   filter: saturate(1.0) contrast(1.0);
@@ -411,18 +422,23 @@ h3{margin:0; letter-spacing:-0.02em}
   color:var(--muted);
   margin-bottom:12px;
 }
-.partnersRow{
+..partnersRow{
   display:flex;
   align-items:center;
-  gap:18px;
+  gap:22px;
   flex-wrap:wrap;
 }
+
 .partnersRow img{
-  height:26px;
-  opacity:.85;
+  height:40px;          /* <- 크게 */
+  max-height:52px;
+  opacity:.92;
   filter: grayscale(100%);
 }
-.partnersNote{margin-top:10px}
+
+@media (max-width:520px){
+  .partnersRow img{ height:34px; }
+}
 
 /* Footer */
 .footer{
