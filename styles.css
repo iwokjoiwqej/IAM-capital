@@ -628,45 +628,48 @@ h3{margin:0; letter-spacing:-0.02em}
 .marquee:hover .marqueeTrack{ animation-play-state: paused; }
 
 /* Groups */
+/* 간격 더 넓게 */
 .marqueeGroup{
   display:flex;
   align-items:center;
-  gap: 40px;
-  padding: 0 28px;
+  gap: 56px;          /* 40 -> 56 (원하는 만큼 더) */
+  padding: 0 34px;
 }
 
-/* Logos */
-.marqueeGroup img{
-  height: 72px;          /* 46 -> 72 */
-  max-height: 84px;
-  opacity: .95;
-  filter: grayscale(0%);
+/* 로고를 넣는 통일된 박스 */
+.logoChip{
+  height: 76px;               /* 모든 로고 높이 통일 기준 */
+  min-width: 160px;           /* 너무 작은 로고 방지 */
+  padding: 10px 14px;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,.06);
+  background: rgba(255,255,255,.02);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+/* 로고 이미지는 박스 안에서 'fit' */
+.logoChip img{
+  max-height: 54px;           /* 로고 자체 높이 */
+  max-width: 260px;           /* 너무 긴 로고 제한 */
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  opacity: .92;
+  filter: grayscale(20%);     /* 원하면 0%로 */
   transition: transform .2s ease, opacity .2s ease, filter .2s ease;
-  display:block;
-}
-@media (max-width:520px){
-  .marqueeGroup img{
-    height: 54px;
-    max-height: 64px;
-  }
 }
 
-
-.marqueeGroup img:hover{
+.logoChip:hover img{
   opacity: 1;
   filter: grayscale(0%);
   transform: translateY(-1px);
 }
 
-@keyframes marqueeMove{
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); } /* duplicate set loop */
-}
-
-/* Mobile */
+/* 모바일 */
 @media (max-width:520px){
-  .marquee::before, .marquee::after{ width: 70px; }
-  .marqueeGroup{ gap: 26px; padding: 0 18px; }
-  .marqueeGroup img{ height: 38px; }
-  .marqueeTrack{ animation-duration: 26s; }
+  .marqueeGroup{ gap: 34px; padding: 0 18px; }
+  .logoChip{ height: 64px; min-width: 140px; }
+  .logoChip img{ max-height: 42px; max-width: 210px; }
 }
