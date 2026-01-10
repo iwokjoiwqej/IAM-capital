@@ -4,16 +4,23 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Strategy — IAM Capital</title>
-  <meta name="description" content="Strategy overview and public standards. Proprietary details are shared privately." />
+  <meta name="description" content="Revenue drivers and public operating principles. IAM Capital does not disclose proprietary parameters on the public site." />
+  <meta name="theme-color" content="#0b1220" />
+
   <link rel="icon" href="./assets/favicon.ico">
   <link rel="apple-touch-icon" href="./assets/apple-touch-icon.png">
   <link rel="manifest" href="./assets/site.webmanifest">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./styles.css?v=1" />
+  <link rel="stylesheet" href="./styles.css?v=2" />
 </head>
+
 <body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <!-- Header -->
   <header class="header" id="top">
     <div class="container headerInner">
       <a class="brand" href="./index.html" aria-label="IAM Capital Home">
@@ -29,17 +36,22 @@
       </nav>
 
       <div class="headerRight">
-        <button class="iconBtn" id="themeBtn" type="button" aria-label="Toggle theme"><span class="dot"></span></button>
+        <button class="iconBtn" id="themeBtn" type="button" aria-label="Toggle theme">
+          <span class="dot"></span>
+        </button>
+
         <button class="iconBtn menuBtn" id="mobileMenuBtn" type="button" aria-label="Open menu">☰</button>
         <a class="cta" href="./contact.html">Request an intro</a>
       </div>
     </div>
 
+    <!-- Mobile drawer -->
     <div class="mobileDrawer" id="mobileDrawer" aria-hidden="true">
       <div class="mobileTop">
         <div class="mobileTitle">Menu</div>
         <button class="iconBtn" id="mobileCloseBtn" type="button" aria-label="Close menu">✕</button>
       </div>
+
       <div class="mobileLinks">
         <a href="./about.html">About us</a>
         <a href="./strategy.html">Strategy</a>
@@ -52,180 +64,84 @@
   <main id="main">
     <section class="section">
       <div class="container">
+
         <div class="sectionHead">
           <h2>Strategy</h2>
-<div class="grid2">
-  <article class="panel">
-    <div class="panelHead">
-      <div class="badge">Revenue drivers</div>
-      <h3>Primary sources</h3>
-    </div>
-
-    <p class="muted">
-      We share the <strong>categories</strong> of our revenue drivers while keeping strategy parameters proprietary.
-      Implementation details, sizing rules, and execution logic are discussed privately when appropriate.
-    </p>
-
-    <div class="drivers">
-      <div class="driver">
-        <div class="driverTitle">Stable yield (Interest farming)</div>
-        <div class="muted small">Lending, staking, structured yield — with risk controls and hedging where applicable.</div>
-      </div>
-
-      <div class="driver">
-        <div class="driverTitle">Automated systematic trading</div>
-        <div class="muted small">Rule-based execution with monitoring, incident response, and fee-aware constraints.</div>
-      </div>
-
-      <div class="driver">
-        <div class="driverTitle">Strategic investments</div>
-        <div class="muted small">Selective, thesis-driven positions with governance and risk budgets.</div>
-      </div>
-
-      <div class="driver">
-        <div class="driverTitle">Arbitrage</div>
-        <div class="muted small">Cross-venue and market-structure opportunities, subject to liquidity and operational limits.</div>
-      </div>
-    </div>
-
-    <div class="muted small" style="margin-top:12px;">
-      Note: We do not publicly disclose signals, weights, leverage limits, or execution rules.
-    </div>
-  </article>
-
-  <article class="panel">
-    <div class="panelHead">
-      <div class="badge amber">Operating principles</div>
-      <h3>How we manage risk</h3>
-    </div>
-
-    <ul class="list compact">
-      <li><span class="tick">✓</span> Risk budgets and exposure constraints</li>
-      <li><span class="tick">✓</span> Fee-aware execution and slippage controls</li>
-      <li><span class="tick">✓</span> Monitoring, logs, and incident response</li>
-      <li><span class="tick">✓</span> Reporting cadence and disclosure standards</li>
-    </ul>
-  </article>
-</div>
-          
-        <div class="grid2">
-          <div class="panel">
-            <div class="panelHead">
-              <div class="badge">Framework</div>
-              <h3>Portfolio construction</h3>
-            </div>
-            <p class="muted">
-              Allocation decisions are made under risk budgets with liquidity-first controls and regime awareness.
-            </p>
-            <ul class="list compact">
-              <li><span class="tick">✓</span> Exposure limits & concentration controls</li>
-              <li><span class="tick">✓</span> Liquidity filters & execution constraints</li>
-              <li><span class="tick">✓</span> Risk review cadence</li>
-            </ul>
-          </div>
-
-          <div class="panel">
-            <div class="panelHead">
-              <div class="badge amber">Operations</div>
-              <h3>Execution & monitoring</h3>
-            </div>
-            <p class="muted">
-              Fee-aware execution preferences, monitoring, incident response, and audit trails.
-            </p>
-            <ul class="list compact">
-              <li><span class="tick">✓</span> Monitoring, logs & alerting</li>
-              <li><span class="tick">✓</span> Fail-safe & escalation paths</li>
-              <li><span class="tick">✓</span> Controls override return optimization</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="panel" style="margin-top:14px;">
-          <h3 class="h4">Disclosure policy</h3>
-          <p class="muted small">
-            We do not publish strategy parameters, signal rules, or portfolio weights on the public site.
-            Detailed diligence materials may be provided privately to qualified parties.
+          <p class="muted">
+            We disclose high-level categories only. Portfolio allocation may change dynamically based on market
+            and macro conditions.
           </p>
         </div>
 
-<div class="panel" style="margin-top:14px;">
-  <div class="panelHead">
-    <div class="badge">Roadmap</div>
-    <h3>Build → validate → scale</h3>
-  </div>
+        <!-- Compact hero panel -->
+        <div class="panel" style="margin-bottom:14px;">
+          <h3 style="margin:0 0 8px; letter-spacing:-0.02em;">Adaptive allocation, risk-first execution</h3>
+          <p class="muted" style="margin:0;">
+            IAM Capital operates a systematic, process-driven approach. We publish public standards and
+            communication practices, while keeping proprietary parameters private. Risk constraints override
+            return optimization.
+          </p>
 
-  <p class="muted">
-    A high-level operating roadmap. Dates and scope may evolve as we expand capabilities and partnerships.
-  </p>
-
-  <div class="timeline">
-    <div class="tItem">
-      <div class="tDot"></div>
-      <div class="tBody">
-        <div class="tTop">
-          <div class="tDate">2026 / 01 / 06</div>
-          <div class="tTag">Company launch</div>
+          <div class="callout" style="margin-top:14px;">
+            <div class="calloutIcon">⟡</div>
+            <div class="calloutText">
+              <div class="calloutTitle">Disclosure</div>
+              <div class="muted">
+                We do not publish signals, portfolio weights, leverage limits, or execution rules on the public site.
+                Detailed diligence materials may be shared privately to qualified parties.
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="tTitle">IAM Capital formation & initial operating setup</div>
-        <div class="muted small">Entity setup, infrastructure baseline, internal controls, reporting templates.</div>
-      </div>
-    </div>
 
-    <div class="tItem">
-      <div class="tDot"></div>
-      <div class="tBody">
-        <div class="tTop">
-          <div class="tDate">2026 Q1–Q2</div>
-          <div class="tTag">Validation</div>
+        <!-- Revenue drivers (keep only) -->
+        <div class="panel">
+          <div class="panelHead">
+            <div class="badge">Revenue drivers</div>
+            <h3>Primary sources</h3>
+          </div>
+
+          <p class="muted">
+            The firm’s return profile is supported by multiple drivers. Allocation across these categories may vary
+            with market structure and macro regime.
+          </p>
+
+          <div class="drivers">
+            <div class="driver">
+              <div class="driverTitle">Stable yield (Interest farming)</div>
+              <div class="muted small">Lending, staking, structured yield — with risk controls and hedging where applicable.</div>
+            </div>
+
+            <div class="driver">
+              <div class="driverTitle">Systematic automated trading</div>
+              <div class="muted small">Rule-based execution, monitoring, and fee-aware constraints.</div>
+            </div>
+
+            <div class="driver">
+              <div class="driverTitle">Strategic investments</div>
+              <div class="muted small">Selective, thesis-driven positions with governance and risk budgets.</div>
+            </div>
+
+            <div class="driver">
+              <div class="driverTitle">Arbitrage</div>
+              <div class="muted small">Cross-venue and market-structure opportunities within operational limits.</div>
+            </div>
+          </div>
+
+          <div class="muted small" style="margin-top:12px;">
+            For informational purposes only. Not investment advice. Past performance does not guarantee future results.
+          </div>
         </div>
-        <div class="tTitle">Live track record & process hardening</div>
-        <div class="muted small">Stability tests, incident response drills, monitoring and reporting cadence.</div>
-      </div>
-    </div>
 
-    <div class="tItem">
-      <div class="tDot"></div>
-      <div class="tBody">
-        <div class="tTop">
-          <div class="tDate">2026 H2</div>
-          <div class="tTag">Scaling</div>
-        </div>
-        <div class="tTitle">Broader strategy coverage & partner infrastructure</div>
-        <div class="muted small">More return drivers, improved execution, improved risk analytics.</div>
-      </div>
-    </div>
-
-    <div class="tItem">
-      <div class="tDot"></div>
-      <div class="tBody">
-        <div class="tTop">
-          <div class="tDate">2027+</div>
-          <div class="tTag">Expansion</div>
-        </div>
-        <div class="tTitle">Institutional-grade structure & multi-vehicle roadmap</div>
-        <div class="muted small">Fund vehicles, long-term research program, and optional venture/strategic allocation framework.</div>
-      </div>
-    </div>
-
-    <div class="tItem">
-      <div class="tDot"></div>
-      <div class="tBody">
-        <div class="tTop">
-          <div class="tDate">Future (template)</div>
-          <div class="tTag">VC / incubation</div>
-        </div>
-        <div class="tTitle">Venture investing and ecosystem building</div>
-        <div class="muted small">A potential expansion into venture-style investments and incubation as capacity grows.</div>
-      </div>
-    </div>
-  </div>
-</div>
-
-          
         <footer class="footer">
-          <div class="footerLeft"><div class="muted small">© <span id="year"></span> IAM Capital. All rights reserved.</div></div>
-          <div class="footerRight muted small"><span>For informational purposes only.</span></div>
+          <div class="footerLeft">
+            <div class="muted small">© <span id="year"></span> IAM Capital. All rights reserved.</div>
+          </div>
+          <div class="footerRight muted small">
+            <span>For informational purposes only.</span>
+          </div>
         </footer>
+
       </div>
     </section>
   </main>
