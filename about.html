@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>About us — IAM Capital</title>
+  <meta name="description" content="About IAM Capital — risk-first, systematic digital asset investment." />
+  <link rel="icon" href="./assets/favicon.ico">
+  <link rel="apple-touch-icon" href="./assets/apple-touch-icon.png">
+  <link rel="manifest" href="./assets/site.webmanifest">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css?v=1" />
+</head>
+<body>
+  <header class="header" id="top">
+    <div class="container headerInner">
+      <a class="brand" href="./index.html" aria-label="IAM Capital Home">
+        <img class="brandLogo" src="./assets/iam-logo.png" alt="IAM Capital logo" />
+        <span class="brandWord">IAM Capital</span>
+      </a>
+
+      <nav class="nav" aria-label="Primary">
+        <a class="navLink" href="./about.html" aria-current="page">About us</a>
+        <a class="navLink" href="./strategy.html">Strategy</a>
+        <a class="navLink" href="./insights.html">Insights</a>
+        <a class="navLink" href="./contact.html">Contact us</a>
+      </nav>
+
+      <div class="headerRight">
+        <button class="iconBtn" id="themeBtn" type="button" aria-label="Toggle theme"><span class="dot"></span></button>
+        <button class="iconBtn menuBtn" id="mobileMenuBtn" type="button" aria-label="Open menu">☰</button>
+        <a class="cta" href="./contact.html">Request an intro</a>
+      </div>
+    </div>
+
+    <div class="mobileDrawer" id="mobileDrawer" aria-hidden="true">
+      <div class="mobileTop">
+        <div class="mobileTitle">Menu</div>
+        <button class="iconBtn" id="mobileCloseBtn" type="button" aria-label="Close menu">✕</button>
+      </div>
+      <div class="mobileLinks">
+        <a href="./about.html">About us</a>
+        <a href="./strategy.html">Strategy</a>
+        <a href="./insights.html">Insights</a>
+        <a href="./contact.html">Contact us</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="section">
+      <div class="container">
+        <div class="sectionHead">
+          <h2>About us</h2>
+          <p class="muted">Risk-first, systematic approach. Built for repeatability.</p>
+        </div>
+
+        <div class="grid2">
+          <div class="panel">
+            <h3>Mission</h3>
+            <p class="muted">
+              Build a disciplined, scalable process for digital asset investing with a focus on survivability,
+              operational control, and consistent reporting.
+            </p>
+          </div>
+
+          <div class="panel">
+            <h3>What we do</h3>
+            <ul class="list compact">
+              <li><span class="tick">✓</span> Systematic risk controls</li>
+              <li><span class="tick">✓</span> Institutional reporting cadence</li>
+              <li><span class="tick">✓</span> Infrastructure-first operations</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="callout">
+          <div class="calloutIcon">⟡</div>
+          <div class="calloutText">
+            <div class="calloutTitle">Disclosure</div>
+            <div class="muted">
+              We do not publish proprietary strategy parameters on the public site. Details are shared privately when appropriate.
+            </div>
+          </div>
+        </div>
+
+        <footer class="footer">
+          <div class="footerLeft"><div class="muted small">© <span id="year"></span> IAM Capital. All rights reserved.</div></div>
+          <div class="footerRight muted small"><span>For informational purposes only.</span></div>
+        </footer>
+      </div>
+    </section>
+  </main>
+
+  <script src="./app.js"></script>
+</body>
+</html>
