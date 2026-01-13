@@ -1,3 +1,51 @@
+/* --- Base Typography --- */
+:root {
+  --font-heading: 'Sora', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --color-text: #111;
+  --color-muted: #555;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--color-text);
+}
+
+/* Headers */
+h1, h2, h3, h4, .heroTitle {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  color: #111;
+}
+
+h1 {
+  font-size: 3rem;
+}
+
+h2 {
+  font-size: 2.25rem;
+}
+
+h3 {
+  font-size: 1.75rem;
+}
+
+/* Navigation */
+.navLink, .brandWord, .cta {
+  font-family: var(--font-heading);
+  font-weight: 600;
+}
+
+/* Buttons */
+.primary, .secondary {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
 :root{
   --bg:#070b14;
   --bg2:#0b1220;
