@@ -3,17 +3,19 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>IAM Capital — Systematic Digital Asset Investment</title>
-  <meta name="description" content="IAM Capital is a crypto-based systematic investment firm focused on risk-first execution and institutional reporting standards." />
+  <title>Asthate — Systematic Digital Asset Investment</title>
+  <meta name="description" content="Asthate is a systematic digital asset investment firm focused on risk-first execution, disciplined operations, and institutional-grade reporting." />
   <meta name="theme-color" content="#0b1220" />
 
+  <!-- Icons -->
   <link rel="icon" href="./assets/favicon.ico">
   <link rel="apple-touch-icon" href="./assets/apple-touch-icon.png">
   <link rel="manifest" href="./assets/site.webmanifest">
 
+  <!-- Fonts: Sora (brand) + Inter (body fallback) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="./styles.css" />
 </head>
@@ -24,19 +26,17 @@
   <!-- Header -->
   <header class="header" id="top">
     <div class="container headerInner">
-      <a class="brand" href="#top" aria-label="IAM Capital Home">
-        <img class="brandLogo" src="./assets/iam-logo.png" alt="IAM Capital logo" />
-        <span class="brandWord">IAM Capital</span>
+      <a class="brand" href="#top" aria-label="Asthate Home">
+        <img class="brandLogo" src="./assets/iam-logo.png" alt="Asthate logo" />
+        <span class="brandWord">Asthate</span>
       </a>
 
-      <!-- CLEAN NAV (no mega menus) -->
-<nav class="nav" aria-label="Primary">
-  <a class="navLink" href="./about.html">About us</a>
-  <a class="navLink" href="./strategy.html">Strategy</a>
-  <a class="navLink" href="./insights.html">Insights</a>
-  <a class="navLink" href="./contact.html">Contact us</a>
-</nav>
-
+      <nav class="nav" aria-label="Primary">
+        <a class="navLink" href="./about.html">About</a>
+        <a class="navLink" href="./strategy.html">Strategy</a>
+        <a class="navLink" href="./insights.html">Insights</a>
+        <a class="navLink" href="./contact.html">Contact</a>
+      </nav>
 
       <div class="headerRight">
         <button class="iconBtn" id="themeBtn" type="button" aria-label="Toggle theme">
@@ -44,7 +44,7 @@
         </button>
 
         <button class="iconBtn menuBtn" id="mobileMenuBtn" type="button" aria-label="Open menu">☰</button>
-        <a class="cta" href="./contact.html">login</a>
+        <a class="cta" href="./contact.html">Portal</a>
       </div>
     </div>
 
@@ -55,18 +55,17 @@
         <button class="iconBtn" id="mobileCloseBtn" type="button" aria-label="Close menu">✕</button>
       </div>
 
-<div class="mobileLinks">
-  <a href="./about.html">About us</a>
-  <a href="./strategy.html">Strategy</a>
-  <a href="./insights.html">Insights</a>
-  <a href="./contact.html">Contact us</a>
-</div>
-
+      <div class="mobileLinks">
+        <a href="./about.html">About</a>
+        <a href="./strategy.html">Strategy</a>
+        <a href="./insights.html">Insights</a>
+        <a href="./contact.html">Contact</a>
+      </div>
     </div>
   </header>
 
   <main id="main">
-    <!-- HERO (image-forward, premium) -->
+    <!-- HERO -->
     <section class="hero">
       <div class="heroBg" aria-hidden="true"></div>
 
@@ -74,91 +73,87 @@
         <div class="heroLeft">
           <div class="pill"><span class="pillDot"></span> Systematic Digital Asset Investment</div>
 
-          <h1>
-            Risk-management first.<br/>
-            Disciplined.<br/>
-            <span class="grad">Built to last.</span>
+          <h1 class="heroTitle">
+            Risk-first execution.<br/>
+            Disciplined operations.<br/>
+            <span class="grad">Built to endure.</span>
           </h1>
 
           <p class="lead">
-            IAM Capital is a <strong>crypto-based</strong> systematic digital asset investment firm focused on repeatable,
-            risk-adjusted outcomes. We prioritize robust risk controls, operational discipline, and clear reporting.
+            Asthate is a systematic digital asset investment firm designed for repeatability —
+            emphasizing robust risk controls, operational rigor, and clear reporting.
           </p>
 
           <div class="whoRow">
-            <div class="whoTitle">Who this is for</div>
+            <div class="whoTitle">For</div>
             <p class="whoText">
-              Qualified investors and partners who value process rigor and institutional-style reporting.
-              Proprietary strategy details are shared privately when appropriate.
+              Qualified investors and partners who value process integrity and institutional-grade reporting.
+              Proprietary details are shared privately when appropriate.
             </p>
           </div>
 
           <div class="heroBtns">
             <a class="primary" href="#framework">Explore framework</a>
-            <a class="secondary" href="#reporting">Reporting standards</a>
+            <a class="secondary" href="#reporting">Reporting</a>
           </div>
 
           <p class="note">For informational purposes only. Not investment advice.</p>
         </div>
 
         <!-- Firm snapshot -->
-        <aside class="snapshot" aria-label="Firm Snapshot">
+        <aside class="snapshot" aria-label="Asthate Snapshot">
           <div class="snapTop">
-            <div class="snapTitle">Firm Snapshot</div>
+            <div class="snapTitle">Snapshot</div>
+            <div class="muted small">High-level overview (illustrative)</div>
           </div>
 
           <div class="kpis" id="kpiGrid"></div>
-          
+
           <div class="snapLine"></div>
 
-<div class="snapLine"></div>
+          <!-- AUM chart -->
+          <div class="chartBlock">
+            <div class="chartTop">
+              <div>
+                <div class="chartKicker">Historical AUM</div>
+                <div class="chartMeta muted">USD (illustrative)</div>
+              </div>
 
-<!-- AUM chart (large) -->
-<div class="chartBlock">
-  <div class="chartTop">
-    <div>
-      <div class="chartKicker">Historical AUM</div>
-      <div class="chartMeta muted">USD (illustrative)</div>
-    </div>
+              <div class="rangePills" data-target="aum">
+                <button class="pillBtn active" type="button" data-range="30d">30D</button>
+                <button class="pillBtn" type="button" data-range="1y">1Y</button>
+                <button class="pillBtn" type="button" data-range="all">ALL</button>
+              </div>
+            </div>
 
-    <div class="rangePills" data-target="aum">
-      <button class="pillBtn active" type="button" data-range="30d">30D</button>
-      <button class="pillBtn" type="button" data-range="1y">1Y</button>
-      <button class="pillBtn" type="button" data-range="all">ALL</button>
-    </div>
-  </div>
+            <div class="chartWrap">
+              <canvas id="aumChart"></canvas>
+              <div class="tooltip" id="aumTip" aria-hidden="true"></div>
+            </div>
+          </div>
 
-  <div class="chartWrap">
-    <canvas id="aumChart"></canvas>
-    <div class="tooltip" id="aumTip" aria-hidden="true"></div>
-  </div>
-</div>
-
-<div class="snapLine"></div>
-
-<!-- IRR chart (large) -->
-<div class="chartBlock">
-  <div class="chartTop">
-    <div>
-      <div class="chartKicker">Historical IRR</div>
-      <div class="chartMeta muted">Annualized % (illustrative)</div>
-    </div>
-
-    <div class="rangePills" data-target="irr">
-      <button class="pillBtn active" type="button" data-range="30d">30D</button>
-      <button class="pillBtn" type="button" data-range="1y">1Y</button>
-      <button class="pillBtn" type="button" data-range="all">ALL</button>
-    </div>
-  </div>
-
-  <div class="chartWrap">
-    <canvas id="irrChart"></canvas>
-    <div class="tooltip" id="irrTip" aria-hidden="true"></div>
-  </div>
-</div>
-
-          
           <div class="snapLine"></div>
+
+          <!-- IRR chart -->
+          <div class="chartBlock">
+            <div class="chartTop">
+              <div>
+                <div class="chartKicker">Historical IRR</div>
+                <div class="chartMeta muted">Annualized % (illustrative)</div>
+              </div>
+
+              <div class="rangePills" data-target="irr">
+                <button class="pillBtn active" type="button" data-range="30d">30D</button>
+                <button class="pillBtn" type="button" data-range="1y">1Y</button>
+                <button class="pillBtn" type="button" data-range="all">ALL</button>
+              </div>
+            </div>
+
+            <div class="chartWrap">
+              <canvas id="irrChart"></canvas>
+              <div class="tooltip" id="irrTip" aria-hidden="true"></div>
+            </div>
+          </div>
 
         </aside>
       </div>
@@ -181,7 +176,8 @@
               <h3>Portfolio Construction</h3>
             </div>
             <p class="muted">
-              Allocation across complementary return drivers under a mandate to preserve capital and optimize risk-adjusted outcomes.
+              Allocation across complementary return drivers under a mandate to preserve capital
+              and optimize risk-adjusted outcomes.
             </p>
             <ul class="list compact">
               <li><span class="tick">✓</span> Exposure constraints & risk budgeting</li>
@@ -196,10 +192,10 @@
               <h3>Execution & Controls</h3>
             </div>
             <p class="muted">
-              Operational discipline and fee-aware execution with monitoring, audit trails, and response protocols.
+              Fee-aware execution with monitoring, audit trails, and incident response protocols.
             </p>
             <ul class="list compact">
-              <li><span class="tick">✓</span> Fee-aware execution preferences</li>
+              <li><span class="tick">✓</span> Execution preferences & fee control</li>
               <li><span class="tick">✓</span> Monitoring, logs & alerting</li>
               <li><span class="tick">✓</span> Fail-safe & incident response</li>
             </ul>
@@ -211,7 +207,8 @@
           <div class="calloutText">
             <div class="calloutTitle">Governance</div>
             <div class="muted">
-              Formal review cadence, incident analysis, and continuous improvement. Risk decisions override return optimization.
+              Formal review cadence, incident analysis, and continuous improvement.
+              Risk decisions override return optimization.
             </div>
           </div>
         </div>
@@ -222,9 +219,9 @@
     <section class="section" id="reporting">
       <div class="container">
         <div class="sectionHead">
-          <h2>Reporting standards</h2>
+          <h2>Reporting</h2>
           <p class="muted">
-            Institutional-style reporting cadence. Net-of-fees format with consistent risk metrics.
+            Institutional-style cadence with consistent risk metrics and net-of-fees reporting conventions.
           </p>
         </div>
 
@@ -258,44 +255,39 @@
         </div>
       </div>
     </section>
-    
-    <!-- PARTNERS (LAST, before footer) -->
+
+    <!-- PARTNERS -->
     <section class="section partnersSection" id="partners">
       <div class="container">
-<div class="partnersBox">
-  <div class="partnersLabel">Infrastructure / Partners</div>
+        <div class="partnersBox">
+          <div class="partnersLabel">Infrastructure / Partners</div>
 
-  <div class="marquee" aria-label="Partners marquee">
-    <div class="marqueeTrack">
-      <!-- Set A -->
-      <div class="marqueeGroup">
-        <img src="./assets/partner-1.png" alt="Partner 1" />
-        <img src="./assets/partner-2.png" alt="Partner 2" />
-        <img src="./assets/partner-3.png" alt="Partner 3" />
-        <img src="./assets/partner-4.png" alt="Partner 4" />
-        <img src="./assets/partner-5.png" alt="Partner 5" />
-        <img src="./assets/partner-6.png" alt="Partner 6" />
-      </div>
+          <div class="marquee" aria-label="Partners marquee">
+            <div class="marqueeTrack">
+              <div class="marqueeGroup">
+                <img src="./assets/partner-1.png" alt="Partner 1" />
+                <img src="./assets/partner-2.png" alt="Partner 2" />
+                <img src="./assets/partner-3.png" alt="Partner 3" />
+                <img src="./assets/partner-4.png" alt="Partner 4" />
+                <img src="./assets/partner-5.png" alt="Partner 5" />
+                <img src="./assets/partner-6.png" alt="Partner 6" />
+              </div>
 
-      <!-- Set B (duplicate for seamless loop) -->
-      <div class="marqueeGroup" aria-hidden="true">
-        <img src="./assets/partner-1.png" alt="" />
-        <img src="./assets/partner-2.png" alt="" />
-        <img src="./assets/partner-3.png" alt="" />
-        <img src="./assets/partner-4.png" alt="" />
-        <img src="./assets/partner-5.png" alt="" />
-        <img src="./assets/partner-6.png" alt="" />
-      </div>
-    </div>
-  </div>
-  
-</div>
-
-
+              <div class="marqueeGroup" aria-hidden="true">
+                <img src="./assets/partner-1.png" alt="" />
+                <img src="./assets/partner-2.png" alt="" />
+                <img src="./assets/partner-3.png" alt="" />
+                <img src="./assets/partner-4.png" alt="" />
+                <img src="./assets/partner-5.png" alt="" />
+                <img src="./assets/partner-6.png" alt="" />
+              </div>
+            </div>
+          </div>
+        </div>
 
         <footer class="footer">
           <div class="footerLeft">
-            <div class="muted small">© <span id="year"></span> IAM Capital. All rights reserved.</div>
+            <div class="muted small">© <span id="year"></span> Asthate. All rights reserved.</div>
           </div>
           <div class="footerRight muted small">
             <span>For informational purposes only.</span>
@@ -305,6 +297,11 @@
     </section>
   </main>
 
+  <script>
+    // year stamp (if you already do this in app.js, you can remove this)
+    const y = document.getElementById("year");
+    if (y) y.textContent = new Date().getFullYear();
+  </script>
   <script src="./app.js"></script>
 </body>
 </html>
