@@ -10,13 +10,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
-  <!-- Chart.js + Financial (Candlestick) -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/date-fns@2.30.0/dist/date-fns.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3"></script>
-
-<!-- ✅ chartjs-chart-financial: UNPKG로 변경 (jsdelivr 대신) -->
-<script src="https://unpkg.com/chartjs-chart-financial@3.3.0/dist/chartjs-chart-financial.umd.min.js"></script>
+  <!-- Chart.js + time adapter deps -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/date-fns@2.30.0/dist/date-fns.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3"></script>
 
   <style>
     :root{
@@ -29,8 +26,8 @@
       --card: rgba(15,22,32,.55);
       --btn: rgba(0,0,0,.22);
 
-      --up: rgba(201,162,39,.95);     /* gold */
-      --down: rgba(120,130,150,.55);  /* muted */
+      --up: rgba(201,162,39,.95);
+      --down: rgba(120,130,150,.55);
       --grid: rgba(255,255,255,.10);
       --tick: rgba(234,240,255,.72);
     }
@@ -264,9 +261,7 @@
       font-size:12px;
       white-space:nowrap;
     }
-    .tfRow{
-      display:flex; gap:8px; flex-wrap:wrap;
-    }
+    .tfRow{ display:flex; gap:8px; flex-wrap:wrap; }
     .tfBtn{
       border:1px solid var(--line);
       background:rgba(0,0,0,.18);
@@ -439,7 +434,7 @@
 
       <div class="chartBox">
         <div class="chartHeader">
-          <div class="title">ASTH Candles</div>
+          <div class="title">ASTH Chart</div>
           <div class="right">
             <div class="tfRow" id="tfRow">
               <button class="tfBtn active" data-tf="15m">15m</button>
@@ -465,14 +460,14 @@
     <div class="foot">
       <span id="updatedAt">Last update: —</span>
       <button class="smallBtn" id="refreshBtn" type="button">Refresh</button>
-      <span style="opacity:.85">Stats update every 30s. Candle refresh every 30s.</span>
+      <span style="opacity:.85">Updates every 30 seconds.</span>
     </div>
 
   </div>
-  
+
   <script>
     // ===== Addresses =====
-    const PAIR_ADDRESS     = "0xd99307addb593f9aff5ef9bee19a424cff27e765"; // pool address (Uniswap pair)
+    const PAIR_ADDRESS     = "0xd99307addb593f9aff5ef9bee19a424cff27e765";
     const CONTRACT_ADDRESS = "0x33474A970752D43107Ee01c3Ab03dCb6C017aCC6";
 
     // DexScreener snapshot (stats)
@@ -480,14 +475,13 @@
     const DEX_API = `https://api.dexscreener.com/latest/dex/pairs/ethereum/${PAIR_ADDRESS}`;
 
     // GeckoTerminal OHLCV (candles)
-    // Docs: /api/v2/networks/{network}/pools/{pool}/ohlcv/{timeframe}?aggregate=...
-    // timeframe: minute|hour|day, aggregate options vary. :contentReference[oaicite:1]{index=1}
     const GT_BASE = "https://api.geckoterminal.com/api/v2";
-    const GT_NET  = "eth"; // Ethereum network id on GeckoTerminal :contentReference[oaicite:2]{index=2}
+    const GT_NET  = "eth";
 
     // ===== Theme =====
     const root = document.documentElement;
     const themeBtn = document.getElementById("themeBtn");
+
     function setTheme(t){
       if (t === "light") root.setAttribute("data-theme","light");
       else root.removeAttribute("data-theme");
@@ -496,6 +490,7 @@
     (function initTheme(){
       setTheme(localStorage.getItem("theme") || "dark");
     })();
+
     themeBtn?.addEventListener("click", () => {
       const isLight = root.getAttribute("data-theme") === "light";
       setTheme(isLight ? "dark" : "light");
@@ -545,10 +540,7 @@
     $("contract").textContent = CONTRACT_ADDRESS;
     $("pair").textContent = PAIR_ADDRESS;
 
-    // ===== Chart styling =====
-    function cssVar(name){
-      return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
-    }
+    function cssVar(name){ return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
     function chartTheme(){
       const isLight = root.getAttribute("data-theme") === "light";
       return {
@@ -559,116 +551,36 @@
       };
     }
 
-    // ✅ FIX: register candlestick controller/elements (CDN에서는 수동 등록이 필요할 때가 많음)
-(function registerFinancial(){
-  const fin = window.ChartFinancial || window["chartjs-chart-financial"];
-  if (!fin) {
-    console.error("ChartFinancial not found. Check script load.");
-    return;
-  }
-  if (fin.CandlestickController) {
-    Chart.register(fin.CandlestickController, fin.CandlestickElement);
-  }
-  if (fin.OhlcController) {
-    Chart.register(fin.OhlcController, fin.OhlcElement);
-  }
-})();
-
-    // ===== Candle chart init =====
-    const ctx = document.getElementById("candleChart").getContext("2d");
-    const t0 = chartTheme();
-
-    const candleChart = new Chart(ctx, {
-      type: "candlestick",
-      data: {
-        datasets: [{
-          label: "ASTH",
-          data: [],
-          // chartjs-chart-financial colors
-          color: { up: t0.up, down: t0.down, unchanged: t0.down },
-          borderColor: { up: t0.up, down: t0.down, unchanged: t0.down },
-        }]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        animation: false,
-        plugins: {
-          legend: { display: false },
-          tooltip: {
-            mode: "nearest",
-            intersect: false,
-            callbacks: {
-              label: (c) => {
-                const v = c.raw || {};
-                return ` O ${fmtUSD(v.o)}  H ${fmtUSD(v.h)}  L ${fmtUSD(v.l)}  C ${fmtUSD(v.c)}`;
-              }
-            }
-          }
-        },
-        scales: {
-          x: {
-            type: "time",
-            time: { tooltipFormat: "PP p" },
-            grid: { color: t0.grid },
-            ticks: { color: t0.tick, maxTicksLimit: 8 }
-          },
-          y: {
-            grid: { color: t0.grid },
-            ticks: { color: t0.tick, callback: (v) => fmtUSD(v) }
-          }
-        }
-      }
-    });
-
-    function restyleChart(){
-      const t = chartTheme();
-      candleChart.options.scales.x.grid.color = t.grid;
-      candleChart.options.scales.y.grid.color = t.grid;
-      candleChart.options.scales.x.ticks.color = t.tick;
-      candleChart.options.scales.y.ticks.color = t.tick;
-
-      candleChart.data.datasets[0].color = { up: t.up, down: t.down, unchanged: t.down };
-      candleChart.data.datasets[0].borderColor = { up: t.up, down: t.down, unchanged: t.down };
-
-      candleChart.update("none");
-    }
-
     // ===== Timeframe mapping =====
-    // GeckoTerminal ohlcv endpoint: timeframe=minute|hour|day and aggregate varies (minute: 1/5/15, hour: 1/4/12, day: 1). :contentReference[oaicite:3]{index=3}
     const TF = {
-      "15m":  { tf: "minute", agg: 15, limit: 300 }, // ~3.1 days
-      "1h":   { tf: "hour",   agg: 1,  limit: 336 }, // ~14 days
-      "4h":   { tf: "hour",   agg: 4,  limit: 450 }, // ~75 days
-      "1d":   { tf: "day",    agg: 1,  limit: 180 }, // up to ~6 months
-      "7d":   { tf: "hour",   agg: 1,  limit: 168 }, // 7 days
-      "30d":  { tf: "hour",   agg: 4,  limit: 180 }, // 30 days (6 candles/day)
-      "180d": { tf: "day",    agg: 1,  limit: 180 }, // ~6 months cap (public API)
+      "15m":  { tf: "minute", agg: 15, limit: 300 },
+      "1h":   { tf: "hour",   agg: 1,  limit: 336 },
+      "4h":   { tf: "hour",   agg: 4,  limit: 450 },
+      "1d":   { tf: "day",    agg: 1,  limit: 180 },
+      "7d":   { tf: "hour",   agg: 1,  limit: 168 },
+      "30d":  { tf: "hour",   agg: 4,  limit: 180 },
+      "180d": { tf: "day",    agg: 1,  limit: 180 },
     };
 
     let currentTF = "15m";
-    let lastCandleRefreshAt = 0;
+    let chartMode = "auto"; // "candles" or "line"
 
-    function setChartBadge(text){
-      $("chartBadge").textContent = text;
-    }
+    function setChartBadge(text){ $("chartBadge").textContent = text; }
 
     function gtOHLCVUrl(key){
       const cfg = TF[key] || TF["15m"];
       const url = new URL(`${GT_BASE}/networks/${GT_NET}/pools/${PAIR_ADDRESS}/ohlcv/${cfg.tf}`);
       url.searchParams.set("aggregate", String(cfg.agg));
-      url.searchParams.set("limit", String(cfg.limit)); // max 1000 typically
+      url.searchParams.set("limit", String(cfg.limit));
       url.searchParams.set("currency", "usd");
       url.searchParams.set("token", "base");
       return url.toString();
     }
 
     function normalizeOHLCV(ohlcvList){
-      // GeckoTerminal returns ohlcv_list as arrays: [timestamp, open, high, low, close, volume] :contentReference[oaicite:4]{index=4}
-      // Order is usually newest->oldest, so we reverse to oldest->newest for chart.
       const rows = Array.isArray(ohlcvList) ? ohlcvList.slice() : [];
-      rows.reverse();
-      return rows
+      rows.reverse(); // oldest -> newest
+      const candles = rows
         .filter(r => Array.isArray(r) && r.length >= 5)
         .map(r => ({
           x: Number(r[0]) * 1000,
@@ -679,38 +591,207 @@
           v: Number(r[5] ?? 0)
         }))
         .filter(p => Number.isFinite(p.x) && Number.isFinite(p.o) && Number.isFinite(p.h) && Number.isFinite(p.l) && Number.isFinite(p.c));
+
+      const line = candles.map(p => ({ x: p.x, y: p.c }));
+      return { candles, line };
     }
 
-    async function loadCandles(tfKey, { quiet = false } = {}){
-      currentTF = tfKey;
-      const url = gtOHLCVUrl(tfKey);
+    // ===== Dynamic loader for chartjs-chart-financial (with fallback CDN) =====
+    async function loadScript(src){
+      return new Promise((resolve, reject) => {
+        const s = document.createElement("script");
+        s.src = src;
+        s.async = true;
+        s.onload = () => resolve(true);
+        s.onerror = () => reject(new Error("Failed to load: " + src));
+        document.head.appendChild(s);
+      });
+    }
 
+    async function ensureFinancial(){
+      if (window.ChartFinancial) return true;
+      // try unpkg first, then jsdelivr
       try{
-        if (!quiet) setChartBadge(`Loading ${tfKey}…`);
-        const res = await fetch(url, { cache: "no-store" });
-        if (!res.ok) throw new Error("GeckoTerminal OHLCV fetch failed");
-        const data = await res.json();
+        await loadScript("https://unpkg.com/chartjs-chart-financial@3.3.0/dist/chartjs-chart-financial.umd.min.js");
+      }catch(e1){
+        try{
+          await loadScript("https://cdn.jsdelivr.net/npm/chartjs-chart-financial@3.3.0/dist/chartjs-chart-financial.umd.min.js");
+        }catch(e2){
+          return false;
+        }
+      }
+      return !!window.ChartFinancial;
+    }
 
-        const list = data?.data?.attributes?.ohlcv_list;
-        const points = normalizeOHLCV(list);
-
-        candleChart.data.datasets[0].data = points;
-        candleChart.update("none");
-
-        lastCandleRefreshAt = Date.now();
-        setChartBadge(`${tfKey} • Live (30s)`);
-      }catch(err){
-        console.error(err);
-        setChartBadge(`${tfKey} • candle load failed`);
+    function registerFinancial(){
+      const fin = window.ChartFinancial;
+      if (!fin) return false;
+      try{
+        Chart.register(fin.CandlestickController, fin.CandlestickElement, fin.OhlcController, fin.OhlcElement);
+        return true;
+      }catch(e){
+        console.error("registerFinancial failed:", e);
+        return false;
       }
     }
 
-    // ===== DexScreener stats =====
+    // ===== Create chart (candles if possible, else line) =====
+    let chart = null;
+
+    function destroyChart(){
+      try{ chart?.destroy(); }catch(_){}
+      chart = null;
+    }
+
+    function createLineChart(){
+      const t = chartTheme();
+      const ctx = document.getElementById("candleChart").getContext("2d");
+      destroyChart();
+
+      chart = new Chart(ctx, {
+        type: "line",
+        data: { datasets: [{
+          data: [],
+          borderWidth: 2,
+          pointRadius: 0,
+          tension: 0.25,
+          fill: true,
+          borderColor: t.up
+        }]},
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          animation: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: { mode:"index", intersect:false, callbacks:{ label:(c)=>` ${fmtUSD(c.parsed.y)}` } }
+          },
+          scales: {
+            x: { type:"time", grid:{ color:t.grid }, ticks:{ color:t.tick, maxTicksLimit:8 } },
+            y: { grid:{ color:t.grid }, ticks:{ color:t.tick, callback:(v)=>fmtUSD(v) } }
+          }
+        }
+      });
+      chartMode = "line";
+      setChartBadge(`${currentTF} • Line (fallback)`);
+    }
+
+    function createCandleChart(){
+      const t = chartTheme();
+      const ctx = document.getElementById("candleChart").getContext("2d");
+      destroyChart();
+
+      chart = new Chart(ctx, {
+        type: "candlestick",
+        data: {
+          datasets: [{
+            label: "ASTH",
+            data: [],
+            color: { up: t.up, down: t.down, unchanged: t.down },
+            borderColor: { up: t.up, down: t.down, unchanged: t.down },
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          animation: false,
+          plugins: {
+            legend: { display:false },
+            tooltip: {
+              mode:"nearest",
+              intersect:false,
+              callbacks:{
+                label:(c)=>{
+                  const v = c.raw || {};
+                  return ` O ${fmtUSD(v.o)}  H ${fmtUSD(v.h)}  L ${fmtUSD(v.l)}  C ${fmtUSD(v.c)}`;
+                }
+              }
+            }
+          },
+          scales: {
+            x: { type:"time", grid:{ color:t.grid }, ticks:{ color:t.tick, maxTicksLimit:8 } },
+            y: { grid:{ color:t.grid }, ticks:{ color:t.tick, callback:(v)=>fmtUSD(v) } }
+          }
+        }
+      });
+
+      chartMode = "candles";
+      setChartBadge(`${currentTF} • Candles`);
+    }
+
+    function restyleChart(){
+      if (!chart) return;
+      const t = chartTheme();
+
+      if (chartMode === "candles"){
+        chart.options.scales.x.grid.color = t.grid;
+        chart.options.scales.y.grid.color = t.grid;
+        chart.options.scales.x.ticks.color = t.tick;
+        chart.options.scales.y.ticks.color = t.tick;
+
+        const ds = chart.data.datasets[0];
+        ds.color = { up: t.up, down: t.down, unchanged: t.down };
+        ds.borderColor = { up: t.up, down: t.down, unchanged: t.down };
+        chart.update("none");
+      } else {
+        chart.options.scales.x.grid.color = t.grid;
+        chart.options.scales.y.grid.color = t.grid;
+        chart.options.scales.x.ticks.color = t.tick;
+        chart.options.scales.y.ticks.color = t.tick;
+        chart.data.datasets[0].borderColor = t.up;
+        chart.update("none");
+      }
+    }
+
+    async function ensureChart(){
+      // try candles first
+      setChartBadge("Loading chart lib…");
+      const okLib = await ensureFinancial();
+      if (okLib && registerFinancial()){
+        createCandleChart();
+        return;
+      }
+      // fallback
+      createLineChart();
+    }
+
+    // ===== Load candles data =====
+    async function loadCandles(tfKey, { quiet=false } = {}){
+      currentTF = tfKey;
+
+      if (!chart) await ensureChart();
+
+      const url = gtOHLCVUrl(tfKey);
+      try{
+        if (!quiet) setChartBadge(`Loading ${tfKey}…`);
+        const res = await fetch(url, { cache:"no-store" });
+        if (!res.ok) throw new Error("GeckoTerminal OHLCV fetch failed: " + res.status);
+        const data = await res.json();
+
+        const list = data?.data?.attributes?.ohlcv_list;
+        const { candles, line } = normalizeOHLCV(list);
+
+        if (chartMode === "candles"){
+          chart.data.datasets[0].data = candles;
+          chart.update("none");
+          setChartBadge(`${tfKey} • Candles • Live (30s)`);
+        } else {
+          chart.data.datasets[0].data = line;
+          chart.update("none");
+          setChartBadge(`${tfKey} • Line • Live (30s)`);
+        }
+      }catch(err){
+        console.error(err);
+        setChartBadge(`${tfKey} • data load failed`);
+      }
+    }
+
+    // ===== DexScreener stats (완전 분리) =====
     async function fetchStats(){
       try{
         setStatus(true, "Updating…");
-        const res = await fetch(DEX_API, { cache: "no-store" });
-        if(!res.ok) throw new Error("DexScreener not ok");
+        const res = await fetch(DEX_API, { cache:"no-store" });
+        if(!res.ok) throw new Error("DexScreener not ok: " + res.status);
 
         const data = await res.json();
         const p = data?.pairs?.[0];
@@ -751,7 +832,7 @@
       }
     }
 
-    // ===== UI events =====
+    // ===== UI =====
     function setActiveTFButton(tfKey){
       document.querySelectorAll(".tfBtn").forEach(b => b.classList.toggle("active", b.dataset.tf === tfKey));
     }
@@ -766,8 +847,8 @@
     });
 
     document.getElementById("refreshBtn").addEventListener("click", async () => {
-      await fetchStats();
-      await loadCandles(currentTF, { quiet: true });
+      fetchStats(); // 병렬로
+      loadCandles(currentTF, { quiet:true });
       restyleChart();
     });
 
@@ -775,15 +856,14 @@
 
     // ===== Boot =====
     (async function boot(){
-      restyleChart();
-      await loadCandles(currentTF);
-      await fetchStats();
+      // chart 먼저 준비
+      await ensureChart();
+      // data 로드 (병렬)
+      fetchStats();
+      loadCandles(currentTF);
 
-      // Stats every 30s
       setInterval(fetchStats, 30000);
-
-      // Candles every 30s (simple refresh; endpoints are cached ~1 minute, so this is safe) :contentReference[oaicite:5]{index=5}
-      setInterval(() => loadCandles(currentTF, { quiet: true }), 30000);
+      setInterval(() => loadCandles(currentTF, { quiet:true }), 30000);
     })();
   </script>
 </body>
