@@ -42,16 +42,16 @@
     .wrap{max-width:1080px;margin:0 auto;padding:28px 18px 80px}
 
     /* Top hero (image or video) */
-    .hero{
-      border:1px solid var(--line);
-      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
-      border-radius:24px;
-      overflow:hidden;
-      min-height:180px;
-      max-height:220px;
-      position:relative;
-      box-shadow:0 18px 60px rgba(0,0,0,.35);
-    }
+.hero{
+  border:1px solid var(--line);
+  background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+  border-radius:24px;
+  overflow:hidden;
+  height: 220px;        /* ✅ 이거 추가/고정 */
+  position:relative;
+  box-shadow:0 18px 60px rgba(0,0,0,.35);
+}
+
     .hero .overlay{
       position:absolute; inset:0;
       background:radial-gradient(800px 380px at 50% 0%, rgba(201,162,39,.15), transparent 60%);
@@ -59,14 +59,15 @@
     }
 
     /* IMPORTANT: make image behave inside fixed-height hero */
-    .heroMedia{
-      width:100%;
-      height:100%;
-      display:block;
-      object-fit:contain; /* show full logo/coin */
-      padding:14px 0;     /* a bit of breathing room */
-      margin:0 auto;
-    }
+.heroMedia{
+  width:100%;
+  height:100%;          /* ✅ hero의 고정 height에 맞춤 */
+  display:block;
+  object-fit:contain;   /* ✅ 로고 안 잘리게 */
+  object-position:center;
+  padding: 18px 0;      /* ✅ 위아래 여백 */
+}
+
 
     /* Description */
     .desc{
