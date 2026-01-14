@@ -5,10 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>ASTH — Overview</title>
 
-  <!-- Sleek fonts -->
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Chart.js (for our own chart) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 
   <style>
     :root{
@@ -18,6 +21,8 @@
       --line:rgba(255,255,255,.08);
       --gold:#c9a227;
       --radius:18px;
+      --card: rgba(15,22,32,.55);
+      --btn: rgba(0,0,0,.22);
     }
     *{box-sizing:border-box}
     body{
@@ -28,33 +33,135 @@
       font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
     }
     a{color:inherit; text-decoration:none}
-    .wrap{max-width:1080px;margin:0 auto;padding:28px 18px 80px}
+    .wrap{max-width:1080px;margin:0 auto;padding:18px 18px 80px}
+
+    /* ===== Top Navigation ===== */
+    .topbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      padding:14px 14px;
+      border:1px solid var(--line);
+      border-radius:18px;
+      background:rgba(15,22,32,.40);
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 14px;
+      z-index: 50;
+    }
+    .brand{display:flex;align-items:center;gap:10px}
+    .brandMark{
+      width:34px;height:34px;border-radius:12px;
+      display:grid;place-items:center;
+      border:1px solid var(--line);
+      background:rgba(0,0,0,.22);
+      font-family:Sora, Inter, sans-serif;
+      font-weight:800;
+      color:var(--gold);
+    }
+    .brandText{font-family:Sora, Inter, sans-serif;font-weight:700;letter-spacing:-.2px}
+
+    .nav{display:flex;align-items:center;gap:16px}
+    .navLink{
+      font-family:Sora, Inter, sans-serif;
+      font-weight:600;
+      font-size:13px;
+      color:rgba(234,241,255,.80);
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid transparent;
+    }
+    .navLink:hover{border-color: rgba(201,162,39,.28); color: rgba(201,162,39,.95);}
+    .navLink.active{
+      border-color: rgba(201,162,39,.35);
+      background: rgba(201,162,39,.08);
+      color: rgba(234,241,255,.92);
+    }
+
+    .navRight{display:flex;align-items:center;gap:10px}
+    .iconBtn{
+      border:1px solid var(--line);
+      background:rgba(0,0,0,.22);
+      color:rgba(234,241,255,.9);
+      border-radius:12px;
+      padding:8px 10px;
+      font-size:14px;
+      cursor:pointer;
+    }
+    .iconBtn:hover{ border-color: rgba(201,162,39,.35); }
+    .mobileOnly{ display:none; }
+
+    /* Drawer */
+    .drawer{
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,.55);
+      opacity: 0; pointer-events:none;
+      transition: opacity .18s ease;
+      z-index: 999;
+    }
+    .drawer.open{opacity: 1; pointer-events:auto;}
+    .drawerHead{
+      position:absolute; top:18px; left:18px; right:18px;
+      border:1px solid var(--line);
+      border-radius:18px;
+      background:rgba(15,22,32,.85);
+      backdrop-filter: blur(12px);
+      padding:12px;
+      display:flex;align-items:center;justify-content:space-between;
+    }
+    .drawerTitle{font-family:Sora, Inter, sans-serif;font-weight:800;}
+    .drawerLinks{
+      position:absolute; top:84px; left:18px; right:18px;
+      border:1px solid var(--line);
+      border-radius:18px;
+      background:rgba(15,22,32,.85);
+      backdrop-filter: blur(12px);
+      padding:12px;
+      display:flex; flex-direction:column; gap:8px;
+    }
+    .drawerLinks a{
+      padding:12px 12px;
+      border-radius:14px;
+      border:1px solid transparent;
+      color:rgba(234,241,255,.88);
+      font-family:Sora, Inter, sans-serif;
+      font-weight:700;
+    }
+    .drawerLinks a:hover{border-color: rgba(201,162,39,.28); color: rgba(201,162,39,.95);}
+    .drawerLinks a.active{
+      border-color: rgba(201,162,39,.35);
+      background: rgba(201,162,39,.08);
+    }
+
+    @media (max-width: 920px){
+      .nav{ display:none; }
+      .mobileOnly{ display:inline-flex; }
+    }
 
     /* HERO */
     .hero{
+      margin-top:16px;
       border:1px solid var(--line);
       background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
       border-radius:24px;
       overflow:hidden;
-      height:320px; /* bigger logo */
+      height:360px; /* bigger */
       position:relative;
       box-shadow:0 18px 60px rgba(0,0,0,.35);
     }
-    @media (max-width:600px){
-      .hero{ height:250px; }
-    }
+    @media (max-width:600px){ .hero{ height:260px; } }
     .hero .overlay{
       position:absolute; inset:0;
       background:radial-gradient(900px 420px at 50% 0%, rgba(201,162,39,.15), transparent 62%);
       pointer-events:none;
     }
     .heroMedia{
-      width:100%;
-      height:100%;
+      width:100%; height:100%;
       display:block;
       object-fit:contain;
       object-position:center;
-      padding: 6px 0; /* less padding = bigger logo */
+      padding: 2px 0; /* minimal padding -> biggest logo */
     }
 
     /* DESCRIPTION */
@@ -62,8 +169,8 @@
       margin-top:22px;
       border:1px solid var(--line);
       border-radius:var(--radius);
-      background:rgba(15,22,32,.55);
-      padding:22px 22px;
+      background:var(--card);
+      padding:22px;
       backdrop-filter: blur(8px);
     }
     .desc h1{
@@ -73,16 +180,11 @@
       font-size:28px;
       letter-spacing:-.3px;
     }
-    .desc p{
-      margin:0;
-      color:var(--muted);
-      font-size:15.5px;
-      line-height:1.75;
-    }
+    .desc p{margin:0;color:var(--muted);font-size:15.5px;line-height:1.75;}
     .pillRow{margin-top:14px;display:flex;gap:10px;flex-wrap:wrap}
     .pill{
       border:1px solid var(--line);
-      background:rgba(0,0,0,.22);
+      background:var(--btn);
       padding:8px 10px;
       border-radius:999px;
       font-size:12.5px;
@@ -98,15 +200,13 @@
       gap:14px;
       align-items:stretch;
     }
-    @media (max-width: 920px){
-      .grid{grid-template-columns:1fr}
-    }
+    @media (max-width: 920px){ .grid{grid-template-columns:1fr} }
 
     /* STATS */
     .panel{
       border:1px solid var(--line);
       border-radius:var(--radius);
-      background:rgba(15,22,32,.55);
+      background:var(--card);
       padding:16px;
       backdrop-filter: blur(8px);
     }
@@ -126,14 +226,8 @@
     .dot.ok{ background: rgba(87, 233, 163, .9); box-shadow:0 0 0 3px rgba(87,233,163,.14); }
     .dot.bad{ background: rgba(255, 98, 98, .9); box-shadow:0 0 0 3px rgba(255,98,98,.14); }
 
-    .cards{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:10px;
-    }
-    @media (max-width: 520px){
-      .cards{grid-template-columns:1fr}
-    }
+    .cards{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+    @media (max-width: 520px){ .cards{grid-template-columns:1fr} }
     .card{
       border:1px solid var(--line);
       background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.015));
@@ -150,17 +244,14 @@
     }
     .sub{margin-top:6px;color:rgba(159,176,200,.9);font-size:12.5px}
     .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;}
-    .link{
-      color:rgba(234,241,255,.92);
-      border-bottom:1px dashed rgba(234,241,255,.25);
-    }
+    .link{color:rgba(234,241,255,.92);border-bottom:1px dashed rgba(234,241,255,.25);}
     .link:hover{ border-bottom-color: rgba(201,162,39,.6); color: rgba(201,162,39,.95); }
 
-    /* CHART */
+    /* CHART (our own) */
     .chartBox{
       border:1px solid var(--line);
       border-radius:var(--radius);
-      background:rgba(15,22,32,.55);
+      background:var(--card);
       overflow:hidden;
       backdrop-filter: blur(8px);
     }
@@ -169,30 +260,20 @@
       border-bottom:1px solid var(--line);
       display:flex;align-items:center;justify-content:space-between;gap:12px;
     }
-    .chartHeader .title{
-      font-family:Sora, Inter, sans-serif;
-      font-weight:700;
-      letter-spacing:-.2px;
-    }
+    .chartHeader .title{font-family:Sora, Inter, sans-serif;font-weight:700;letter-spacing:-.2px;}
     .chartHeader .badge{
       border:1px solid var(--line);
-      background:rgba(0,0,0,.22);
+      background:var(--btn);
       color:rgba(234,241,255,.85);
       border-radius:999px;
       padding:7px 10px;
       font-size:12px;
       white-space:nowrap;
     }
-    .tvWrap{height:420px}
-    @media (max-width:920px){
-      .tvWrap{height:380px}
-    }
-    .tvWrap iframe{
-      width:100%;
-      height:100%;
-      border:0;
-      display:block;
-    }
+    .chartInner{padding:12px 14px 16px;}
+    .chartCanvasWrap{height: 420px;}
+    @media (max-width:920px){ .chartCanvasWrap{height:380px} }
+    canvas{width:100% !important; height:100% !important; display:block;}
 
     .foot{
       margin-top:26px;
@@ -206,7 +287,7 @@
     .foot span{color:var(--gold)}
     .smallBtn{
       border:1px solid var(--line);
-      background:rgba(0,0,0,.22);
+      background:var(--btn);
       color:rgba(234,241,255,.88);
       border-radius:999px;
       padding:7px 10px;
@@ -214,47 +295,56 @@
       cursor:pointer;
     }
     .smallBtn:hover{ border-color: rgba(201,162,39,.35); }
+
+    /* Theme (optional light) */
+    html[data-theme="light"]{
+      --bg:#f4f6fb;
+      --text:#0b1220;
+      --muted:#445065;
+      --line:rgba(11,18,32,.12);
+      --card: rgba(255,255,255,.82);
+      --btn: rgba(11,18,32,.06);
+    }
   </style>
 </head>
 
 <body>
-  <header class="topbar">
-  <a class="brand" href="./index.html" aria-label="Home">
-    <span class="brandMark">A</span>
-    <span class="brandText">Asthate</span>
-  </a>
-
-  <nav class="nav">
-    <a class="navLink" href="./index.html">Home</a>
-    <a class="navLink" href="./about.html">About</a>
-    <a class="navLink" href="./strategy.html">Strategy</a>
-    <a class="navLink active" href="./ASTH.html">ASTH</a>
-    <a class="navLink" href="./contact.html">Contact</a>
-  </nav>
-
-  <div class="navRight">
-    <button class="iconBtn" id="themeBtn" type="button" aria-label="Toggle theme">☼</button>
-    <button class="iconBtn mobileOnly" id="mobileMenuBtn" type="button" aria-label="Open menu">☰</button>
-  </div>
-</header>
-
-<!-- Mobile Drawer -->
-<div class="drawer" id="mobileDrawer" aria-hidden="true">
-  <div class="drawerHead">
-    <div class="drawerTitle">Menu</div>
-    <button class="iconBtn" id="mobileCloseBtn" type="button" aria-label="Close menu">✕</button>
-  </div>
-
-  <div class="drawerLinks">
-    <a href="./index.html">Home</a>
-    <a href="./about.html">About</a>
-    <a href="./strategy.html">Strategy</a>
-    <a href="./ASTH.html" class="active">ASTH</a>
-    <a href="./contact.html">Contact</a>
-  </div>
-</div>
-
   <div class="wrap">
+
+    <header class="topbar">
+      <a class="brand" href="./index.html" aria-label="Home">
+        <span class="brandMark">A</span>
+        <span class="brandText">Asthate</span>
+      </a>
+
+      <nav class="nav">
+        <a class="navLink" href="./index.html">Home</a>
+        <a class="navLink" href="./about.html">About</a>
+        <a class="navLink" href="./strategy.html">Strategy</a>
+        <a class="navLink active" href="./ASTH.html">ASTH</a>
+        <a class="navLink" href="./contact.html">Contact</a>
+      </nav>
+
+      <div class="navRight">
+        <button class="iconBtn" id="themeBtn" type="button" aria-label="Toggle theme">☼</button>
+        <button class="iconBtn mobileOnly" id="mobileMenuBtn" type="button" aria-label="Open menu">☰</button>
+      </div>
+    </header>
+
+    <!-- Mobile Drawer -->
+    <div class="drawer" id="mobileDrawer" aria-hidden="true">
+      <div class="drawerHead">
+        <div class="drawerTitle">Menu</div>
+        <button class="iconBtn" id="mobileCloseBtn" type="button" aria-label="Close menu">✕</button>
+      </div>
+      <div class="drawerLinks">
+        <a href="./index.html">Home</a>
+        <a href="./about.html">About</a>
+        <a href="./strategy.html">Strategy</a>
+        <a href="./ASTH.html" class="active">ASTH</a>
+        <a href="./contact.html">Contact</a>
+      </div>
+    </div>
 
     <!-- HERO -->
     <section class="hero">
@@ -332,22 +422,17 @@
         </div>
       </div>
 
-      <!-- RIGHT: chart -->
+      <!-- RIGHT: our chart -->
       <div class="chartBox">
         <div class="chartHeader">
-          <div class="title">ASTH Chart</div>
-          <div class="badge">DexScreener</div>
+          <div class="title">ASTH Price</div>
+          <div class="badge" id="chartBadge">Live (30s)</div>
         </div>
 
-        <div class="tvWrap">
-          <iframe
-            id="dexFrame"
-            src="about:blank"
-            title="ASTH DexScreener Chart"
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-            allowfullscreen
-          ></iframe>
+        <div class="chartInner">
+          <div class="chartCanvasWrap">
+            <canvas id="priceChart"></canvas>
+          </div>
         </div>
       </div>
 
@@ -356,20 +441,53 @@
     <div class="foot">
       <span id="updatedAt">Last update: —</span>
       <button class="smallBtn" id="refreshBtn" type="button">Refresh</button>
-      <span style="opacity:.85">Data updates automatically every 30 seconds.</span>
+      <span style="opacity:.85">Stats update every 30 seconds. Chart updates on each refresh.</span>
     </div>
 
   </div>
 
   <script>
     // ====== CONFIG (yours) ======
-    const PAIR_ADDRESS = "0xd99307addb593f9aff5ef9bee19a424cff27e765"; // from your DexScreener URL
-    const CONTRACT_ADDRESS = "0x33474A970752D43107Ee01c3Ab03dCb6C017aCC6"; // your ERC-20 contract
+    const PAIR_ADDRESS = "0xd99307addb593f9aff5ef9bee19a424cff27e765";
+    const CONTRACT_ADDRESS = "0x33474A970752D43107Ee01c3Ab03dCb6C017aCC6";
 
-    // DexScreener: embed + API
-    const DEX_URL = `https://dexscreener.com/ethereum/${PAIR_ADDRESS}`;
-    const EMBED_URL = `https://dexscreener.com/ethereum/${PAIR_ADDRESS}?embed=1&theme=dark&trades=0&info=0`;
-    const API_URL = `https://api.dexscreener.com/latest/dex/pairs/ethereum/${PAIR_ADDRESS}`;
+    const DEX_URL  = `https://dexscreener.com/ethereum/${PAIR_ADDRESS}`;
+    const API_URL  = `https://api.dexscreener.com/latest/dex/pairs/ethereum/${PAIR_ADDRESS}`;
+
+    // ====== NAV + THEME ======
+    const root = document.documentElement;
+    const themeBtn = document.getElementById("themeBtn");
+
+    function setTheme(t){
+      if (t === "light") root.setAttribute("data-theme","light");
+      else root.removeAttribute("data-theme");
+      localStorage.setItem("theme", t);
+    }
+    (function initTheme(){
+      const saved = localStorage.getItem("theme") || "dark";
+      setTheme(saved);
+    })();
+
+    themeBtn?.addEventListener("click", () => {
+      const isLight = root.getAttribute("data-theme") === "light";
+      setTheme(isLight ? "dark" : "light");
+      priceChart?.update();
+    });
+
+    function initMobileDrawer(){
+      const btn = document.getElementById("mobileMenuBtn");
+      const drawer = document.getElementById("mobileDrawer");
+      const closeBtn = document.getElementById("mobileCloseBtn");
+      if (!btn || !drawer || !closeBtn) return;
+
+      const open = () => { drawer.classList.add("open"); drawer.setAttribute("aria-hidden","false"); };
+      const close = () => { drawer.classList.remove("open"); drawer.setAttribute("aria-hidden","true"); };
+
+      btn.addEventListener("click", open);
+      closeBtn.addEventListener("click", close);
+      drawer.querySelectorAll("a").forEach(a => a.addEventListener("click", close));
+    }
+    initMobileDrawer();
 
     // ====== UI helpers ======
     const $ = (id) => document.getElementById(id);
@@ -377,7 +495,7 @@
     function fmtUSD(n, dp=2){
       if (n === null || n === undefined || n === "" || Number.isNaN(Number(n))) return "$—";
       const num = Number(n);
-      const digits = Math.abs(num) >= 1 ? dp : 6; // small price -> more precision
+      const digits = Math.abs(num) >= 1 ? dp : 6;
       return "$" + num.toLocaleString(undefined, { maximumFractionDigits: digits });
     }
     function fmtNum(n, dp=2){
@@ -395,13 +513,82 @@
       $("updatedAt").textContent = "Last update: " + now.toLocaleString();
     }
 
-    // ====== init static links ======
+    // init static links
     $("dexLink").href = DEX_URL;
     $("scanLink").href = `https://etherscan.io/token/${CONTRACT_ADDRESS}`;
     $("contract").textContent = CONTRACT_ADDRESS;
     $("pair").textContent = PAIR_ADDRESS;
-    $("dexFrame").src = EMBED_URL;
 
+    // ====== Our chart (line history from refresh samples) ======
+    // This is a "site-native" chart, but it only reflects the points we collect.
+    // For a truly accurate OHLC candle chart, you'd fetch candle data via an API (next section).
+    const history = {
+      labels: [],
+      prices: []
+    };
+
+    function chartColors(){
+      const isLight = root.getAttribute("data-theme") === "light";
+      return {
+        grid: isLight ? "rgba(11,18,32,.10)" : "rgba(255,255,255,.10)",
+        text: isLight ? "rgba(11,18,32,.72)" : "rgba(234,240,255,.72)",
+      };
+    }
+
+    const ctx = document.getElementById("priceChart").getContext("2d");
+    let priceChart = new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: history.labels,
+        datasets: [{
+          label: "ASTH Price (USD)",
+          data: history.prices,
+          tension: 0.25,
+          fill: true,
+          pointRadius: 0,
+          borderWidth: 2,
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        animation: { duration: 200 },
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            mode: "index",
+            intersect: false,
+            callbacks: {
+              label: (ctx) => ` ${fmtUSD(ctx.parsed.y)}`
+            }
+          }
+        },
+        scales: {
+          x: {
+            grid: { color: chartColors().grid },
+            ticks: { color: chartColors().text, maxTicksLimit: 6 }
+          },
+          y: {
+            grid: { color: chartColors().grid },
+            ticks: {
+              color: chartColors().text,
+              callback: (v) => fmtUSD(v)
+            }
+          }
+        }
+      }
+    });
+
+    function restyleChart(){
+      const c = chartColors();
+      priceChart.options.scales.x.grid.color = c.grid;
+      priceChart.options.scales.y.grid.color = c.grid;
+      priceChart.options.scales.x.ticks.color = c.text;
+      priceChart.options.scales.y.ticks.color = c.text;
+      priceChart.update();
+    }
+
+    // ====== Fetch stats (DexScreener API) ======
     async function fetchStats(){
       try{
         setStatus(true, "Updating…");
@@ -411,7 +598,6 @@
         const p = (data && data.pairs && data.pairs[0]) ? data.pairs[0] : null;
         if(!p) throw new Error("No pair data");
 
-        // core fields (defensive)
         const priceUsd = p.priceUsd ?? null;
         const change24h = p.priceChange?.h24 ?? null;
 
@@ -426,7 +612,7 @@
         const txBuys = p.txns?.h24?.buys ?? null;
         const txSells = p.txns?.h24?.sells ?? null;
 
-        // update UI
+        // UI
         $("price").textContent = fmtUSD(priceUsd);
         $("priceSub").textContent = `24h: ${change24h === null ? "—" : (Number(change24h).toFixed(2) + "%")}`;
 
@@ -440,6 +626,23 @@
         const txText = (txBuys === null && txSells === null) ? "—" : `${fmtNum(txBuys,0)} buys / ${fmtNum(txSells,0)} sells`;
         $("volSub").textContent = `Txns (24h): ${txText}`;
 
+        // Chart sample point (site-native history)
+        if (priceUsd !== null && !Number.isNaN(Number(priceUsd))){
+          const now = new Date();
+          const label = now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+
+          history.labels.push(label);
+          history.prices.push(Number(priceUsd));
+
+          // keep last N points so it stays clean
+          const MAX = 60;
+          if (history.labels.length > MAX){
+            history.labels.shift();
+            history.prices.shift();
+          }
+          priceChart.update();
+        }
+
         setUpdated();
         setStatus(true, "Live");
       }catch(err){
@@ -449,11 +652,15 @@
     }
 
     // manual refresh
-    $("refreshBtn").addEventListener("click", fetchStats);
+    $("refreshBtn").addEventListener("click", () => { fetchStats(); restyleChart(); });
 
-    // initial + interval updates
+    // initial + interval
     fetchStats();
     setInterval(fetchStats, 30000);
+
+    // restyle chart on resize / load
+    window.addEventListener("resize", restyleChart);
+    restyleChart();
   </script>
 </body>
 </html>
