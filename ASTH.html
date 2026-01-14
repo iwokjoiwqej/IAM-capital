@@ -7,7 +7,332 @@
 
   <!-- Sleek fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" <!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ASTH — Overview</title>
+
+  <!-- Sleek fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#0b0f14;
+      --card:#0f1620;
+      --card2:#0c121a;
+      --text:#eaf1ff;
+      --muted:#9fb0c8;
+      --line:rgba(255,255,255,.08);
+      --gold:#c9a227;
+      --radius:18px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      background:radial-gradient(1200px 600px at 50% -100px, rgba(201,162,39,.18), transparent 55%),
+                 linear-gradient(180deg, #070a0f 0%, var(--bg) 40%, #070a0f 100%);
+      color:var(--text);
+      font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+    }
+    a{color:inherit}
+    .wrap{max-width:1080px;margin:0 auto;padding:28px 18px 80px}
+
+    /* Top hero (image or video) */
+    .hero{
+      border:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      border-radius:24px;
+      overflow:hidden;
+      min-height:180px;
+      max-height:220px;
+      position:relative;
+      box-shadow:0 18px 60px rgba(0,0,0,.35);
+    }
+    .hero .overlay{
+      position:absolute; inset:0;
+      background:radial-gradient(800px 380px at 50% 0%, rgba(201,162,39,.15), transparent 60%);
+      pointer-events:none;
+    }
+
+    /* IMPORTANT: make image behave inside fixed-height hero */
+    .heroMedia{
+      width:100%;
+      height:100%;
+      display:block;
+      object-fit:contain; /* show full logo/coin */
+      padding:14px 0;     /* a bit of breathing room */
+      margin:0 auto;
+    }
+
+    /* Description */
+    .desc{
+      margin-top:22px;
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      background:rgba(15,22,32,.55);
+      padding:22px 22px;
+      backdrop-filter: blur(8px);
+    }
+    .desc h1{
+      margin:0 0 10px;
+      font-family:Sora, Inter, sans-serif;
+      font-weight:700;
+      font-size:28px;
+      letter-spacing:-.3px;
+    }
+    .desc p{
+      margin:0;
+      color:var(--muted);
+      font-size:15.5px;
+      line-height:1.75;
+    }
+    .pillRow{margin-top:14px;display:flex;gap:10px;flex-wrap:wrap}
+    .pill{
+      border:1px solid var(--line);
+      background:rgba(0,0,0,.22);
+      padding:8px 10px;
+      border-radius:999px;
+      font-size:12.5px;
+      color:rgba(234,241,255,.82);
+    }
+    .pill b{color:var(--gold);font-weight:700}
+
+    /* Split section */
+    .grid{
+      margin-top:22px;
+      display:grid;
+      grid-template-columns: 1fr 1.3fr; /* left stats / right chart */
+      gap:14px;
+      align-items:stretch;
+    }
+    @media (max-width: 920px){
+      .grid{grid-template-columns:1fr}
+    }
+
+    /* Stats */
+    .panel{
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      background:rgba(15,22,32,.55);
+      padding:16px;
+      backdrop-filter: blur(8px);
+    }
+    .panelTitle{
+      display:flex;align-items:center;justify-content:space-between;
+      margin-bottom:10px;
+      font-family:Sora, Inter, sans-serif;
+      font-weight:700;
+      letter-spacing:-.2px;
+    }
+    .miniNote{color:var(--muted);font-size:12.5px}
+    .cards{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px;
+    }
+    @media (max-width: 520px){
+      .cards{grid-template-columns:1fr}
+    }
+    .card{
+      border:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.015));
+      border-radius:14px;
+      padding:14px 14px;
+    }
+    .label{color:rgba(159,176,200,.9);font-size:12.5px}
+    .value{
+      margin-top:6px;
+      font-size:18px;
+      font-family:Sora, Inter, sans-serif;
+      font-weight:700;
+      letter-spacing:-.2px;
+    }
+    .sub{margin-top:6px;color:rgba(159,176,200,.9);font-size:12.5px}
+
+    /* Chart */
+    .chartBox{
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      background:rgba(15,22,32,.55);
+      overflow:hidden;
+      backdrop-filter: blur(8px);
+    }
+    .chartHeader{
+      padding:14px 16px;
+      border-bottom:1px solid var(--line);
+      display:flex;align-items:center;justify-content:space-between;gap:12px;
+    }
+    .chartHeader .title{
+      font-family:Sora, Inter, sans-serif;
+      font-weight:700;
+      letter-spacing:-.2px;
+    }
+    .chartHeader .badge{
+      border:1px solid var(--line);
+      background:rgba(0,0,0,.22);
+      color:rgba(234,241,255,.85);
+      border-radius:999px;
+      padding:7px 10px;
+      font-size:12px;
+      white-space:nowrap;
+    }
+
+    .tvWrap{height:420px}
+    @media (max-width:920px){
+      .tvWrap{height:380px}
+    }
+
+    .tvWrap iframe{
+      width:100%;
+      height:100%;
+      border:0;
+      display:block;
+    }
+
+    /* Footer spacing */
+    .foot{margin-top:26px;color:rgba(159,176,200,.75);font-size:12.5px}
+    .foot span{color:var(--gold)}
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="overlay"></div>
+      <img class="heroMedia" src="./assets/asth-coin.png" alt="ASTH coin" />
+    </section>
+
+    <!-- DESCRIPTION -->
+    <section class="desc">
+      <h1>ASTH <span style="color:#c9a227;font-weight:600;">Asset Overview</span></h1>
+      <p>
+        ASTH is a digital asset designed with a focus on transparency,
+        disciplined risk management, and long-term sustainability.
+        Rather than short-term speculation, ASTH aims to function as a
+        utility-driven token supported by verifiable data and
+        responsible capital deployment.
+      </p>
+
+      <div class="pillRow">
+        <div class="pill"><b>Network</b> ERC-20 / EVM</div>
+        <div class="pill"><b>Token</b> ASTH</div>
+        <div class="pill"><b>Focus</b> Utility · Sustainability</div>
+      </div>
+    </section>
+
+    <!-- SPLIT: left stats / right chart -->
+    <section class="grid">
+
+      <!-- LEFT: stats -->
+      <div class="panel">
+        <div class="panelTitle">
+          <div>Key Statistics</div>
+          <div class="miniNote">Auto-updated (placeholder)</div>
+        </div>
+
+        <div class="cards">
+          <div class="card">
+            <div class="label">Price</div>
+            <div class="value" id="price">$—</div>
+            <div class="sub" id="priceSub">24h: —</div>
+          </div>
+
+          <div class="card">
+            <div class="label">Market Cap</div>
+            <div class="value" id="mcap">$—</div>
+            <div class="sub" id="mcapSub">Circulating: —</div>
+          </div>
+
+          <div class="card">
+            <div class="label">24h Volume</div>
+            <div class="value" id="vol">$—</div>
+            <div class="sub" id="volSub">Liquidity: —</div>
+          </div>
+
+          <div class="card">
+            <div class="label">Supply</div>
+            <div class="value" id="supply">—</div>
+            <div class="sub" id="supplySub">Total / Max</div>
+          </div>
+
+          <div class="card">
+            <div class="label">Holders</div>
+            <div class="value" id="holders">—</div>
+            <div class="sub" id="holdersSub">On-chain</div>
+          </div>
+
+          <div class="card">
+            <div class="label">Contract</div>
+            <div class="value" style="font-size:14px;word-break:break-all" id="contract">—</div>
+            <div class="sub">Etherscan link</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: chart -->
+      <div class="chartBox">
+        <div class="chartHeader">
+          <div class="title">ASTH Chart</div>
+          <div class="badge">DexScreener</div>
+        </div>
+
+        <div class="tvWrap">
+          <iframe
+            src="https://dexscreener.com/ethereum/0xPAIRADDRESS?embed=1&theme=dark&trades=0&info=0"
+            allowfullscreen
+          ></iframe>
+        </div>
+      </div>
+
+    </section>
+
+    <div class="foot">
+      Tip: Update the <span>pair address</span> and your <span>contract</span> to make this production-ready.
+    </div>
+
+  </div>
+
+  <script>
+    // --- Placeholder stats (wire real data later: DexScreener API / GeckoTerminal / your backend) ---
+    const mock = {
+      price: 0.05778,
+      change24h: 86.44,
+      mcap: 57000,
+      circulating: 1000000,
+      volume24h: null,
+      supply: "—",
+      holders: "—",
+      contract: "0xYourContractHere"
+    };
+
+    const fmtUSD = (n) => {
+      if (n === null || n === undefined) return "$—";
+      return "$" + Number(n).toLocaleString(undefined, { maximumFractionDigits: 2 });
+    };
+
+    document.getElementById("price").textContent = fmtUSD(mock.price);
+    document.getElementById("priceSub").textContent = `24h: ${mock.change24h ?? "—"}%`;
+
+    document.getElementById("mcap").textContent = fmtUSD(mock.mcap);
+    document.getElementById("mcapSub").textContent = `Circulating: ${Number(mock.circulating).toLocaleString()}`;
+
+    document.getElementById("vol").textContent = fmtUSD(mock.volume24h);
+    document.getElementById("volSub").textContent = "Liquidity: —";
+
+    document.getElementById("supply").textContent = mock.supply;
+    document.getElementById("holders").textContent = mock.holders;
+
+    document.getElementById("contract").textContent = mock.contract;
+  </script>
+</body>
+</html>
+crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
   <style>
