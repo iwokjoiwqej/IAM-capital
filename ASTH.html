@@ -218,6 +218,42 @@
 </head>
 
 <body>
+  <header class="topbar">
+  <a class="brand" href="./index.html" aria-label="Home">
+    <span class="brandMark">A</span>
+    <span class="brandText">Asthate</span>
+  </a>
+
+  <nav class="nav">
+    <a class="navLink" href="./index.html">Home</a>
+    <a class="navLink" href="./about.html">About</a>
+    <a class="navLink" href="./strategy.html">Strategy</a>
+    <a class="navLink active" href="./ASTH.html">ASTH</a>
+    <a class="navLink" href="./contact.html">Contact</a>
+  </nav>
+
+  <div class="navRight">
+    <button class="iconBtn" id="themeBtn" type="button" aria-label="Toggle theme">☼</button>
+    <button class="iconBtn mobileOnly" id="mobileMenuBtn" type="button" aria-label="Open menu">☰</button>
+  </div>
+</header>
+
+<!-- Mobile Drawer -->
+<div class="drawer" id="mobileDrawer" aria-hidden="true">
+  <div class="drawerHead">
+    <div class="drawerTitle">Menu</div>
+    <button class="iconBtn" id="mobileCloseBtn" type="button" aria-label="Close menu">✕</button>
+  </div>
+
+  <div class="drawerLinks">
+    <a href="./index.html">Home</a>
+    <a href="./about.html">About</a>
+    <a href="./strategy.html">Strategy</a>
+    <a href="./ASTH.html" class="active">ASTH</a>
+    <a href="./contact.html">Contact</a>
+  </div>
+</div>
+
   <div class="wrap">
 
     <!-- HERO -->
