@@ -12,7 +12,7 @@ const state = {
   kpis: [
     { label: "AUM", value: "94.2K USD", sub: "Indicative (internally managed)" },
     { label: "IRR", value: "14.7%", sub: "Illustrative placeholder" },
-    { label: "Team", value: "17", sub: "Core headcount" },
+    { label: "Team", value: "7", sub: "Core headcount" },
     { label: "Operating History", value: "12+ months", sub: "Live trading experience" },
   ],
 
@@ -21,44 +21,22 @@ const state = {
 
   series: {
     aum: {
-      unit: "USD",
-      formatY: (v) => v >= 1000 ? `${Math.round(v/1000)}K` : `${Math.round(v)}`,
-      formatTip: (v) => `$${Number(v).toLocaleString()}`,
-      data: {
-        // daily-ish points (short)
-        "30d": mkSeries(
-          ["Day 1","Day 6","Day 11","Day 16","Day 21","Day 26","Day 30"],
-          [82000, 83500, 84800, 86200, 88000, 91500, 94200]
-        ),
-        // weekly-ish
-        "1y": mkSeries(
-          ["Jan","Mar","May","Jul","Sep","Nov","Dec"],
-          [42000, 50000, 56000, 61000, 70000, 86000, 94200]
-        ),
-        // monthly-ish
-        "all": mkSeries(
-          ["2026 Q1","2026 Q2","2026 Q3","2026 Q4","2027"],
-          [24000, 42000, 61000, 83000, 94200]
-        ),
-      }
-    },
-
-    irr: {
+        irr: {
       unit: "%",
       formatY: (v) => `${v.toFixed(1)}%`,
       formatTip: (v) => `${v.toFixed(2)}%`,
       data: {
         "30d": mkSeries(
           ["Day 1","Day 6","Day 11","Day 16","Day 21","Day 26","Day 30"],
-          [18.2, 19.1, 18.7, 20.4, 21.0, 23.5, 24.7]
+          [12.2, 11.1, 12.7, 12.4, 11.0, 13.5, 13.7]
         ),
         "1y": mkSeries(
           ["Jan","Mar","May","Jul","Sep","Nov","Dec"],
-          [12.4, 16.1, 14.8, 18.7, 17.2, 22.3, 24.7]
+          [12.4, 16.1, 14.8, 13.7, 14.2, 15.3, 15.7]
         ),
         "all": mkSeries(
           ["2026 Q1","2026 Q2","2026 Q3","2026 Q4","2028"],
-          [8.6, 12.4, 16.8, 20.3, 24.7]
+          [14.6, 14.4, 15.8, 14.3, 15.7]
         ),
       }
     },
