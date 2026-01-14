@@ -821,3 +821,20 @@ h3{ margin:0; letter-spacing:-0.02em; }
 @media (max-width: 520px){
   .drivers{ grid-template-columns: 1fr; }
 }
+
+/* ===== Header Logo (FORCE SAFE) ===== */
+.brandLogoHeader{
+  width:28px !important;
+  height:28px !important;
+  max-width:28px !important;
+  max-height:28px !important;
+
+  object-fit:contain;
+  display:block;
+  flex-shrink:0;
+
+  border-radius:8px;
+  background: rgba(0,0,0,.15);
+  padding:4px;
+}
+
