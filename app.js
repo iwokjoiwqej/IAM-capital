@@ -1,30 +1,46 @@
+/* app.js — IRR only (AUM removed) */
+
 const $ = (sel) => document.querySelector(sel);
 const $$ = (sel) => Array.from(document.querySelectorAll(sel));
+
+function mkSeries(labels, values){
+  return { labels, values };
+}
+
+// safer than replaceAll for older WebView/engines
+function escapeHtml(s){
+  return String(s)
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+}
 
 /**
  * Data idea:
  * - 30D: daily points
  * - 1Y: weekly points (or monthly)
  * - ALL: monthly points
- * 지금은 샘플 데이터. 너가 values만 바꾸면 됨.
+ * 지금은 샘플 데이터. values만 바꾸면 됨.
  */
 const state = {
   kpis: [
-    { label: "AUM", value: "94.2K USD", sub: "Indicative (internally managed)" },
     { label: "IRR", value: "14.7%", sub: "Illustrative placeholder" },
+    { label: "AUM", value: "94.2K USD", sub: "Indicative (internally managed)" },
     { label: "Team", value: "7", sub: "Core headcount" },
     { label: "Operating History", value: "12+ months", sub: "Live trading experience" },
   ],
 
   ranges: ["30d", "1y", "all"],
-  activeRange: { aum: "30d", irr: "30d" },
+  activeRange: { irr: "30d" },
 
-const series = {
-  aum: {
+  // IRR only
+  series: {
     irr: {
       unit: "%",
-      formatY: (v) => `${v.toFixed(1)}%`,
-      formatTip: (v) => `${v.toFixed(2)}%`,
+      formatY: (v) => v == null || Number.isNaN(Number(v)) ? "-" : `${Number(v).toFixed(1)}%`,
+      formatTip: (v) => v == null || Number.isNaN(Number(v)) ? "-" : `${Number(v).toFixed(2)}%`,
       data: {
         "30d": mkSeries(
           ["Day 1","Day 6","Day 11","Day 16","Day 21","Day 26","Day 30"],
@@ -43,19 +59,6 @@ const series = {
   }
 };
 
-function mkSeries(labels, values){
-  return { labels, values };
-}
-
-function escapeHtml(s){
-  return String(s)
-    .replaceAll("&","&amp;")
-    .replaceAll("<","&lt;")
-    .replaceAll(">","&gt;")
-    .replaceAll('"',"&quot;")
-    .replaceAll("'","&#039;");
-}
-
 function renderKpis(){
   const grid = $("#kpiGrid");
   if (!grid) return;
@@ -68,9 +71,13 @@ function renderKpis(){
   `).join("");
 }
 
+/* ======================
+   THEME (kept compatible)
+   ====================== */
 function setTheme(theme){
-  if (theme === "light") document.documentElement.setAttribute("data-theme","light");
-  else document.documentElement.removeAttribute("data-theme");
+  const root = document.documentElement;
+  if (theme === "light") root.setAttribute("data-theme","light");
+  else root.removeAttribute("data-theme");
   localStorage.setItem("iam_theme", theme);
 }
 function initTheme(){
@@ -97,15 +104,20 @@ function makeChart({ canvasId, tipId, getSeries, yFormat, tipFormat }){
       text: isLight ? "rgba(11,18,32,.72)" : "rgba(234,240,255,.72)",
       line: "rgba(77,163,255,.95)",
       fill: isLight ? "rgba(77,163,255,.12)" : "rgba(77,163,255,.10)",
-      dot: "rgba(124,92,255,.95)",
     };
   }
 
   function resize(){
-    // match CSS size
     const dpr = window.devicePixelRatio || 1;
-    const cssW = canvas.clientWidth;
-    const cssH = canvas.clientHeight;
+    const cssW = canvas.clientWidth || 0;
+    const cssH = canvas.clientHeight || 0;
+
+    // if height is 0 due to CSS, chart can't draw
+    if (!cssW || !cssH) {
+      geom = { W: cssW, H: cssH };
+      return;
+    }
+
     canvas.width = Math.round(cssW * dpr);
     canvas.height = Math.round(cssH * dpr);
     ctx.setTransform(dpr,0,0,dpr,0,0);
@@ -135,16 +147,20 @@ function makeChart({ canvasId, tipId, getSeries, yFormat, tipFormat }){
 
   function draw(){
     if (!geom) resize();
+    if (!geom || !geom.W || !geom.H) return;
+
     const { W, H } = geom;
     const { grid, text, line, fill } = colors();
 
     const s = getSeries();
-    if (!s) return;
+    if (!s || !Array.isArray(s.labels) || !Array.isArray(s.values) || !s.values.length) return;
+
     const labels = s.labels;
-    const values = s.values;
+    const values = s.values.map(Number).filter(v => !Number.isNaN(v));
+    if (!values.length) return;
 
     const { pts, bounds, minV, maxV } = computePoints(labels, values);
-    cached = { pts, bounds, minV, maxV, labels, values };
+    cached = { pts, bounds, minV, maxV };
 
     ctx.clearRect(0,0,W,H);
 
@@ -186,7 +202,7 @@ function makeChart({ canvasId, tipId, getSeries, yFormat, tipFormat }){
       ctx.fill();
     });
 
-    // axis labels (clean): first/last label only
+    // axis labels (first/last only)
     ctx.fillStyle = text;
     ctx.font = "900 11px Inter, system-ui, sans-serif";
     ctx.textBaseline = "top";
@@ -201,15 +217,16 @@ function makeChart({ canvasId, tipId, getSeries, yFormat, tipFormat }){
     ctx.textBaseline = "middle";
     const maxTxt = yFormat(maxV);
     const minTxt = yFormat(minV);
+
     const mx = ctx.measureText(maxTxt).width;
     ctx.fillText(maxTxt, bounds.x1 - mx, bounds.y0);
+
     const mn = ctx.measureText(minTxt).width;
     ctx.fillText(minTxt, bounds.x1 - mn, bounds.y1);
   }
 
   function nearestPoint(px){
     if (!cached) return null;
-    // nearest in x
     let best = null, bestD = Infinity;
     for(const p of cached.pts){
       const d = Math.abs(p.x - px);
@@ -218,14 +235,14 @@ function makeChart({ canvasId, tipId, getSeries, yFormat, tipFormat }){
     return best;
   }
 
-  function showTip(p, clientX, clientY){
+  function showTip(p){
     if (!tip) return;
     tip.innerHTML = `
       <div class="tipRow"><span class="tipKey">Period</span><span class="tipVal">${escapeHtml(p.label)}</span></div>
       <div class="tipRow"><span class="tipKey">Value</span><span class="tipVal">${escapeHtml(tipFormat(p.v))}</span></div>
     `;
-    tip.style.left = `${clientX}px`;
-    tip.style.top  = `${clientY}px`;
+    tip.style.left = `${p.x}px`;
+    tip.style.top  = `${p.y}px`;
     tip.classList.add("show");
     tip.setAttribute("aria-hidden","false");
   }
@@ -236,26 +253,18 @@ function makeChart({ canvasId, tipId, getSeries, yFormat, tipFormat }){
     tip.setAttribute("aria-hidden","true");
   }
 
-  // events for tooltip
   const wrap = canvas.parentElement;
   if (wrap){
     wrap.addEventListener("mousemove", (e) => {
       if (!cached) return;
       const rect = canvas.getBoundingClientRect();
       const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-
       const p = nearestPoint(x);
       if (!p) return;
-
-      // place tooltip near point (inside wrap coords)
-      const tx = p.x;
-      const ty = p.y;
-
-      showTip(p, tx, ty);
+      showTip(p);
     });
-
     wrap.addEventListener("mouseleave", hideTip);
+
     wrap.addEventListener("touchstart", (e) => {
       const t = e.touches?.[0];
       if (!t) return;
@@ -263,12 +272,12 @@ function makeChart({ canvasId, tipId, getSeries, yFormat, tipFormat }){
       const x = t.clientX - rect.left;
       const p = nearestPoint(x);
       if (!p) return;
-      showTip(p, p.x, p.y);
+      showTip(p);
     }, { passive:true });
+
     wrap.addEventListener("touchend", hideTip);
   }
 
-  // public API
   return {
     redraw(){
       resize();
@@ -286,13 +295,15 @@ function initRangePills(onChange){
       const btn = e.target.closest("button[data-range]");
       if (!btn) return;
 
-      const target = group.getAttribute("data-target"); // aum or irr
+      const target = group.getAttribute("data-target"); // should be "irr"
       const range = btn.getAttribute("data-range");
       if (!target || !range) return;
 
+      // only allow irr (in case HTML still has other targets)
+      if (target !== "irr") return;
+
       state.activeRange[target] = range;
 
-      // set active class
       group.querySelectorAll("button").forEach(b => b.classList.remove("active"));
       btn.classList.add("active");
 
@@ -323,15 +334,7 @@ function init(){
   renderKpis();
   initMobileDrawer();
 
-  // Charts
-  const aumChart = makeChart({
-    canvasId: "aumChart",
-    tipId: "aumTip",
-    getSeries: () => state.series.aum.data[state.activeRange.aum],
-    yFormat: (v) => state.series.aum.formatY(v),
-    tipFormat: (v) => state.series.aum.formatTip(v),
-  });
-
+  // IRR Chart only
   const irrChart = makeChart({
     canvasId: "irrChart",
     tipId: "irrTip",
@@ -341,7 +344,6 @@ function init(){
   });
 
   function redrawAll(){
-    aumChart?.redraw();
     irrChart?.redraw();
   }
 
@@ -349,30 +351,16 @@ function init(){
   initRangePills(() => redrawAll());
 
   // Redraw on resize
-  window.addEventListener("resize", () => redrawAll());
+  window.addEventListener("resize", redrawAll);
 
-  // Theme
-  const themeBtn = document.getElementById("themeBtn");
-const root = document.documentElement; // <html>
-
-const savedTheme = localStorage.getItem("theme");
-if (savedTheme) {
-  root.setAttribute("data-theme", savedTheme);
-}
-
-themeBtn?.addEventListener("click", () => {
-  const current = root.getAttribute("data-theme");
-  const next = current === "light" ? "dark" : "light";
-
-  if (next === "dark") {
-    root.removeAttribute("data-theme");
-    localStorage.setItem("theme", "dark");
-  } else {
-    root.setAttribute("data-theme", "light");
-    localStorage.setItem("theme", "light");
-  }
-});
-
+  // Theme toggle (unified key: iam_theme)
+  const themeBtn = $("#themeBtn");
+  themeBtn?.addEventListener("click", () => {
+    const root = document.documentElement;
+    const isLight = root.getAttribute("data-theme") === "light";
+    setTheme(isLight ? "dark" : "light");
+    redrawAll(); // repaint chart colors
+  });
 
   // Footer year
   const year = $("#year");
