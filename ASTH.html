@@ -46,15 +46,6 @@
       position: sticky; top: 14px; z-index: 50;
     }
     .brand{display:flex;align-items:center;gap:10px}
-    .brandMark{
-      width:34px;height:34px;border-radius:12px;
-      display:grid;place-items:center;
-      border:1px solid var(--line);
-      background:rgba(0,0,0,.22);
-      font-family:Sora, Inter, sans-serif;
-      font-weight:800;
-      color:var(--gold);
-    }
     .brandText{font-family:Sora, Inter, sans-serif;font-weight:700;letter-spacing:-.2px}
 
     .nav{display:flex;align-items:center;gap:16px}
@@ -141,7 +132,7 @@
       background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
       border-radius:24px;
       overflow:hidden;
-      height:360px; /* bigger logo */
+      height:360px;
       position:relative;
       box-shadow:0 18px 60px rgba(0,0,0,.35);
     }
@@ -304,6 +295,24 @@
       --card: rgba(255,255,255,.82);
       --btn: rgba(11,18,32,.06);
     }
+
+    /* ✅✅✅ FIX: Header logo size locked (THIS is what you were missing) */
+    .brandLogoHeader{
+      width:28px;
+      height:28px;
+      max-width:28px;
+      max-height:28px;
+      object-fit:contain;
+      display:block;
+      flex: 0 0 28px;
+      border-radius:8px;
+    }
+    .topbar .brand img{
+      width:28px !important;
+      height:28px !important;
+      max-width:28px !important;
+      max-height:28px !important;
+    }
   </style>
 </head>
 
@@ -315,7 +324,6 @@
         <img class="brandLogoHeader" src="./assets/iam-logo.png" alt="Asthate logo" />
         <span class="brandText">Asthate</span>
       </a>
-
 
       <nav class="nav">
         <a class="navLink" href="./index.html">Home</a>
@@ -345,13 +353,11 @@
       </div>
     </div>
 
-    <!-- HERO -->
     <section class="hero">
       <div class="overlay"></div>
       <img class="heroMedia" src="./assets/asth-coin.png" alt="ASTH coin" />
     </section>
 
-    <!-- DESCRIPTION -->
     <section class="desc">
       <h1>ASTH <span style="color:#c9a227;font-weight:600;">Asset Overview</span></h1>
       <p>
@@ -369,9 +375,7 @@
       </div>
     </section>
 
-    <!-- SPLIT -->
     <section class="grid">
-      <!-- LEFT -->
       <div class="panel">
         <div class="panelTitle">
           <div>Key Statistics</div>
@@ -420,7 +424,6 @@
         </div>
       </div>
 
-      <!-- RIGHT -->
       <div class="chartBox">
         <div class="chartHeader">
           <div class="title">ASTH Price (Line)</div>
@@ -444,14 +447,11 @@
   </div>
 
   <script>
-    // ====== CONFIG ======
     const PAIR_ADDRESS = "0xd99307addb593f9aff5ef9bee19a424cff27e765";
     const CONTRACT_ADDRESS = "0x33474A970752D43107Ee01c3Ab03dCb6C017aCC6";
-
     const DEX_URL = `https://dexscreener.com/ethereum/${PAIR_ADDRESS}`;
     const API_URL = `https://api.dexscreener.com/latest/dex/pairs/ethereum/${PAIR_ADDRESS}`;
 
-    // ====== Theme (single key: theme) ======
     const root = document.documentElement;
     const themeBtn = document.getElementById("themeBtn");
 
@@ -470,7 +470,6 @@
       restyleChart();
     });
 
-    // ====== Mobile drawer ======
     function initMobileDrawer(){
       const btn = document.getElementById("mobileMenuBtn");
       const drawer = document.getElementById("mobileDrawer");
@@ -486,7 +485,6 @@
     }
     initMobileDrawer();
 
-    // ====== helpers ======
     const $ = (id) => document.getElementById(id);
 
     function fmtUSD(n, dp=2){
@@ -509,15 +507,13 @@
       $("updatedAt").textContent = "Last update: " + new Date().toLocaleString();
     }
 
-    // init static links
     $("dexLink").href = DEX_URL;
     $("scanLink").href = `https://etherscan.io/token/${CONTRACT_ADDRESS}`;
     $("contract").textContent = CONTRACT_ADDRESS;
     $("pair").textContent = PAIR_ADDRESS;
 
-    // ====== Line chart (accurate live price samples) ======
     const history = { labels: [], prices: [] };
-    const MAX_POINTS = 120; // keep last 120 points
+    const MAX_POINTS = 120;
 
     function chartColors(){
       const isLight = root.getAttribute("data-theme") === "light";
@@ -530,42 +526,18 @@
     const ctx = document.getElementById("priceChart").getContext("2d");
     const priceChart = new Chart(ctx, {
       type: "line",
-      data: {
-        labels: history.labels,
-        datasets: [{
-          data: history.prices,
-          tension: 0.25,
-          fill: true,
-          pointRadius: 0,
-          borderWidth: 2,
-        }]
-      },
+      data: { labels: history.labels, datasets: [{ data: history.prices, tension: 0.25, fill: true, pointRadius: 0, borderWidth: 2 }] },
       options: {
         responsive: true,
         maintainAspectRatio: false,
         animation: { duration: 180 },
         plugins: {
           legend: { display: false },
-          tooltip: {
-            mode: "index",
-            intersect: false,
-            callbacks: {
-              label: (c) => ` ${fmtUSD(c.parsed.y)}`
-            }
-          }
+          tooltip: { mode: "index", intersect: false, callbacks: { label: (c) => ` ${fmtUSD(c.parsed.y)}` } }
         },
         scales: {
-          x: {
-            grid: { color: chartColors().grid },
-            ticks: { color: chartColors().text, maxTicksLimit: 6 }
-          },
-          y: {
-            grid: { color: chartColors().grid },
-            ticks: {
-              color: chartColors().text,
-              callback: (v) => fmtUSD(v)
-            }
-          }
+          x: { grid: { color: chartColors().grid }, ticks: { color: chartColors().text, maxTicksLimit: 6 } },
+          y: { grid: { color: chartColors().grid }, ticks: { color: chartColors().text, callback: (v) => fmtUSD(v) } }
         }
       }
     });
@@ -584,15 +556,10 @@
       const label = now.toLocaleTimeString([], { hour:"2-digit", minute:"2-digit" });
       history.labels.push(label);
       history.prices.push(Number(priceUsd));
-
-      if (history.labels.length > MAX_POINTS){
-        history.labels.shift();
-        history.prices.shift();
-      }
+      if (history.labels.length > MAX_POINTS){ history.labels.shift(); history.prices.shift(); }
       priceChart.update();
     }
 
-    // ====== Fetch DexScreener stats ======
     async function fetchStats(){
       try{
         setStatus(true, "Updating…");
@@ -617,7 +584,6 @@
         const txBuys = p.txns?.h24?.buys ?? null;
         const txSells = p.txns?.h24?.sells ?? null;
 
-        // UI updates
         $("price").textContent = fmtUSD(priceUsd);
         $("priceSub").textContent = `24h: ${change24h === null ? "—" : (Number(change24h).toFixed(2) + "%")}`;
 
@@ -631,10 +597,7 @@
         const txText = (txBuys === null && txSells === null) ? "—" : `${fmtNum(txBuys,0)} buys / ${fmtNum(txSells,0)} sells`;
         $("volSub").textContent = `Txns (24h): ${txText}`;
 
-        // chart point
-        if (priceUsd !== null && !Number.isNaN(Number(priceUsd))){
-          pushPricePoint(priceUsd);
-        }
+        if (priceUsd !== null && !Number.isNaN(Number(priceUsd))) pushPricePoint(priceUsd);
 
         setUpdated();
         setStatus(true, "Live");
@@ -644,10 +607,9 @@
       }
     }
 
-    $("refreshBtn").addEventListener("click", () => { fetchStats(); restyleChart(); });
+    document.getElementById("refreshBtn").addEventListener("click", () => { fetchStats(); restyleChart(); });
     window.addEventListener("resize", restyleChart);
 
-    // start
     restyleChart();
     fetchStats();
     setInterval(fetchStats, 30000);
