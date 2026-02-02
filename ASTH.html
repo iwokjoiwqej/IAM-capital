@@ -404,23 +404,21 @@
     const GT_NET  = "eth";
 
     // ===== Theme (only for chart restyle; header theme handled by app.js) =====
-    const root = document.documentElement;
-    const themeBtn = document.getElementById("themeBtn");
+// ===== Theme (handled globally by app.js) =====
+// Do NOT attach another click handler to #themeBtn here.
+// We only restyle the chart when theme changes.
 
-    function setTheme(t){
-      if (t === "light") root.setAttribute("data-theme","light");
-      else root.removeAttribute("data-theme");
-      localStorage.setItem("theme", t);
-    }
-    (function initTheme(){
-      setTheme(localStorage.getItem("theme") || "dark");
-    })();
+const root = document.documentElement;
 
-    themeBtn?.addEventListener("click", () => {
-      const isLight = root.getAttribute("data-theme") === "light";
-      setTheme(isLight ? "dark" : "light");
-      restyleChart();
-    });
+(function initThemeFromGlobal(){
+  // app.js uses localStorage("theme") and sets data-theme on <html>.
+  // This page just reads it and styles the chart accordingly.
+  restyleChart();
+})();
+
+// Watch attribute changes (theme toggle) and restyle chart
+const obs = new MutationObserver(() => restyleChart());
+obs.observe(root, { attributes: true, attributeFilter: ["data-theme"] });
 
     // ===== Helpers =====
     const $ = (id) => document.getElementById(id);
