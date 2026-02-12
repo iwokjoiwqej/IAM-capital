@@ -1,0 +1,191 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Performance | Asthate</title>
+  <meta name="description" content="Asthate historical performance format: IRR trend, risk metrics, and monthly return breakdown." />
+  <meta name="theme-color" content="#0b0b0f" />
+
+  <link rel="icon" href="./assets/favicon.ico">
+  <link rel="apple-touch-icon" href="./assets/apple-touch-icon.png">
+  <link rel="manifest" href="./assets/site.webmanifest">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="header" id="top">
+    <div class="container headerInner">
+      <a class="brand" href="./index.html" aria-label="Asthate Home">
+        <img class="brandLogo" src="./assets/iam-logo.png" data-logo-dark="./assets/iam-logo.png" data-logo-light="./assets/image.png" alt="Asthate logo" onerror="this.classList.add('logo-missing'); this.removeAttribute('src');" />
+        <span class="brandWord">ASTHATE</span>
+      </a>
+
+      <nav class="nav" aria-label="Primary">
+        <a class="navLink" href="./about.html">About</a>
+        <a class="navLink" href="./strategy.html">Strategy</a>
+        <a class="navLink" href="./performance.html" aria-current="page">Performance</a>
+        <a class="navLink" href="./ASTH.html">ASTH</a>
+        <a class="navLink" href="./contact.html">Contact</a>
+      </nav>
+
+      <div class="headerRight">
+        <button class="iconBtn" id="themeBtn" type="button" aria-label="Toggle theme"><span class="dot"></span></button>
+        <button class="iconBtn menuBtn" id="mobileMenuBtn" type="button" aria-label="Open menu">Menu</button>
+        <a class="cta" href="./contact.html">Request DD Pack</a>
+      </div>
+    </div>
+
+    <div class="mobileDrawer" id="mobileDrawer" aria-hidden="true">
+      <div class="mobileTop">
+        <div class="mobileTitle">Menu</div>
+        <button class="iconBtn" id="mobileCloseBtn" type="button" aria-label="Close menu">Close</button>
+      </div>
+
+      <div class="mobileLinks">
+        <a href="./about.html">About</a>
+        <a href="./strategy.html">Strategy</a>
+        <a href="./performance.html">Performance</a>
+        <a href="./ASTH.html">ASTH</a>
+        <a href="./contact.html">Contact</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="section">
+      <div class="container">
+        <div class="sectionHead">
+          <h2>Historical IRR and Risk Metrics</h2>
+          <p class="muted">IRR history and monthly performance format.</p>
+        </div>
+
+        <div class="grid2">
+          <aside class="snapshot" aria-label="Performance Snapshot">
+            <div class="snapTop">
+              <div class="snapTitle">Performance Snapshot</div>
+              <div class="muted small">Illustrative format</div>
+            </div>
+
+            <div class="kpis" id="kpiGrid"></div>
+
+            <div class="snapLine"></div>
+
+            <div class="chartBlock">
+              <div class="chartTop">
+                <div>
+                  <div class="chartKicker">Past IRR Trend</div>
+                  <div class="muted small">Net internal format</div>
+                </div>
+                <div class="rangePills" data-target="irr">
+                  <button class="pillBtn active" type="button" data-range="30d">30D</button>
+                  <button class="pillBtn" type="button" data-range="1y">1Y</button>
+                  <button class="pillBtn" type="button" data-range="all">ALL</button>
+                </div>
+              </div>
+
+              <div class="chartWrap">
+                <canvas id="irrChart"></canvas>
+                <div class="tooltip" id="irrTip" aria-hidden="true"></div>
+              </div>
+            </div>
+          </aside>
+
+          <div class="panel">
+            <div class="panelHead">
+              <div class="badge">Methodology</div>
+              <h3>Presentation Rules</h3>
+            </div>
+            <ul class="list compact">
+              <li><span class="tick">1</span> Returns shown net of execution costs</li>
+              <li><span class="tick">2</span> Drawdown shown on peak-to-trough basis</li>
+              <li><span class="tick">3</span> Ratios are estimates, not audited statements</li>
+              <li><span class="tick">4</span> Full diligence pack available after qualification</li>
+            </ul>
+
+            <div class="callout" style="margin-top: 16px;">
+              <div class="calloutIcon">!</div>
+              <div class="calloutText">
+                <div class="calloutTitle">Disclosure</div>
+                <div class="muted">Past performance does not guarantee future results.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel" style="margin-top: 14px;">
+          <div class="panelHead">
+            <div class="badge amber">Monthly Table</div>
+            <h3>Recent Breakdown</h3>
+          </div>
+          <div class="tableWrap">
+            <table class="dataTable" aria-label="Monthly performance table">
+              <thead>
+                <tr>
+                  <th>Period</th>
+                  <th>Net Return</th>
+                  <th>Cumulative</th>
+                  <th>Max Drawdown</th>
+                  <th>Comment</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>2025 Q2</td>
+                  <td>+4.1%</td>
+                  <td>+4.1%</td>
+                  <td>-1.2%</td>
+                  <td>Carry and relative-value contribution.</td>
+                </tr>
+                <tr>
+                  <td>2025 Q3</td>
+                  <td>+7.8%</td>
+                  <td>+12.2%</td>
+                  <td>-2.0%</td>
+                  <td>Tighter execution filters and controlled beta.</td>
+                </tr>
+                <tr>
+                  <td>2025 Q4</td>
+                  <td>+5.9%</td>
+                  <td>+18.8%</td>
+                  <td>-3.3%</td>
+                  <td>Risk overlay reduced drawdown during volatility spikes.</td>
+                </tr>
+                <tr>
+                  <td>2026 YTD</td>
+                  <td>+8.6%</td>
+                  <td>+27.4%</td>
+                  <td>-6.8%</td>
+                  <td>Better cost retention and disciplined rebalancing.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <footer class="footer">
+          <div class="footerLeft"><div class="muted small">&copy; <span id="year"></span> Asthate. All rights reserved.</div></div>
+          <div class="footerRight muted small"><span>Informational website only. Not investment advice.</span></div>
+        </footer>
+      </div>
+    </section>
+  </main>
+
+  <script src="./app.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+

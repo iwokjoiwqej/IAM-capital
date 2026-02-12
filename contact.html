@@ -1,11 +1,11 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Contact us — Asthate</title>
-  <meta name="description" content="Contact Asthate for introductions and diligence requests." />
-  <meta name="theme-color" content="#0b1220" />
+  <title>Contact | Asthate</title>
+  <meta name="description" content="Contact Asthate for investor introductions, due diligence requests, and onboarding steps." />
+  <meta name="theme-color" content="#0b0b0f" />
 
   <link rel="icon" href="./assets/favicon.ico">
   <link rel="apple-touch-icon" href="./assets/apple-touch-icon.png">
@@ -13,51 +13,47 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="./styles.css?v=1" />
+  <link rel="stylesheet" href="./styles.css" />
 </head>
-
 <body>
   <a class="skip" href="#main">Skip to content</a>
 
-  <!-- Header (SAME as about.html) -->
   <header class="header" id="top">
     <div class="container headerInner">
       <a class="brand" href="./index.html" aria-label="Asthate Home">
-        <img class="brandLogo" src="./assets/iam-logo.png" alt="Asthate logo" />
-        <span class="brandWord">Asthate</span>
+        <img class="brandLogo" src="./assets/iam-logo.png" data-logo-dark="./assets/iam-logo.png" data-logo-light="./assets/image.png" alt="Asthate logo" onerror="this.classList.add('logo-missing'); this.removeAttribute('src');" />
+        <span class="brandWord">ASTHATE</span>
       </a>
 
       <nav class="nav" aria-label="Primary">
-        <a class="navLink" href="./about.html">About us</a>
+        <a class="navLink" href="./about.html">About</a>
         <a class="navLink" href="./strategy.html">Strategy</a>
+        <a class="navLink" href="./performance.html">Performance</a>
         <a class="navLink" href="./ASTH.html">ASTH</a>
-        <a class="navLink" href="./contact.html" aria-current="page">Contact us</a>
+        <a class="navLink" href="./contact.html" aria-current="page">Contact</a>
       </nav>
 
       <div class="headerRight">
-        <button class="iconBtn" id="themeBtn" type="button" aria-label="Toggle theme">
-          <span class="dot"></span>
-        </button>
-
-        <button class="iconBtn menuBtn" id="mobileMenuBtn" type="button" aria-label="Open menu">☰</button>
-        <a class="cta" href="#contact">Request an intro</a>
+        <button class="iconBtn" id="themeBtn" type="button" aria-label="Toggle theme"><span class="dot"></span></button>
+        <button class="iconBtn menuBtn" id="mobileMenuBtn" type="button" aria-label="Open menu">Menu</button>
+        <a class="cta" href="#contact">Start Inquiry</a>
       </div>
     </div>
 
-    <!-- Mobile drawer (SAME as about.html) -->
     <div class="mobileDrawer" id="mobileDrawer" aria-hidden="true">
       <div class="mobileTop">
         <div class="mobileTitle">Menu</div>
-        <button class="iconBtn" id="mobileCloseBtn" type="button" aria-label="Close menu">✕</button>
+        <button class="iconBtn" id="mobileCloseBtn" type="button" aria-label="Close menu">Close</button>
       </div>
 
       <div class="mobileLinks">
-        <a href="./about.html">About us</a>
+        <a href="./about.html">About</a>
         <a href="./strategy.html">Strategy</a>
+        <a href="./performance.html">Performance</a>
         <a href="./ASTH.html">ASTH</a>
-        <a href="./contact.html">Contact us</a>
+        <a href="./contact.html">Contact</a>
       </div>
     </div>
   </header>
@@ -66,77 +62,130 @@
     <section class="section" id="contact">
       <div class="container">
         <div class="sectionHead">
-          <h2>Contact us</h2>
-          <p class="muted">
-            Introductions and diligence requests. We respond within 24–48 hours on business days.
-          </p>
+          <h2>Investor Contact and Onboarding</h2>
+          <p class="muted">From inquiry to onboarding.</p>
         </div>
 
-        <!-- Primary contact cards -->
         <div class="contactGrid">
-          <div class="panel contactCard">
+          <div class="contactCard">
             <div class="contactLabel">Email</div>
             <a class="contactValue" href="mailto:admin@asthate.com">admin@asthate.com</a>
-            <div class="contactSub muted">Preferred first contact.</div>
+            <div class="contactSub">Primary contact channel.</div>
           </div>
 
-          <div class="panel contactCard">
+          <div class="contactCard">
             <div class="contactLabel">LinkedIn</div>
-            <a class="contactValue" href="https://www.linkedin.com/company/asthate/" target="_blank" rel="noopener">
-              Company Page
-            </a>
-            <div class="contactSub muted">Updates and introductions.</div>
+            <a class="contactValue" href="https://www.linkedin.com/company/asthate/" target="_blank" rel="noopener">Asthate Company Page</a>
+            <div class="contactSub">Company profile and updates.</div>
           </div>
 
-          <div class="panel contactCard">
-            <div class="contactLabel">Location</div>
+          <div class="contactCard">
+            <div class="contactLabel">Jurisdiction</div>
             <div class="contactValue">Singapore</div>
-            <div class="contactSub muted">Asia-Pacific coverage.</div>
+            <div class="contactSub">APAC base, global coverage.</div>
           </div>
         </div>
 
-        <!-- Extra professional block (same visual language as about.html) -->
-        <div class="callout">
-          <div class="calloutIcon">⟡</div>
-          <div class="calloutText">
-            <div class="calloutTitle">What to include in your email</div>
-            <div class="muted">
-              A brief intro, your investor profile, target ticket size, and timeline. If relevant, include preferred
-              communication channel and any diligence requirements.
+        <div class="panel" style="margin-top: 12px;">
+          <div class="panelHead">
+            <div class="badge">Onboarding Flow</div>
+            <h3>Diligence Sequence</h3>
+          </div>
+
+          <div class="timeline">
+            <div class="tItem">
+              <div class="tTop">
+                <div class="tDate">Step 1</div>
+                <div class="tTag">Inquiry</div>
+              </div>
+              <div class="tTitle">Submit intro profile and mandate fit</div>
+              <p class="muted small">Include investor type, target allocation, and timeline.</p>
+            </div>
+
+            <div class="tItem">
+              <div class="tTop">
+                <div class="tDate">Step 2</div>
+                <div class="tTag">NDA</div>
+              </div>
+              <div class="tTitle">Mutual confidentiality process</div>
+              <p class="muted small">Required before sharing sensitive process materials.</p>
+            </div>
+
+            <div class="tItem">
+              <div class="tTop">
+                <div class="tDate">Step 3</div>
+                <div class="tTag">DD Package</div>
+              </div>
+              <div class="tTitle">Receive framework, risk, and reporting documents</div>
+              <p class="muted small">Includes strategy memo, risk controls, and operations checklist.</p>
+            </div>
+
+            <div class="tItem">
+              <div class="tTop">
+                <div class="tDate">Step 4</div>
+                <div class="tTag">Review Call</div>
+              </div>
+              <div class="tTitle">Partner call for Q&A and suitability</div>
+              <p class="muted small">Focus on mandate fit, liquidity terms, and governance expectations.</p>
+            </div>
+
+            <div class="tItem">
+              <div class="tTop">
+                <div class="tDate">Step 5</div>
+                <div class="tTag">Onboarding</div>
+              </div>
+              <div class="tTitle">Final documentation and account setup</div>
+              <p class="muted small">Executed only after legal, compliance, and operational checks are complete.</p>
             </div>
           </div>
         </div>
 
-        <div class="grid2" style="margin-top:14px;">
+        <div class="grid2" style="margin-top: 12px;">
           <div class="panel">
-            <h3>Office hours</h3>
-            <p class="muted" style="margin:10px 0 0;">
-              Monday–Friday (SGT). We aim to reply within 24–48 hours on business days.
-            </p>
+            <h3>What to Include in First Email</h3>
+            <ul class="list compact">
+              <li><span class="tick">1</span> Investor classification and jurisdiction</li>
+              <li><span class="tick">2</span> Expected ticket size and deployment horizon</li>
+              <li><span class="tick">3</span> Required DD and legal checklist items</li>
+              <li><span class="tick">4</span> Preferred meeting times and contact person</li>
+            </ul>
           </div>
 
           <div class="panel">
-            <h3>Disclosure</h3>
-            <p class="muted" style="margin:10px 0 0;">
-              This website is for informational purposes only and does not constitute investment advice.
-              Digital assets involve substantial risk including loss of capital.
+            <h3>Response Standard</h3>
+            <p class="muted" style="margin-top: 10px;">
+              Initial response target: 24 to 48 business hours.
             </p>
           </div>
         </div>
 
+        <div class="callout">
+          <div class="calloutIcon">!</div>
+          <div class="calloutText">
+            <div class="calloutTitle">Legal Notice</div>
+            <div class="muted">
+              Informational only. Access to detailed materials may be restricted by jurisdiction and eligibility.
+            </div>
+          </div>
+        </div>
+
         <footer class="footer">
-          <div class="footerLeft">
-            <div class="muted small">© <span id="year"></span> Asthate. All rights reserved.</div>
-          </div>
-          <div class="footerRight muted small">
-            <span>For informational purposes only.</span>
-          </div>
+          <div class="footerLeft"><div class="muted small">&copy; <span id="year"></span> Asthate. All rights reserved.</div></div>
+          <div class="footerRight muted small"><span>Informational website only. Not investment advice.</span></div>
         </footer>
       </div>
     </section>
   </main>
 
-  <!-- SAME as about.html -->
   <script src="./app.js"></script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+

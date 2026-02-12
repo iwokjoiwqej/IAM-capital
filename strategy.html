@@ -1,11 +1,11 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Strategy — Asthate</title>
-  <meta name="description" content="Revenue drivers and public operating principles. Asthate does not disclose proprietary parameters on the public site." />
-  <meta name="theme-color" content="#0b1220" />
+  <title>Strategy | Asthate</title>
+  <meta name="description" content="Asthate strategy framework: yield, systematic trading, strategic investing, dynamic allocation, and hard risk limits." />
+  <meta name="theme-color" content="#0b0b0f" />
 
   <link rel="icon" href="./assets/favicon.ico">
   <link rel="apple-touch-icon" href="./assets/apple-touch-icon.png">
@@ -13,50 +13,46 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./styles.css?v=2" />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css" />
 </head>
-
 <body>
   <a class="skip" href="#main">Skip to content</a>
 
-  <!-- Header -->
   <header class="header" id="top">
     <div class="container headerInner">
       <a class="brand" href="./index.html" aria-label="Asthate Home">
-        <img class="brandLogo" src="./assets/iam-logo.png" alt="Asthate logo" />
-        <span class="brandWord">Asthate</span>
+        <img class="brandLogo" src="./assets/iam-logo.png" data-logo-dark="./assets/iam-logo.png" data-logo-light="./assets/image.png" alt="Asthate logo" onerror="this.classList.add('logo-missing'); this.removeAttribute('src');" />
+        <span class="brandWord">ASTHATE</span>
       </a>
 
       <nav class="nav" aria-label="Primary">
-        <a class="navLink" href="./about.html">About us</a>
+        <a class="navLink" href="./about.html">About</a>
         <a class="navLink" href="./strategy.html" aria-current="page">Strategy</a>
+        <a class="navLink" href="./performance.html">Performance</a>
         <a class="navLink" href="./ASTH.html">ASTH</a>
-        <a class="navLink" href="./contact.html">Contact us</a>
+        <a class="navLink" href="./contact.html">Contact</a>
       </nav>
 
       <div class="headerRight">
-        <button class="iconBtn" id="themeBtn" type="button" aria-label="Toggle theme">
-          <span class="dot"></span>
-        </button>
-
-        <button class="iconBtn menuBtn" id="mobileMenuBtn" type="button" aria-label="Open menu">☰</button>
-        <a class="cta" href="./contact.html">Request an intro</a>
+        <button class="iconBtn" id="themeBtn" type="button" aria-label="Toggle theme"><span class="dot"></span></button>
+        <button class="iconBtn menuBtn" id="mobileMenuBtn" type="button" aria-label="Open menu">Menu</button>
+        <a class="cta" href="./contact.html">Investor Inquiry</a>
       </div>
     </div>
 
-    <!-- Mobile drawer -->
     <div class="mobileDrawer" id="mobileDrawer" aria-hidden="true">
       <div class="mobileTop">
         <div class="mobileTitle">Menu</div>
-        <button class="iconBtn" id="mobileCloseBtn" type="button" aria-label="Close menu">✕</button>
+        <button class="iconBtn" id="mobileCloseBtn" type="button" aria-label="Close menu">Close</button>
       </div>
 
       <div class="mobileLinks">
-        <a href="./about.html">About us</a>
+        <a href="./about.html">About</a>
         <a href="./strategy.html">Strategy</a>
+        <a href="./performance.html">Performance</a>
         <a href="./ASTH.html">ASTH</a>
-        <a href="./contact.html">Contact us</a>
+        <a href="./contact.html">Contact</a>
       </div>
     </div>
   </header>
@@ -64,158 +60,107 @@
   <main id="main">
     <section class="section">
       <div class="container">
-
-  <main id="main">
-    <section class="section">
-      <div class="container">
         <div class="sectionHead">
-          <h2>Strategy</h2>
+          <h2>Strategy Architecture</h2>
+          <p class="muted">A practical framework for running crypto capital with hard limits and clear reporting.</p>
         </div>
 
-        
-        <!-- Compact hero panel -->
-        <div class="panel" style="margin-bottom:14px;">
-          <h3 style="margin:0 0 8px; letter-spacing:-0.02em;">Adaptive allocation, risk-first execution</h3>
-          <p class="muted" style="margin:0;">
-            Asthate operates a systematic, process-driven approach. We publish public standards and
-            communication practices, while keeping proprietary parameters private. Risk constraints override
-            return optimization.
-          </p>
-
-          <div class="callout" style="margin-top:14px;">
-            <div class="calloutIcon">⟡</div>
-            <div class="calloutText">
-              <div class="calloutTitle">Disclosure</div>
-              <div class="muted">
-                We do not publish signals, portfolio weights, leverage limits, or execution rules on the public site.
-                Detailed diligence materials may be shared privately to qualified parties.
-              </div>
+        <div class="grid2">
+          <div class="panel">
+            <div class="panelHead">
+              <div class="badge">Core Mandate</div>
+              <h3>What We Actually Run</h3>
             </div>
+            <p class="muted">We run three engines: Yield, Systematic Trading, and Strategic Investing. The objective is steady compounding with controlled downside.</p>
+            <ul class="list compact">
+              <li><span class="tick">M</span> Capital preservation comes before return targeting</li>
+              <li><span class="tick">M</span> Rule-based execution over discretionary impulse</li>
+              <li><span class="tick">M</span> No guaranteed IRR at any stage</li>
+            </ul>
+          </div>
+
+          <div class="panel">
+            <div class="panelHead">
+              <div class="badge">Scope</div>
+              <h3>In Scope / Out of Scope</h3>
+            </div>
+            <p class="muted">In scope: conservative yield structures, drawdown-controlled systematic trading, and thesis-led strategic positions.</p>
+            <ul class="list compact">
+              <li><span class="tick">U</span> Out of scope: high-leverage discretionary trading</li>
+              <li><span class="tick">U</span> Out of scope: low-liquidity, weakly-vetted protocol exposure</li>
+              <li><span class="tick">U</span> Out of scope: cross-exchange arbitrage in this phase</li>
+            </ul>
           </div>
         </div>
 
-        <!-- Revenue drivers (keep only) -->
-        <div class="panel">
+        <div class="panel" style="margin-top: 12px;">
           <div class="panelHead">
-            <div class="badge">Revenue drivers</div>
-            <h3>Primary sources</h3>
+            <div class="badge amber">Framework</div>
+            <h3>Signal, Execution, Risk, Rebalance</h3>
           </div>
-
-          <p class="muted">
-            The firm’s return profile is supported by multiple drivers. Allocation across these categories may vary
-            with market structure and macro regime.
-          </p>
 
           <div class="drivers">
             <div class="driver">
-              <div class="driverTitle">Stable yield (Interest farming)</div>
-              <div class="muted small">Lending, staking, structured yield — with risk controls and hedging where applicable.</div>
+              <div class="driverTitle">Yield Engine</div>
+              <p class="muted">Targets durable cash-flow style return from vetted venues and conservative structures.</p>
             </div>
-
             <div class="driver">
-              <div class="driverTitle">Systematic automated trading</div>
-              <div class="muted small">Rule-based execution, monitoring, and fee-aware constraints.</div>
+              <div class="driverTitle">Systematic Trading Engine</div>
+              <p class="muted">Runs predefined entry/exit logic with strict sizing and stop rules.</p>
             </div>
-
             <div class="driver">
-              <div class="driverTitle">Strategic investments</div>
-              <div class="muted small">Selective, thesis-driven positions with governance and risk budgets.</div>
+              <div class="driverTitle">Strategic Investing Engine</div>
+              <p class="muted">Takes thesis-based medium-term positions with capped concentration.</p>
             </div>
-
             <div class="driver">
-              <div class="driverTitle">Arbitrage</div>
-              <div class="muted small">Cross-venue and market-structure opportunities within operational limits.</div>
+              <div class="driverTitle">Dynamic Allocation Logic</div>
+              <p class="muted">Weights can shift by volatility regime, drawdown triggers, and opportunity windows.</p>
             </div>
-          </div>
-
-          <div class="muted small" style="margin-top:12px;">
-            For informational purposes only. Not investment advice. Past performance does not guarantee future results.
           </div>
         </div>
 
-<div class="panel" style="margin-top:14px;">
-  <div class="panelHead">
-    <div class="badge">Roadmap</div>
-    <h3>Build → validate → scale</h3>
-  </div>
+        <div class="grid2" style="margin-top: 12px;">
+          <div class="panel">
+            <div class="panelHead">
+              <div class="badge">Risk Controls</div>
+              <h3>Non-Negotiable Limits</h3>
+            </div>
+            <ul class="list compact">
+              <li><span class="tick">1</span> Max portfolio drawdown limit: 20%</li>
+              <li><span class="tick">2</span> Weekly loss limit: 5%</li>
+              <li><span class="tick">3</span> Daily loss limit: 2%</li>
+              <li><span class="tick">4</span> Kill-switch and de-risk protocol when triggers are hit</li>
+            </ul>
+          </div>
 
-  <p class="muted">
-    A high-level operating roadmap. Dates and scope may evolve as we expand capabilities and partnerships.
-  </p>
-
-  <div class="timeline">
-    <div class="tItem">
-      <div class="tDot"></div>
-      <div class="tBody">
-        <div class="tTop">
-          <div class="tDate">2026 / 01 / 06</div>
-          <div class="tTag">Company launch</div>
+          <div class="panel">
+            <div class="panelHead">
+              <div class="badge">Reporting</div>
+              <h3>Investor Transparency</h3>
+            </div>
+            <ul class="list compact">
+              <li><span class="tick">1</span> Weekly snapshot: return, risk events, and positioning notes</li>
+              <li><span class="tick">2</span> Monthly report: engine contribution and drawdown summary</li>
+              <li><span class="tick">3</span> Discloses policy changes and major execution incidents</li>
+              <li><span class="tick">4</span> Includes liquidity/reserve context for current regime</li>
+            </ul>
+          </div>
         </div>
-        <div class="tTitle">Asthate formation & initial operating setup</div>
-        <div class="muted small">Entity setup, infrastructure baseline, internal controls, reporting templates.</div>
-      </div>
-    </div>
 
-    <div class="tItem">
-      <div class="tDot"></div>
-      <div class="tBody">
-        <div class="tTop">
-          <div class="tDate">2026 Q1–Q2</div>
-          <div class="tTag">Validation</div>
+        <div class="callout">
+          <div class="calloutIcon">!</div>
+          <div class="calloutText">
+            <div class="calloutTitle">Important Disclosure</div>
+            <div class="muted">
+              Past performance does not guarantee future results. Strategy parameters shown here are high-level by design; execution settings remain internal.
+            </div>
+          </div>
         </div>
-        <div class="tTitle">Live track record & process hardening</div>
-        <div class="muted small">Stability tests, incident response drills, monitoring and reporting cadence.</div>
-      </div>
-    </div>
 
-    <div class="tItem">
-      <div class="tDot"></div>
-      <div class="tBody">
-        <div class="tTop">
-          <div class="tDate">2026 H2</div>
-          <div class="tTag">Scaling</div>
-        </div>
-        <div class="tTitle">Broader strategy coverage & partner infrastructure</div>
-        <div class="muted small">More return drivers, improved execution, improved risk analytics.</div>
-      </div>
-    </div>
-
-    <div class="tItem">
-      <div class="tDot"></div>
-      <div class="tBody">
-        <div class="tTop">
-          <div class="tDate">2027+</div>
-          <div class="tTag">Expansion</div>
-        </div>
-        <div class="tTitle">Institutional-grade structure & multi-vehicle roadmap</div>
-        <div class="muted small">Fund vehicles, long-term research program, and optional venture/strategic allocation framework.</div>
-      </div>
-    </div>
-
-    <div class="tItem">
-      <div class="tDot"></div>
-      <div class="tBody">
-        <div class="tTop">
-          <div class="tDate">Future (template)</div>
-          <div class="tTag">VC / incubation</div>
-        </div>
-        <div class="tTitle">Venture investing and ecosystem building</div>
-        <div class="muted small">A potential expansion into venture-style investments and incubation as capacity grows.</div>
-      </div>
-    </div>
-  </div>
-</div>
-
-        
         <footer class="footer">
-          <div class="footerLeft">
-            <div class="muted small">© <span id="year"></span> Asthate. All rights reserved.</div>
-          </div>
-          <div class="footerRight muted small">
-            <span>For informational purposes only.</span>
-          </div>
+          <div class="footerLeft"><div class="muted small">&copy; <span id="year"></span> Asthate. All rights reserved.</div></div>
+          <div class="footerRight muted small"><span>Informational website only. Not investment advice.</span></div>
         </footer>
-
       </div>
     </section>
   </main>
@@ -223,3 +168,8 @@
   <script src="./app.js"></script>
 </body>
 </html>
+
+
+
+
+
