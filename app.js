@@ -77,7 +77,7 @@ function updateBrandLogos(theme) {
 
 function initTheme() {
   const saved = localStorage.getItem("iam_theme");
-  setTheme(saved || "dark");
+  setTheme(saved || "light");
 }
 
 function makeChart({ canvasId, tipId, getSeries, yFormat, tipFormat }) {
@@ -342,6 +342,7 @@ function init() {
 }
 
 init();
+
 
 
 

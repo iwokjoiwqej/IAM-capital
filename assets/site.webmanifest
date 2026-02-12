@@ -1,6 +1,6 @@
-{
-  "name": "MyWebSite",
-  "short_name": "MySite",
+﻿{
+  "name": "Asthate",
+  "short_name": "Asthate",
   "icons": [
     {
       "src": "/web-app-manifest-192x192.png",
