@@ -253,9 +253,21 @@ function makeChart({ canvasId, tipId, getSeries, yFormat, tipFormat }) {
       <div class="tipRow"><span class="tipKey">Period</span><span class="tipVal">${escapeHtml(p.label)}</span></div>
       <div class="tipRow"><span class="tipKey">Value</span><span class="tipVal">${escapeHtml(tipFormat(p.v))}</span></div>
     `;
-    tip.style.left = `${p.x}px`;
-    tip.style.top = `${p.y}px`;
+
+    // Keep tooltip fully visible within the chart bounds.
     tip.classList.add("show");
+    const tipWidth = tip.offsetWidth || 140;
+    const tipHeight = tip.offsetHeight || 56;
+    const chartWidth = canvas.clientWidth || 0;
+
+    const minX = (tipWidth / 2) + 8;
+    const maxX = chartWidth - (tipWidth / 2) - 8;
+    const clampedX = Math.max(minX, Math.min(maxX, p.x));
+    const minY = tipHeight + 14;
+    const clampedY = Math.max(minY, p.y);
+
+    tip.style.left = `${clampedX}px`;
+    tip.style.top = `${clampedY}px`;
     tip.setAttribute("aria-hidden", "false");
   }
 
@@ -407,11 +419,120 @@ function initFrameworkMap() {
   }
 }
 
+function initFocusBoards() {
+  const boards = Array.from(document.querySelectorAll("[data-focus-root]"));
+  if (!boards.length) return;
+
+  boards.forEach((board) => {
+    const buttons = Array.from(board.querySelectorAll("[data-focus-btn]"));
+    const panes = Array.from(board.querySelectorAll("[data-focus-pane]"));
+    if (!buttons.length || !panes.length) return;
+
+    const activate = (key) => {
+      if (!key) return;
+      board.setAttribute("data-focus-active", key);
+
+      buttons.forEach((btn) => {
+        const isActive = btn.getAttribute("data-focus-btn") === key;
+        btn.classList.toggle("is-active", isActive);
+        btn.setAttribute("aria-selected", isActive ? "true" : "false");
+      });
+
+      panes.forEach((pane) => {
+        const isActive = pane.getAttribute("data-focus-pane") === key;
+        pane.classList.toggle("is-active", isActive);
+        pane.hidden = !isActive;
+      });
+    };
+
+    buttons.forEach((btn) => {
+      const key = btn.getAttribute("data-focus-btn");
+      if (!key) return;
+      btn.addEventListener("click", () => activate(key));
+      btn.addEventListener("mouseenter", () => activate(key));
+      btn.addEventListener("focus", () => activate(key));
+    });
+
+    const defaultKey = board.getAttribute("data-focus-default");
+    const fallbackKey = buttons[0]?.getAttribute("data-focus-btn");
+    activate(defaultKey || fallbackKey);
+  });
+}
+
+function initLeadForms() {
+  const forms = Array.from(document.querySelectorAll("form[data-lead-form]"));
+  if (!forms.length) return;
+
+  forms.forEach((form) => {
+    const notice = form.querySelector("[data-form-notice]");
+    const success = form.getAttribute("data-success") || "Submitted successfully.";
+    const endpoint = form.getAttribute("data-api-path");
+    const submitBtn = form.querySelector('button[type="submit"]');
+
+    const setNotice = (message, isError = false) => {
+      if (!notice) return;
+      notice.textContent = message;
+      notice.hidden = false;
+      notice.classList.toggle("is-error", isError);
+      notice.classList.toggle("is-success", !isError);
+    };
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+
+      const payload = Object.fromEntries(new FormData(form).entries());
+      Object.keys(payload).forEach((key) => {
+        if (typeof payload[key] === "string") payload[key] = payload[key].trim();
+      });
+
+      if (!endpoint) {
+        setNotice(success, false);
+        form.reset();
+        return;
+      }
+
+      if (submitBtn) submitBtn.disabled = true;
+
+      try {
+        const res = await fetch(endpoint, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
+
+        let data = {};
+        try {
+          data = await res.json();
+        } catch (_) {
+          data = {};
+        }
+
+        if (!res.ok) {
+          throw new Error(data?.message || "Submission failed. Please try again.");
+        }
+
+        setNotice(data?.message || success, false);
+        form.reset();
+      } catch (err) {
+        setNotice(err?.message || "Submission failed. Please try again.", true);
+      } finally {
+        if (submitBtn) submitBtn.disabled = false;
+      }
+    });
+  });
+}
+
 function init() {
   initTheme();
   renderKpis();
   initMobileDrawer();
   initFrameworkMap();
+  initFocusBoards();
+  initLeadForms();
 
   const irrChart = makeChart({
     canvasId: "irrChart",

@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DD Request | Asthate</title>
+  <meta name="description" content="Request Asthate due-diligence materials. Submit NDA status, investor profile, and required document scope." />
+  <meta name="theme-color" content="#0b0b0f" />
+  <meta name="apple-mobile-web-app-title" content="Asthate" />
+
+  <link rel="icon" href="./assets/favicon.ico">
+  <link rel="apple-touch-icon" href="./assets/apple-touch-icon.png">
+  <link rel="manifest" href="./assets/site.webmanifest">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="header" id="top">
+    <div class="container headerInner">
+      <a class="brand" href="./index.html" aria-label="Asthate Home">
+        <img class="brandLogo" src="./assets/iam-logo.png" data-logo-dark="./assets/iam-logo.png" data-logo-light="./assets/image.png" alt="Asthate logo" onerror="this.classList.add('logo-missing'); this.removeAttribute('src');" />
+        <span class="brandWord">ASTHATE</span>
+      </a>
+
+      <nav class="nav" aria-label="Primary">
+        <a class="navLink" href="./about.html">About</a>
+        <a class="navLink" href="./strategy.html">Strategy</a>
+        <a class="navLink" href="./performance.html">Performance</a>
+        <a class="navLink" href="./ASTH.html">ASTH</a>
+        <a class="navLink" href="./contact.html">Contact</a>
+      </nav>
+
+      <div class="headerRight">
+        <button class="iconBtn" id="themeBtn" type="button" aria-label="Toggle theme"><span class="dot"></span></button>
+        <button class="iconBtn menuBtn" id="mobileMenuBtn" type="button" aria-label="Open menu">Menu</button>
+        <a class="cta" href="./portal.html">Investor Portal</a>
+      </div>
+    </div>
+
+    <div class="mobileDrawer" id="mobileDrawer" aria-hidden="true">
+      <div class="mobileTop">
+        <div class="mobileTitle">Menu</div>
+        <button class="iconBtn" id="mobileCloseBtn" type="button" aria-label="Close menu">Close</button>
+      </div>
+
+      <div class="mobileLinks">
+        <a href="./about.html">About</a>
+        <a href="./strategy.html">Strategy</a>
+        <a href="./performance.html">Performance</a>
+        <a href="./ASTH.html">ASTH</a>
+        <a href="./contact.html">Contact</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="section">
+      <div class="container">
+        <div class="sectionHead">
+          <h2>Due Diligence Request</h2>
+          <p class="muted">Request review documents based on your diligence scope.</p>
+        </div>
+
+        <div class="grid2 mb12">
+          <div class="panel">
+            <div class="panelHead">
+              <div class="badge">Checklist</div>
+              <h3>Before We Share Files</h3>
+            </div>
+            <ul class="list compact">
+              <li><span class="tick">1</span> Investor identity and entity details</li>
+              <li><span class="tick">2</span> Jurisdiction and eligibility check</li>
+              <li><span class="tick">3</span> NDA status confirmation</li>
+              <li><span class="tick">4</span> Scope of requested DD materials</li>
+            </ul>
+          </div>
+
+          <div class="panel">
+            <div class="panelHead">
+              <div class="badge amber">Materials</div>
+              <h3>Typical DD Package</h3>
+            </div>
+            <ul class="list compact">
+              <li><span class="tick">A</span> Strategy framework and risk policy</li>
+              <li><span class="tick">A</span> Performance methodology and reporting format</li>
+              <li><span class="tick">A</span> Operational process and governance cadence</li>
+              <li><span class="tick">A</span> Legal and structure update (when available)</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="panel formShell">
+          <div class="panelHead">
+            <div class="badge amber">DD Intake</div>
+            <h3>Request Form</h3>
+          </div>
+
+          <form class="leadForm" data-lead-form data-api-path="/api/dd-request" data-success="DD request submitted. We will send next steps after eligibility review.">
+            <div class="formGrid">
+              <label class="field">
+                <span>Full Name</span>
+                <input type="text" name="full_name" required />
+              </label>
+
+              <label class="field">
+                <span>Work Email</span>
+                <input type="email" name="email" required />
+              </label>
+
+              <label class="field">
+                <span>Organization</span>
+                <input type="text" name="organization" required />
+              </label>
+
+              <label class="field">
+                <span>Role</span>
+                <input type="text" name="role" required />
+              </label>
+
+              <label class="field">
+                <span>NDA Status</span>
+                <select name="nda_status" required>
+                  <option value="">Select</option>
+                  <option>NDA already signed</option>
+                  <option>NDA needed</option>
+                </select>
+              </label>
+
+              <label class="field">
+                <span>Review Priority</span>
+                <select name="priority" required>
+                  <option value="">Select</option>
+                  <option>Standard (5-7 business days)</option>
+                  <option>Priority (2-3 business days)</option>
+                </select>
+              </label>
+            </div>
+
+            <label class="field field--full">
+              <span>Requested Items</span>
+              <textarea name="requested_items" rows="5" placeholder="List specific documents or questions."></textarea>
+            </label>
+
+            <div class="hpTrap" aria-hidden="true">
+              <label>Leave empty
+                <input type="text" name="website" tabindex="-1" autocomplete="off" />
+              </label>
+            </div>
+
+            <label class="consentRow">
+              <input type="checkbox" required />
+              <span>I confirm all requested materials are for internal diligence use only.</span>
+            </label>
+
+            <div class="formActions">
+              <button class="primary" type="submit">Submit DD Request</button>
+              <a class="secondary" href="./portal.html">Go to Portal Access</a>
+            </div>
+
+            <div class="formNotice" data-form-notice aria-live="polite" hidden></div>
+          </form>
+        </div>
+
+        <footer class="footer">
+          <div class="footerLeft"><div class="muted small">&copy; <span id="year"></span> Asthate. All rights reserved.</div></div>
+          <div class="footerRight muted small"><span>Informational website only. Not investment advice.</span></div>
+        </footer>
+      </div>
+    </section>
+  </main>
+
+  <script src="./app.js"></script>
+</body>
+</html>

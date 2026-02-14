@@ -38,7 +38,7 @@
       <div class="headerRight">
         <button class="iconBtn" id="themeBtn" type="button" aria-label="Toggle theme"><span class="dot"></span></button>
         <button class="iconBtn menuBtn" id="mobileMenuBtn" type="button" aria-label="Open menu">Menu</button>
-        <a class="cta" href="./contact.html">Investor Inquiry</a>
+        <a class="cta" href="./inquiry.html">Investor Inquiry</a>
       </div>
     </div>
 
@@ -63,7 +63,7 @@
       <div class="container">
         <div class="sectionHead">
           <h2>Strategy Architecture</h2>
-          <p class="muted">Framework for running crypto capital with hard limits.</p>
+          <p class="muted">How we deploy crypto capital across three engines.</p>
         </div>
 
         <div class="sectionFrame sectionFrame--strategy mb12">
@@ -72,90 +72,113 @@
           </div>
           <div class="strategyMediaText">
             <div class="mediaTitle">Three engines, one risk budget</div>
-            <p class="mediaText">Yield capture, BTC-dominance automated trading, and strategic event investing run in parallel under one risk budget.</p>
+            <p class="mediaText">Yield capture, BTC-dominance bot trading, and event-driven investing run under one risk framework.</p>
           </div>
         </div>
 
-        <div class="grid2">
-          <div class="panel">
-            <div class="panelHead">
-              <div class="badge">Core Mandate</div>
-              <h3>What We Actually Run</h3>
-            </div>
-            <p class="muted">Goal: steady compounding with controlled downside.</p>
-            <ul class="list compact">
-              <li><span class="tick">M</span> Capital preservation comes before return targeting</li>
-              <li><span class="tick">M</span> Systematic book is driven by BTC dominance regime logic</li>
-              <li><span class="tick">M</span> No guaranteed IRR at any stage</li>
-            </ul>
+        <div class="strategyStats mb12">
+          <article class="strategyStat">
+            <span>Systematic Book</span>
+            <strong>BTC Dominance Regime Bot</strong>
+          </article>
+          <article class="strategyStat">
+            <span>Strategic Book</span>
+            <strong>Pre-Listing / Event-Driven</strong>
+          </article>
+          <article class="strategyStat">
+            <span>Risk Priority</span>
+            <strong>Downside First</strong>
+          </article>
+        </div>
+
+        <div class="panel strategyStudio mb12" data-focus-root data-focus-default="yield">
+          <div class="panelHead">
+            <div class="badge amber">Engine Control Board</div>
+            <h3>Interactive Strategy Brief</h3>
           </div>
 
-          <div class="panel">
-            <div class="panelHead">
-              <div class="badge">Scope</div>
-              <h3>In Scope / Out of Scope</h3>
+          <div class="strategyStudioBody">
+            <div class="engineMatrix" aria-hidden="true">
+              <div class="engineRow engineRow--yield">
+                <span class="engineRowName">Yield Engine</span>
+                <div class="engineMeter"><i></i></div>
+                <strong>Carry Core</strong>
+              </div>
+              <div class="engineRow engineRow--systematic">
+                <span class="engineRowName">Automated Trading</span>
+                <div class="engineMeter"><i></i></div>
+                <strong>Regime Bot</strong>
+              </div>
+              <div class="engineRow engineRow--strategic">
+                <span class="engineRowName">Strategic Investment</span>
+                <div class="engineMeter"><i></i></div>
+                <strong>Event Alpha</strong>
+              </div>
+              <p class="engineMatrixNote">Indicative risk-budget emphasis changes by market regime.</p>
             </div>
-            <p class="muted">In scope: conservative yield carry, BTC-dominance bot execution, and pre-listing/event-driven strategic allocations.</p>
-            <ul class="list compact">
-              <li><span class="tick">U</span> Out of scope: high-leverage discretionary trading</li>
-              <li><span class="tick">U</span> Out of scope: weak-liquidity or weakly-vetted protocol exposure</li>
-              <li><span class="tick">U</span> Out of scope: cross-exchange arbitrage at this stage</li>
-            </ul>
+
+            <div class="strategyPanel">
+              <div class="engineSelector">
+                <button class="engineKey is-active" type="button" data-focus-btn="yield">Yield Generation</button>
+                <button class="engineKey" type="button" data-focus-btn="systematic">Automated Trading</button>
+                <button class="engineKey" type="button" data-focus-btn="strategic">Strategic Investment</button>
+              </div>
+
+              <div class="focusReadout focusReadout--strategy">
+                <article class="focusPane is-active" data-focus-pane="yield">
+                  <h4>Yield Generation</h4>
+                  <p>Targets funding-rate and basis carry on vetted venues with capped sizing.</p>
+                  <ul class="compactDots">
+                    <li>Carry-focused, low-turnover structure</li>
+                    <li>Hard stop rules under stress conditions</li>
+                  </ul>
+                </article>
+
+                <article class="focusPane" data-focus-pane="systematic" hidden>
+                  <h4>Automated Trading</h4>
+                  <p>Runs a BTC-dominance tracking model for regime-based entries and exits.</p>
+                  <ul class="compactDots">
+                    <li>Rule-based triggers and cooldown logic</li>
+                    <li>Slippage and execution health controls</li>
+                  </ul>
+                </article>
+
+                <article class="focusPane" data-focus-pane="strategic" hidden>
+                  <h4>Strategic Investment</h4>
+                  <p>Builds positions in pre-listing or information-led opportunities, then scales out by plan.</p>
+                  <ul class="compactDots">
+                    <li>Research-first sourcing discipline</li>
+                    <li>Staged exit and de-risk playbook</li>
+                  </ul>
+                </article>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panelHead">
+            <div class="badge">Risk Guardrails</div>
+            <h3>Non-Negotiable Limits</h3>
+          </div>
+          <div class="guardRail">
+            <div class="guardChip"><span>Daily Loss</span><strong>2%</strong></div>
+            <div class="guardChip"><span>Weekly Loss</span><strong>5%</strong></div>
+            <div class="guardChip"><span>Max Drawdown</span><strong>20%</strong></div>
+            <div class="guardChip"><span>Breach Action</span><strong>Kill-Switch</strong></div>
           </div>
         </div>
 
         <div class="panel mt12">
           <div class="panelHead">
-            <div class="badge amber">Framework</div>
-            <h3>Signal, Execution, Risk, Rebalance</h3>
+            <div class="badge">Reporting</div>
+            <h3>Investor Transparency</h3>
           </div>
-
-          <div class="drivers">
-            <div class="driver">
-              <div class="driverTitle">Yield Engine</div>
-              <p class="muted">Targets funding-rate and basis-carry setups on vetted venues with capped position size and strict downside control.</p>
-            </div>
-            <div class="driver">
-              <div class="driverTitle">Automated Trading Engine</div>
-              <p class="muted">Uses BTC dominance trend and regime shifts to run bot-based entries/exits with predefined stop, cooldown, and slippage limits.</p>
-            </div>
-            <div class="driver">
-              <div class="driverTitle">Strategic Investing Engine</div>
-              <p class="muted">Deploys into pre-listing and early information-driven opportunities from public research, then exits through staged risk reduction.</p>
-            </div>
-            <div class="driver">
-              <div class="driverTitle">Dynamic Allocation Logic</div>
-              <p class="muted">Risk budget shifts between engines using volatility state, drawdown depth, and liquidity condition triggers.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="grid2 mt12">
-          <div class="panel">
-            <div class="panelHead">
-              <div class="badge">Risk Controls</div>
-              <h3>Non-Negotiable Limits</h3>
-            </div>
-            <ul class="list compact">
-              <li><span class="tick">1</span> Max portfolio drawdown limit: 20%</li>
-              <li><span class="tick">2</span> Weekly loss limit: 5%</li>
-              <li><span class="tick">3</span> Daily loss limit: 2%</li>
-              <li><span class="tick">4</span> Kill-switch and de-risk protocol when triggers are hit</li>
-            </ul>
-          </div>
-
-          <div class="panel">
-            <div class="panelHead">
-              <div class="badge">Reporting</div>
-              <h3>Investor Transparency</h3>
-            </div>
-            <ul class="list compact">
-              <li><span class="tick">1</span> Weekly snapshot: return, risk events, and positioning notes</li>
-              <li><span class="tick">2</span> Monthly report: engine contribution, drawdown path, and exposure profile</li>
-              <li><span class="tick">3</span> Discloses policy changes and major execution incidents</li>
-              <li><span class="tick">4</span> Includes liquidity context for current regime</li>
-            </ul>
-          </div>
+          <ul class="list compact">
+            <li><span class="tick">1</span> Weekly snapshot: return, risk events, and exposure notes</li>
+            <li><span class="tick">2</span> Monthly report: engine contribution and drawdown path</li>
+            <li><span class="tick">3</span> Material policy changes and incidents are disclosed</li>
+          </ul>
         </div>
 
         <div class="callout">
@@ -163,7 +186,7 @@
           <div class="calloutText">
             <div class="calloutTitle">Important Disclosure</div>
             <div class="muted">
-              Past performance does not guarantee future results. Execution settings remain internal.
+              Past performance does not guarantee future results. Execution parameters remain internal.
             </div>
           </div>
         </div>

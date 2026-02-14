@@ -1,9 +1,9 @@
-ï»¿<!doctype html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>ASTH - Overview</title>
+  <title>ASTH ? Overview</title>
 
   <link rel="stylesheet" href="./styles.css?v=2" />
 
@@ -36,10 +36,8 @@
     *{box-sizing:border-box}
     body{
       margin:0;
-      background:
-        radial-gradient(900px 460px at 14% 0%, rgba(201,162,39,.13), transparent 62%),
-        radial-gradient(760px 500px at 88% 4%, rgba(201,162,39,.1), transparent 68%),
-        linear-gradient(180deg, rgba(7,10,15,.96) 0%, rgba(7,10,15,.98) 100%);
+      background:radial-gradient(1200px 600px at 50% -100px, rgba(201,162,39,.18), transparent 55%),
+                 linear-gradient(180deg, #070a0f 0%, var(--bg) 40%, #070a0f 100%);
       color:var(--text);
       font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
     }
@@ -148,9 +146,6 @@
     }
     .sub{margin-top:6px;color:rgba(159,176,200,.9);font-size:12.5px}
     .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;}
-    .monoBreak{font-size:14px;word-break:break-all}
-    .goldAccent{color:#c9a227;font-weight:600}
-    .muted85{opacity:.85}
     .link{color:rgba(234,241,255,.92);border-bottom:1px dashed rgba(234,241,255,.25);}
     .link:hover{ border-bottom-color: rgba(201,162,39,.6); color: rgba(201,162,39,.95); }
 
@@ -238,12 +233,6 @@
       --grid: rgba(11,18,32,.10);
       --tick: rgba(11,18,32,.70);
     }
-    html[data-theme="light"] body{
-      background:
-        radial-gradient(900px 460px at 14% 0%, rgba(178,132,29,.1), transparent 62%),
-        radial-gradient(760px 500px at 88% 4%, rgba(178,132,29,.08), transparent 68%),
-        linear-gradient(180deg, #fcfcf8 0%, #f1f2ec 100%);
-    }
 
   /* force header theme dot look (same as main site) */
 .header .dot{
@@ -259,20 +248,19 @@
 <body>
   <a class="skip" href="#main">Skip to content</a>
 
-  
+  <!-- ? Strategy.htmlÀÌ¶û µ¿ÀÏÇÑ Çì´õ ±¸Á¶ -->
   <header class="header" id="top">
     <div class="container headerInner">
       <a class="brand" href="./index.html" aria-label="Asthate Home">
-        <img class="brandLogo" src="./assets/iam-logo.png" data-logo-dark="./assets/iam-logo.png" data-logo-light="./assets/image.png" alt="Asthate logo" onerror="this.classList.add('logo-missing'); this.removeAttribute('src');" />
-        <span class="brandWord">ASTHATE</span>
+        <img class="brandLogo" src="./assets/iam-logo.png" alt="Asthate logo" />
+        <span class="brandWord">Asthate</span>
       </a>
 
       <nav class="nav" aria-label="Primary">
-        <a class="navLink" href="./about.html">About</a>
+        <a class="navLink" href="./about.html">About us</a>
         <a class="navLink" href="./strategy.html">Strategy</a>
-        <a class="navLink" href="./performance.html">Performance</a>
         <a class="navLink" href="./ASTH.html" aria-current="page">ASTH</a>
-        <a class="navLink" href="./contact.html">Contact</a>
+        <a class="navLink" href="./contact.html">Contact us</a>
       </nav>
 
       <div class="headerRight">
@@ -280,23 +268,22 @@
           <span class="dot"></span>
         </button>
 
-        <button class="iconBtn menuBtn" id="mobileMenuBtn" type="button" aria-label="Open menu">Menu</button>
-        <a class="cta" href="./inquiry.html">Investor Inquiry</a>
+        <button class="iconBtn menuBtn" id="mobileMenuBtn" type="button" aria-label="Open menu">?</button>
+        <a class="cta" href="./contact.html">Request an intro</a>
       </div>
     </div>
 
     <div class="mobileDrawer" id="mobileDrawer" aria-hidden="true">
       <div class="mobileTop">
         <div class="mobileTitle">Menu</div>
-        <button class="iconBtn" id="mobileCloseBtn" type="button" aria-label="Close menu">Close</button>
+        <button class="iconBtn" id="mobileCloseBtn" type="button" aria-label="Close menu">?</button>
       </div>
 
       <div class="mobileLinks">
-        <a href="./about.html">About</a>
+        <a href="./about.html">About us</a>
         <a href="./strategy.html">Strategy</a>
-        <a href="./performance.html">Performance</a>
         <a href="./ASTH.html">ASTH</a>
-        <a href="./contact.html">Contact</a>
+        <a href="./contact.html">Contact us</a>
       </div>
     </div>
   </header>
@@ -310,16 +297,19 @@
       </section>
 
       <section class="desc">
-        <h1>ASTH <span class="goldAccent">Token Overview</span></h1>
+        <h1>ASTH <span style="color:#c9a227;font-weight:600;">Asset Overview</span></h1>
         <p>
-          ASTH is the utility token for the Asthate ecosystem. It is not an equity claim, not a default profit-sharing token, and not a NAV/IRR tracking instrument.
-          By policy, ASTH ecosystem capital is managed separately from client AUM and strategy capital.
+          ASTH is a digital asset designed with a focus on transparency,
+          disciplined risk management, and long-term sustainability.
+          Rather than short-term speculation, ASTH aims to function as a
+          utility-driven token supported by verifiable data and
+          responsible capital deployment.
         </p>
 
         <div class="pillRow">
-          <div class="pill"><b>Role</b> Utility token</div>
           <div class="pill"><b>Network</b> Ethereum (ERC-20)</div>
-          <div class="pill"><b>Data</b> DexScreener + GeckoTerminal</div>
+          <div class="pill"><b>Pair</b> ASTH / WETH</div>
+          <div class="pill"><b>Source</b> DexScreener + GeckoTerminal</div>
         </div>
       </section>
 
@@ -329,44 +319,44 @@
             <div>Key Statistics</div>
             <div class="miniNote">
               <span class="dot" id="statusDot"></span>
-              <span id="statusText">Loading...</span>
+              <span id="statusText">Loading¡¦</span>
             </div>
           </div>
 
           <div class="cards">
             <div class="card">
               <div class="label">Price</div>
-              <div class="value" id="price">$â€”</div>
-              <div class="sub" id="priceSub">24h: â€”</div>
+              <div class="value" id="price">$?</div>
+              <div class="sub" id="priceSub">24h: ?</div>
             </div>
 
             <div class="card">
               <div class="label">Market Cap</div>
-              <div class="value" id="mcap">$â€”</div>
-              <div class="sub" id="mcapSub">FDV: â€”</div>
+              <div class="value" id="mcap">$?</div>
+              <div class="sub" id="mcapSub">FDV: ?</div>
             </div>
 
             <div class="card">
               <div class="label">Liquidity</div>
-              <div class="value" id="liq">$â€”</div>
-              <div class="sub" id="liqSub">Base / Quote: â€”</div>
+              <div class="value" id="liq">$?</div>
+              <div class="sub" id="liqSub">Base / Quote: ?</div>
             </div>
 
             <div class="card">
               <div class="label">24h Volume</div>
-              <div class="value" id="vol">$â€”</div>
-              <div class="sub" id="volSub">Txns (24h): â€”</div>
+              <div class="value" id="vol">$?</div>
+              <div class="sub" id="volSub">Txns (24h): ?</div>
             </div>
 
             <div class="card">
               <div class="label">Pair</div>
-              <div class="value mono monoBreak" id="pair">â€”</div>
+              <div class="value mono" style="font-size:14px;word-break:break-all" id="pair">?</div>
               <div class="sub"><a class="link" id="dexLink" href="#" target="_blank" rel="noopener">Open on DexScreener</a></div>
             </div>
 
             <div class="card">
               <div class="label">Contract</div>
-              <div class="value mono monoBreak" id="contract">â€”</div>
+              <div class="value mono" style="font-size:14px;word-break:break-all" id="contract">?</div>
               <div class="sub"><a class="link" id="scanLink" href="#" target="_blank" rel="noopener">Open on Etherscan</a></div>
             </div>
           </div>
@@ -382,7 +372,7 @@
                 <button class="tfBtn" data-tf="30d">30d</button>
                 <button class="tfBtn" data-tf="180d">180d</button>
               </div>
-              <div class="badge" id="chartBadge">Loading...</div>
+              <div class="badge" id="chartBadge">Loading¡¦</div>
             </div>
           </div>
 
@@ -395,18 +385,18 @@
       </section>
 
       <div class="foot">
-        <span id="updatedAt">Last update: â€”</span>
+        <span id="updatedAt">Last update: ?</span>
         <button class="smallBtn" id="refreshBtn" type="button">Refresh</button>
-        <span class="muted85">Updates every 30 seconds.</span>
+        <span style="opacity:.85">Updates every 30 seconds.</span>
       </div>
 
     </div>
   </main>
 
-  
+  <!-- ? app.js´Â ¹Ýµå½Ã body ¸Ç ¾Æ·¡¿¡¼­ ·Îµå -->
   <script src="./app.js"></script>
 
-  
+  <!-- ? ÀÌ ÀÎ¶óÀÎ ½ºÅ©¸³Æ®´Â IIFE·Î °¨½Î¼­ $ Àü¿ªÃæµ¹ ¹æÁö -->
   <script>
   (() => {
     // ===== Addresses =====
@@ -429,7 +419,7 @@
 const root = document.documentElement;
 
 (function initThemeFromGlobal(){
-  // app.js sets data-theme on <html> and persists user choice globally.
+  // app.js uses localStorage("theme") and sets data-theme on <html>.
   // This page just reads it and styles the chart accordingly.
   restyleChart();
 })();
@@ -442,13 +432,13 @@ obs.observe(root, { attributes: true, attributeFilter: ["data-theme"] });
     const $ = (id) => document.getElementById(id);
 
     function fmtUSD(n, dp=2){
-      if (n === null || n === undefined || n === "" || Number.isNaN(Number(n))) return "$â€”";
+      if (n === null || n === undefined || n === "" || Number.isNaN(Number(n))) return "$?";
       const num = Number(n);
       const digits = Math.abs(num) >= 1 ? dp : 6;
       return "$" + num.toLocaleString(undefined, { maximumFractionDigits: digits });
     }
     function fmtNum(n, dp=2){
-      if (n === null || n === undefined || n === "" || Number.isNaN(Number(n))) return "â€”";
+      if (n === null || n === undefined || n === "" || Number.isNaN(Number(n))) return "?";
       return Number(n).toLocaleString(undefined, { maximumFractionDigits: dp });
     }
     function setStatus(ok, text){
@@ -595,7 +585,7 @@ obs.observe(root, { attributes: true, attributeFilter: ["data-theme"] });
         }
       });
       chartMode = "line";
-      setChartBadge(`${currentTF} - Line (fallback)`);
+      setChartBadge(`${currentTF} ? Line (fallback)`);
     }
 
     function createCandleChart(){
@@ -638,7 +628,7 @@ obs.observe(root, { attributes: true, attributeFilter: ["data-theme"] });
       });
 
       chartMode = "candles";
-      setChartBadge(`${currentTF} - Candles`);
+      setChartBadge(`${currentTF} ? Candles`);
     }
 
     function restyleChart(){
@@ -661,7 +651,7 @@ obs.observe(root, { attributes: true, attributeFilter: ["data-theme"] });
     }
 
     async function ensureChart(){
-      setChartBadge("Loading chart lib...");
+      setChartBadge("Loading chart lib¡¦");
       const okLib = await ensureFinancial();
       if (okLib && registerFinancial()){
         createCandleChart();
@@ -677,7 +667,7 @@ obs.observe(root, { attributes: true, attributeFilter: ["data-theme"] });
 
       const url = gtOHLCVUrl(tfKey);
       try{
-        if (!quiet) setChartBadge(`Loading ${tfKey}...`);
+        if (!quiet) setChartBadge(`Loading ${tfKey}¡¦`);
         const res = await fetch(url, { cache:"no-store" });
         if (!res.ok) throw new Error("GeckoTerminal OHLCV fetch failed: " + res.status);
         const data = await res.json();
@@ -688,21 +678,21 @@ obs.observe(root, { attributes: true, attributeFilter: ["data-theme"] });
         if (chartMode === "candles"){
           chart.data.datasets[0].data = candles;
           chart.update("none");
-          setChartBadge(`${tfKey} - Candles - Live (30s)`);
+          setChartBadge(`${tfKey} ? Candles ? Live (30s)`);
         } else {
           chart.data.datasets[0].data = line;
           chart.update("none");
-          setChartBadge(`${tfKey} - Line - Live (30s)`);
+          setChartBadge(`${tfKey} ? Line ? Live (30s)`);
         }
       }catch(err){
         console.error(err);
-        setChartBadge(`${tfKey} - data load failed`);
+        setChartBadge(`${tfKey} ? data load failed`);
       }
     }
 
     async function fetchStats(){
       try{
-        setStatus(true, "Updating...");
+        setStatus(true, "Updating¡¦");
         const res = await fetch(DEX_API, { cache:"no-store" });
         if(!res.ok) throw new Error("DexScreener not ok: " + res.status);
 
@@ -725,7 +715,7 @@ obs.observe(root, { attributes: true, attributeFilter: ["data-theme"] });
         const txSells = p.txns?.h24?.sells ?? null;
 
         $("price").textContent = fmtUSD(priceUsd);
-        $("priceSub").textContent = `24h: ${change24h === null ? "â€”" : (Number(change24h).toFixed(2) + "%")}`;
+        $("priceSub").textContent = `24h: ${change24h === null ? "?" : (Number(change24h).toFixed(2) + "%")}`;
 
         $("mcap").textContent = fmtUSD(mcap, 0);
         $("mcapSub").textContent = `FDV: ${fmtUSD(fdv, 0)}`;
@@ -734,7 +724,7 @@ obs.observe(root, { attributes: true, attributeFilter: ["data-theme"] });
         $("liqSub").textContent = `Base / Quote: ${fmtNum(liqBase, 4)} / ${fmtNum(liqQuote, 4)}`;
 
         $("vol").textContent = fmtUSD(vol24h, 0);
-        const txText = (txBuys === null && txSells === null) ? "â€”" : `${fmtNum(txBuys,0)} buys / ${fmtNum(txSells,0)} sells`;
+        const txText = (txBuys === null && txSells === null) ? "?" : `${fmtNum(txBuys,0)} buys / ${fmtNum(txSells,0)} sells`;
         $("volSub").textContent = `Txns (24h): ${txText}`;
 
         setUpdated();
@@ -778,9 +768,3 @@ obs.observe(root, { attributes: true, attributeFilter: ["data-theme"] });
   </script>
 </body>
 </html>
-
-
-
-
-
-

@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Investor Portal | Asthate</title>
+  <meta name="description" content="Investor portal access for approved Asthate investors and DD users." />
+  <meta name="theme-color" content="#0b0b0f" />
+  <meta name="apple-mobile-web-app-title" content="Asthate" />
+
+  <link rel="icon" href="./assets/favicon.ico">
+  <link rel="apple-touch-icon" href="./assets/apple-touch-icon.png">
+  <link rel="manifest" href="./assets/site.webmanifest">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="header" id="top">
+    <div class="container headerInner">
+      <a class="brand" href="./index.html" aria-label="Asthate Home">
+        <img class="brandLogo" src="./assets/iam-logo.png" data-logo-dark="./assets/iam-logo.png" data-logo-light="./assets/image.png" alt="Asthate logo" onerror="this.classList.add('logo-missing'); this.removeAttribute('src');" />
+        <span class="brandWord">ASTHATE</span>
+      </a>
+
+      <nav class="nav" aria-label="Primary">
+        <a class="navLink" href="./about.html">About</a>
+        <a class="navLink" href="./strategy.html">Strategy</a>
+        <a class="navLink" href="./performance.html">Performance</a>
+        <a class="navLink" href="./ASTH.html">ASTH</a>
+        <a class="navLink" href="./contact.html">Contact</a>
+      </nav>
+
+      <div class="headerRight">
+        <button class="iconBtn" id="themeBtn" type="button" aria-label="Toggle theme"><span class="dot"></span></button>
+        <button class="iconBtn menuBtn" id="mobileMenuBtn" type="button" aria-label="Open menu">Menu</button>
+        <a class="cta" href="./inquiry.html">Start Inquiry</a>
+      </div>
+    </div>
+
+    <div class="mobileDrawer" id="mobileDrawer" aria-hidden="true">
+      <div class="mobileTop">
+        <div class="mobileTitle">Menu</div>
+        <button class="iconBtn" id="mobileCloseBtn" type="button" aria-label="Close menu">Close</button>
+      </div>
+
+      <div class="mobileLinks">
+        <a href="./about.html">About</a>
+        <a href="./strategy.html">Strategy</a>
+        <a href="./performance.html">Performance</a>
+        <a href="./ASTH.html">ASTH</a>
+        <a href="./contact.html">Contact</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="section">
+      <div class="container">
+        <div class="sectionHead">
+          <h2>Investor Portal Access</h2>
+          <p class="muted">For approved investors and diligence users.</p>
+        </div>
+
+        <div class="grid2">
+          <div class="panel formShell portalGate">
+            <div class="panelHead">
+              <div class="badge amber">Portal Login</div>
+              <h3>Secure Access</h3>
+            </div>
+
+            <form class="leadForm" data-lead-form data-api-path="/api/portal-request" data-success="Access request sent. We will share a secure sign-in link by email.">
+              <label class="field">
+                <span>Work Email</span>
+                <input type="email" name="email" required />
+              </label>
+
+              <label class="field">
+                <span>Passphrase</span>
+                <input type="password" name="passphrase" required />
+              </label>
+
+              <div class="hpTrap" aria-hidden="true">
+                <label>Leave empty
+                  <input type="text" name="website" tabindex="-1" autocomplete="off" />
+                </label>
+              </div>
+
+              <div class="formActions">
+                <button class="primary" type="submit">Request Access Link</button>
+              </div>
+
+              <div class="formNotice" data-form-notice aria-live="polite" hidden></div>
+            </form>
+          </div>
+
+          <div class="panel">
+            <div class="panelHead">
+              <div class="badge">Portal Scope</div>
+              <h3>What You Will Access</h3>
+            </div>
+            <ul class="list compact">
+              <li><span class="tick">1</span> Monthly investor report archive</li>
+              <li><span class="tick">2</span> DD file room and policy updates</li>
+              <li><span class="tick">3</span> Exposure/risk commentary by period</li>
+              <li><span class="tick">4</span> Scheduled call notes and notices</li>
+            </ul>
+
+            <div class="callout mt12">
+              <div class="calloutIcon">!</div>
+              <div class="calloutText">
+                <div class="calloutTitle">Access Policy</div>
+                <div class="muted">
+                  Portal credentials are issued only after qualification and compliance checks.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <footer class="footer">
+          <div class="footerLeft"><div class="muted small">&copy; <span id="year"></span> Asthate. All rights reserved.</div></div>
+          <div class="footerRight muted small"><span>Informational website only. Not investment advice.</span></div>
+        </footer>
+      </div>
+    </section>
+  </main>
+
+  <script src="./app.js"></script>
+</body>
+</html>
