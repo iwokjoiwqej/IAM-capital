@@ -14,6 +14,11 @@ function escapeHtml(value) {
     .replace(/'/g, "&#039;");
 }
 
+function fmtMillions(value, digits = 2) {
+  if (value == null || Number.isNaN(Number(value))) return "-";
+  return `$${Number(value).toFixed(digits)}M`;
+}
+
 const state = {
   kpis: [
     { label: "Since Inception IRR", value: "27.4%", sub: "Illustrative internal format" },
@@ -21,7 +26,7 @@ const state = {
     { label: "Sharpe Ratio", value: "1.42", sub: "Estimated" },
     { label: "AUM", value: "USD 0.12M", sub: "Build-phase capital base" },
   ],
-  activeRange: { irr: "30d" },
+  activeRange: { irr: "30d", aum: "30d" },
   series: {
     irr: {
       formatY: (v) => (v == null || Number.isNaN(Number(v)) ? "-" : `${Number(v).toFixed(1)}%`),
@@ -38,6 +43,24 @@ const state = {
         "all": mkSeries(
           ["2025 Q2", "2025 Q3", "2025 Q4", "2026 Q1"],
           [4.1, 12.2, 18.8, 27.4]
+        )
+      }
+    },
+    aum: {
+      formatY: (v) => fmtMillions(v, 2),
+      formatTip: (v) => fmtMillions(v, 3),
+      data: {
+        "30d": mkSeries(
+          ["Day 1", "Day 6", "Day 11", "Day 16", "Day 21", "Day 26", "Day 30"],
+          [0.108, 0.106, 0.111, 0.114, 0.112, 0.118, 0.120]
+        ),
+        "1y": mkSeries(
+          ["Jan", "Mar", "May", "Jul", "Sep", "Nov", "Dec"],
+          [0.071, 0.079, 0.087, 0.095, 0.103, 0.112, 0.120]
+        ),
+        "all": mkSeries(
+          ["2025 Q2", "2025 Q3", "2025 Q4", "2026 Q1"],
+          [0.041, 0.072, 0.098, 0.120]
         )
       }
     }
@@ -279,7 +302,8 @@ function initRangePills(onChange) {
 
       const target = group.getAttribute("data-target");
       const range = btn.getAttribute("data-range");
-      if (target !== "irr" || !range) return;
+      if (!target || !range) return;
+      if (!state.series[target] || !state.series[target].data[range]) return;
 
       state.activeRange[target] = range;
       group.querySelectorAll("button").forEach((b) => b.classList.remove("active"));
@@ -310,10 +334,84 @@ function initMobileDrawer() {
   drawer.querySelectorAll("a").forEach((a) => a.addEventListener("click", close));
 }
 
+function initFrameworkMap() {
+  const map = document.querySelector(".frameworkMap");
+  if (!map) return;
+
+  const nodes = Array.from(map.querySelectorAll(".fwNode"));
+  const plates = Array.from(map.querySelectorAll(".fwPlate[data-engine-id]"));
+  const visual = document.getElementById("frameworkVisual");
+  const focus = document.getElementById("frameworkFocus");
+  if (!visual || !focus) return;
+
+  const focusTag = focus.querySelector(".fwFocusTag");
+  const focusTitle = focus.querySelector(".fwFocusTitle");
+  const focusCopy = focus.querySelector(".fwFocusCopy");
+
+  const setEngineActive = (plate) => {
+    if (!plate || !plates.length) return;
+    plates.forEach((p) => p.classList.remove("is-engine-active"));
+    plate.classList.add("is-engine-active");
+
+    const engineId = plate.getAttribute("data-engine-id");
+    visual.classList.remove("engine-yield", "engine-systematic", "engine-strategic");
+    if (engineId) visual.classList.add(`engine-${engineId}`);
+
+    const layer = plate.getAttribute("data-engine") || "";
+    const title = plate.getAttribute("data-engine-title") || "";
+    const copy = plate.getAttribute("data-engine-copy") || "";
+
+    if (focusTag) focusTag.textContent = layer;
+    if (focusTitle) focusTitle.textContent = title;
+    if (focusCopy) focusCopy.textContent = copy;
+  };
+
+  const setActive = (node) => {
+    if (!node || !nodes.length) return;
+    nodes.forEach((n) => n.classList.remove("is-active"));
+    node.classList.add("is-active");
+
+    const layerId = node.getAttribute("data-layer-id") || "1";
+    visual.classList.remove("is-layer-1", "is-layer-2", "is-layer-3", "is-layer-4");
+    visual.classList.add(`is-layer-${layerId}`);
+
+    const layer = node.getAttribute("data-layer") || "";
+    const title = node.getAttribute("data-title") || "";
+    const copy = node.getAttribute("data-copy") || "";
+
+    if (focusTag) focusTag.textContent = layer;
+    if (focusTitle) focusTitle.textContent = title;
+    if (focusCopy) focusCopy.textContent = copy;
+  };
+
+  nodes.forEach((node) => {
+    node.addEventListener("mouseenter", () => setActive(node));
+    node.addEventListener("focus", () => setActive(node));
+    node.addEventListener("click", () => setActive(node));
+  });
+
+  plates.forEach((plate) => {
+    plate.addEventListener("mouseenter", () => setEngineActive(plate));
+    plate.addEventListener("focus", () => setEngineActive(plate));
+    plate.addEventListener("click", () => setEngineActive(plate));
+  });
+
+  if (nodes.length) {
+    const initialNode = map.querySelector(".fwNode.is-active") || nodes[0];
+    setActive(initialNode);
+  }
+
+  if (plates.length) {
+    const initialPlate = map.querySelector(".fwPlate.is-engine-active") || plates[0];
+    setEngineActive(initialPlate);
+  }
+}
+
 function init() {
   initTheme();
   renderKpis();
   initMobileDrawer();
+  initFrameworkMap();
 
   const irrChart = makeChart({
     canvasId: "irrChart",
@@ -323,7 +421,18 @@ function init() {
     tipFormat: (v) => state.series.irr.formatTip(v),
   });
 
-  const redrawAll = () => irrChart?.redraw();
+  const aumChart = makeChart({
+    canvasId: "aumChart",
+    tipId: "aumTip",
+    getSeries: () => state.series.aum.data[state.activeRange.aum],
+    yFormat: (v) => state.series.aum.formatY(v),
+    tipFormat: (v) => state.series.aum.formatTip(v),
+  });
+
+  const redrawAll = () => {
+    irrChart?.redraw();
+    aumChart?.redraw();
+  };
 
   initRangePills(redrawAll);
   window.addEventListener("resize", redrawAll);

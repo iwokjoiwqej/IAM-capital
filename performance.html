@@ -63,25 +63,15 @@
       <div class="container">
         <div class="sectionHead">
           <h2>Historical IRR and Risk Metrics</h2>
-          <p class="muted">IRR history and monthly performance format.</p>
+          <p class="muted">Past IRR and AUM trends with monthly breakdown.</p>
         </div>
 
-        <div class="grid2">
-          <aside class="snapshot" aria-label="Performance Snapshot">
-            <div class="snapTop">
-              <div class="snapTitle">Performance Snapshot</div>
-              <div class="muted small">Illustrative format</div>
-            </div>
-
-            <div class="kpis" id="kpiGrid"></div>
-
-            <div class="snapLine"></div>
-
-            <div class="chartBlock">
+        <div class="sectionFrame sectionFrame--performance mb12">
+          <div class="grid2">
+            <div class="panel">
               <div class="chartTop">
                 <div>
                   <div class="chartKicker">Past IRR Trend</div>
-                  <div class="muted small">Net internal format</div>
                 </div>
                 <div class="rangePills" data-target="irr">
                   <button class="pillBtn active" type="button" data-range="30d">30D</button>
@@ -95,6 +85,34 @@
                 <div class="tooltip" id="irrTip" aria-hidden="true"></div>
               </div>
             </div>
+
+            <div class="panel">
+              <div class="chartTop">
+                <div>
+                  <div class="chartKicker">Past AUM Trend</div>
+                </div>
+                <div class="rangePills" data-target="aum">
+                  <button class="pillBtn active" type="button" data-range="30d">30D</button>
+                  <button class="pillBtn" type="button" data-range="1y">1Y</button>
+                  <button class="pillBtn" type="button" data-range="all">ALL</button>
+                </div>
+              </div>
+
+              <div class="chartWrap">
+                <canvas id="aumChart"></canvas>
+                <div class="tooltip" id="aumTip" aria-hidden="true"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid2">
+          <aside class="snapshot" aria-label="Performance Snapshot">
+            <div class="snapTop">
+              <div class="snapTitle">Performance Snapshot</div>
+            </div>
+
+            <div class="kpis" id="kpiGrid"></div>
           </aside>
 
           <div class="panel">
@@ -106,20 +124,12 @@
               <li><span class="tick">1</span> Returns shown net of execution costs</li>
               <li><span class="tick">2</span> Drawdown shown on peak-to-trough basis</li>
               <li><span class="tick">3</span> Ratios are estimates, not audited statements</li>
-              <li><span class="tick">4</span> Full diligence pack available after qualification</li>
+              <li><span class="tick">4</span> Diligence pack after qualification</li>
             </ul>
-
-            <div class="callout" style="margin-top: 16px;">
-              <div class="calloutIcon">!</div>
-              <div class="calloutText">
-                <div class="calloutTitle">Disclosure</div>
-                <div class="muted">Past performance does not guarantee future results.</div>
-              </div>
-            </div>
           </div>
         </div>
 
-        <div class="panel" style="margin-top: 14px;">
+        <div class="panel mt14">
           <div class="panelHead">
             <div class="badge amber">Monthly Table</div>
             <h3>Recent Breakdown</h3>
@@ -132,7 +142,6 @@
                   <th>Net Return</th>
                   <th>Cumulative</th>
                   <th>Max Drawdown</th>
-                  <th>Comment</th>
                 </tr>
               </thead>
               <tbody>
@@ -141,28 +150,24 @@
                   <td>+4.1%</td>
                   <td>+4.1%</td>
                   <td>-1.2%</td>
-                  <td>Carry and relative-value contribution.</td>
                 </tr>
                 <tr>
                   <td>2025 Q3</td>
                   <td>+7.8%</td>
                   <td>+12.2%</td>
                   <td>-2.0%</td>
-                  <td>Tighter execution filters and controlled beta.</td>
                 </tr>
                 <tr>
                   <td>2025 Q4</td>
                   <td>+5.9%</td>
                   <td>+18.8%</td>
                   <td>-3.3%</td>
-                  <td>Risk overlay reduced drawdown during volatility spikes.</td>
                 </tr>
                 <tr>
                   <td>2026 YTD</td>
                   <td>+8.6%</td>
                   <td>+27.4%</td>
                   <td>-6.8%</td>
-                  <td>Better cost retention and disciplined rebalancing.</td>
                 </tr>
               </tbody>
             </table>

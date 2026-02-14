@@ -74,14 +74,14 @@
           </h1>
 
           <p class="lead">
-            We manage crypto strategies with a simple rule: protect downside first, then compound steadily.
+            We run crypto capital with one rule: cut downside fast, then compound with discipline.
           </p>
 
           <div class="whoRow">
             <div class="whoTitle">Positioning</div>
             <p class="whoText">
-              We focus on systematic income and relative-value setups in digital assets.
-              Public pages show how we operate. Signal parameters stay private.
+              We run a three-engine crypto mandate: yield capture, BTC-dominance systematic trading,
+              and event-driven strategic positions. Public pages explain structure, not live parameters.
             </p>
           </div>
 
@@ -90,13 +90,15 @@
             <a class="secondary" href="./performance.html">View Performance</a>
           </div>
 
-          <p class="note">Informational only. Not investment advice.</p>
         </div>
 
         <aside class="snapshot" aria-label="Firm Snapshot">
+          <div class="snapshotMedia">
+            <img class="mediaAsset" src="./assets/main%201.png" alt="Asthate market monitoring workflow" loading="lazy" onerror="this.onerror=null;this.src='./assets/hero.jpg';" />
+          </div>
+
           <div class="snapTop">
             <div class="snapTitle">At a Glance</div>
-            <div class="muted small">How we run the desk</div>
           </div>
 
           <ul class="list compact">
@@ -106,13 +108,6 @@
             <li><span class="tick">4</span> Fund structure in progress</li>
           </ul>
 
-          <div class="callout">
-            <div class="calloutIcon">P</div>
-            <div class="calloutText">
-              <div class="calloutTitle">Performance and IRR</div>
-              <div class="muted">Full IRR history and monthly breakdown are on the Performance page.</div>
-            </div>
-          </div>
         </aside>
       </div>
     </section>
@@ -120,62 +115,122 @@
     <section class="section" id="framework">
       <div class="container">
         <div class="sectionHead">
-          <h2>Investment Framework</h2>
-          <p class="muted">Four practical layers drive execution and risk control.</p>
+          <h2>System Structure</h2>
+          <p class="muted">Hover each node to preview the role.</p>
         </div>
 
-        <div class="grid2">
-          <article class="panel">
-            <div class="panelHead">
-              <div class="badge">Layer 1</div>
-              <h3>Signal Layer</h3>
-            </div>
-            <p class="muted">Signals combine market structure, carry, and liquidity state.</p>
-            <ul class="list compact">
-              <li><span class="tick">1</span> Multi-source data quality checks</li>
-              <li><span class="tick">2</span> Regime classification and probability scoring</li>
-              <li><span class="tick">3</span> Entry filters tied to risk budget capacity</li>
-            </ul>
-          </article>
+        <div class="panel frameworkMap">
+          <div class="frameworkTop">
+            <h3>Three Engines, One <span class="grad">Risk Budget</span></h3>
+            <p class="muted">Hover or tap each layer to focus the role.</p>
+          </div>
 
-          <article class="panel">
-            <div class="panelHead">
-              <div class="badge">Layer 2</div>
-              <h3>Execution Layer</h3>
+          <div class="frameworkStage">
+            <div class="fwSide">
+              <div
+                class="fwNode is-active"
+                tabindex="0"
+                data-layer-id="1"
+                data-layer="Layer 1"
+                data-title="Signal Layer"
+                data-copy="Combines BTC dominance trend, basis structure, and liquidity regime filters."
+              >
+                <span class="fwTag">Layer 1</span>
+                <strong>Signal Layer</strong>
+                <span class="fwDesc">Combines BTC dominance trend, basis structure, and liquidity regime filters.</span>
+              </div>
+              <div
+                class="fwNode"
+                tabindex="0"
+                data-layer-id="4"
+                data-layer="Layer 4"
+                data-title="Rebalancing"
+                data-copy="Reallocates risk budget across engines on weekly cadence and trigger events."
+              >
+                <span class="fwTag">Layer 4</span>
+                <strong>Rebalancing</strong>
+                <span class="fwDesc">Reallocates risk budget across engines on weekly cadence and trigger events.</span>
+              </div>
             </div>
-            <p class="muted">Execution uses fee-aware routing with slippage and venue limits.</p>
-            <ul class="list compact">
-              <li><span class="tick">1</span> Venue selection and counterparty limits</li>
-              <li><span class="tick">2</span> Pre-trade liquidity and spread checks</li>
-              <li><span class="tick">3</span> Post-trade reconciliation and incident logs</li>
-            </ul>
-          </article>
 
-          <article class="panel">
-            <div class="panelHead">
-              <div class="badge amber">Layer 3</div>
-              <h3>Risk Overlay</h3>
+            <div class="frameworkVisual is-layer-1 engine-yield" id="frameworkVisual" role="group" aria-label="Engine layer interaction">
+              <div class="fwPlateCluster">
+                <button
+                  class="fwPlate fwPlateTop is-engine-active"
+                  type="button"
+                  data-engine-id="yield"
+                  data-engine="First Layer"
+                  data-engine-title="Yield Engine"
+                  data-engine-copy="Captures funding, basis, and low-turnover carry setups with hard downside limits."
+                  aria-label="Yield engine layer"
+                >
+                  <span class="fwPlateCore" aria-hidden="true"></span>
+                  <span class="fwPlateHint">Yield</span>
+                </button>
+                <button
+                  class="fwPlate fwPlateMid"
+                  type="button"
+                  data-engine-id="systematic"
+                  data-engine="Middle Layer"
+                  data-engine-title="Automated Trading Engine"
+                  data-engine-copy="Runs a BTC-dominance-tracking bot with rule-based entries, exits, and slippage control."
+                  aria-label="Automated trading engine layer"
+                >
+                  <span class="fwPlateCore" aria-hidden="true"></span>
+                  <span class="fwPlateHint">Automated Trading</span>
+                </button>
+                <button
+                  class="fwPlate fwPlateBase"
+                  type="button"
+                  data-engine-id="strategic"
+                  data-engine="Base Layer"
+                  data-engine-title="Strategic Investing Engine"
+                  data-engine-copy="Targets pre-listing and early information-driven opportunities using public-source research."
+                  aria-label="Strategic investing engine layer"
+                >
+                  <span class="fwPlateCore" aria-hidden="true"></span>
+                  <span class="fwPlateHint">Strategic Investing</span>
+                </button>
+              </div>
+              <div class="fwEngines">
+                <span>Yield</span>
+                <span>Systematic</span>
+                <span>Strategic</span>
+              </div>
+              <div class="fwFocus" id="frameworkFocus">
+                <div class="fwFocusTag">First Layer</div>
+                <div class="fwFocusTitle">Yield Engine</div>
+                <div class="fwFocusCopy">Captures funding, basis, and low-turnover carry setups with hard downside limits.</div>
+              </div>
             </div>
-            <p class="muted">Risk overlay can cut exposure regardless of signal strength.</p>
-            <ul class="list compact">
-              <li><span class="tick">1</span> Max drawdown guardrails and de-risk triggers</li>
-              <li><span class="tick">2</span> Volatility targeting and stress scenarios</li>
-              <li><span class="tick">3</span> Liquidity concentration limits by instrument</li>
-            </ul>
-          </article>
 
-          <article class="panel">
-            <div class="panelHead">
-              <div class="badge amber">Layer 4</div>
-              <h3>Rebalancing Logic</h3>
+            <div class="fwSide">
+              <div
+                class="fwNode"
+                tabindex="0"
+                data-layer-id="2"
+                data-layer="Layer 2"
+                data-title="Execution Layer"
+                data-copy="Bot execution uses fee-aware routing, slippage caps, and live order-health checks."
+              >
+                <span class="fwTag">Layer 2</span>
+                <strong>Execution Layer</strong>
+                <span class="fwDesc">Bot execution uses fee-aware routing, slippage caps, and live order-health checks.</span>
+              </div>
+              <div
+                class="fwNode"
+                tabindex="0"
+                data-layer-id="3"
+                data-layer="Layer 3"
+                data-title="Risk Overlay"
+                data-copy="Cuts gross and net exposure when drawdown, volatility, or liquidity triggers are breached."
+              >
+                <span class="fwTag">Layer 3</span>
+                <strong>Risk Overlay</strong>
+                <span class="fwDesc">Cuts gross and net exposure when drawdown, volatility, or liquidity triggers are breached.</span>
+              </div>
             </div>
-            <p class="muted">Rebalancing is threshold-based and regime-aware.</p>
-            <ul class="list compact">
-              <li><span class="tick">1</span> Threshold-based weight drift controls</li>
-              <li><span class="tick">2</span> Turnover and cost budgeting</li>
-              <li><span class="tick">3</span> Weekly governance review checkpoints</li>
-            </ul>
-          </article>
+          </div>
         </div>
       </div>
     </section>
@@ -184,7 +239,7 @@
       <div class="container">
         <div class="sectionHead">
           <h2>Risk and Legal Overview</h2>
-          <p class="muted">Key risk, legal status, and investor communication.</p>
+          <p class="muted">Risk, legal status, and investor communication.</p>
         </div>
 
         <div class="grid3">
@@ -224,7 +279,7 @@
           <div class="calloutText">
             <div class="calloutTitle">Fund Structure (Coming Soon)</div>
             <div class="muted">
-              Formal fund structure documents and service-provider disclosures will be published after legal milestones are completed.
+              Fund structure and service-provider details will be published after legal milestones.
             </div>
           </div>
         </div>

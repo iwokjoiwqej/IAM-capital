@@ -148,6 +148,9 @@
     }
     .sub{margin-top:6px;color:rgba(159,176,200,.9);font-size:12.5px}
     .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;}
+    .monoBreak{font-size:14px;word-break:break-all}
+    .goldAccent{color:#c9a227;font-weight:600}
+    .muted85{opacity:.85}
     .link{color:rgba(234,241,255,.92);border-bottom:1px dashed rgba(234,241,255,.25);}
     .link:hover{ border-bottom-color: rgba(201,162,39,.6); color: rgba(201,162,39,.95); }
 
@@ -307,7 +310,7 @@
       </section>
 
       <section class="desc">
-        <h1>ASTH <span style="color:#c9a227;font-weight:600;">Token Overview</span></h1>
+        <h1>ASTH <span class="goldAccent">Token Overview</span></h1>
         <p>
           ASTH is the utility token for the Asthate ecosystem. It is not an equity claim, not a default profit-sharing token, and not a NAV/IRR tracking instrument.
           By policy, ASTH ecosystem capital is managed separately from client AUM and strategy capital.
@@ -357,13 +360,13 @@
 
             <div class="card">
               <div class="label">Pair</div>
-              <div class="value mono" style="font-size:14px;word-break:break-all" id="pair">—</div>
+              <div class="value mono monoBreak" id="pair">—</div>
               <div class="sub"><a class="link" id="dexLink" href="#" target="_blank" rel="noopener">Open on DexScreener</a></div>
             </div>
 
             <div class="card">
               <div class="label">Contract</div>
-              <div class="value mono" style="font-size:14px;word-break:break-all" id="contract">—</div>
+              <div class="value mono monoBreak" id="contract">—</div>
               <div class="sub"><a class="link" id="scanLink" href="#" target="_blank" rel="noopener">Open on Etherscan</a></div>
             </div>
           </div>
@@ -394,7 +397,7 @@
       <div class="foot">
         <span id="updatedAt">Last update: —</span>
         <button class="smallBtn" id="refreshBtn" type="button">Refresh</button>
-        <span style="opacity:.85">Updates every 30 seconds.</span>
+        <span class="muted85">Updates every 30 seconds.</span>
       </div>
 
     </div>
@@ -426,7 +429,7 @@
 const root = document.documentElement;
 
 (function initThemeFromGlobal(){
-  // app.js uses localStorage("theme") and sets data-theme on <html>.
+  // app.js sets data-theme on <html> and persists user choice globally.
   // This page just reads it and styles the chart accordingly.
   restyleChart();
 })();
