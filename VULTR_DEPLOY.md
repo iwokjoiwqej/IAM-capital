@@ -82,6 +82,20 @@ ALLOWED_ORIGINS=http://139.180.223.253
 
 # If domain is connected later, replace with:
 # ALLOWED_ORIGINS=https://your-domain.com,https://www.your-domain.com
+
+# Admin dashboard (Basic Auth) at /admin
+ADMIN_USER=admin
+ADMIN_PASS=CHANGE_THIS_STRONG_ADMIN_PASSWORD
+
+# Email notifications (optional). If SMTP_HOST is empty, email sending is disabled.
+SMTP_HOST=
+SMTP_PORT=465
+SMTP_SECURE=true
+SMTP_USER=
+SMTP_PASS=
+EMAIL_FROM=Asthate Intake <no-reply@your-domain.com>
+EMAIL_TO=you@your-email.com
+EMAIL_SUBJECT_PREFIX=[Asthate]
 ```
 
 Install API deps:
@@ -142,6 +156,15 @@ server {
 
     location /api/ {
         proxy_pass http://127.0.0.1:8080/api/;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+
+    # Admin dashboard (protected by Basic Auth in Node)
+    location /admin {
+        proxy_pass http://127.0.0.1:8080/admin;
         proxy_http_version 1.1;
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
